@@ -183,16 +183,13 @@ class _ValuationScreenPageState extends ConsumerState<ValuationScreenPage> {
                                 key: _keyForField(field.id),
                                 child: InspectionFieldInput(
                                   field: field,
+                                  inlineChoices: true,
                                   value: state.answers[field.id] ?? '',
                                   onChanged: (next) =>
                                       notifier.setAnswer(field.id, next),
                                   onDiscreteSelection: () {
                                     if (nextFieldId == null) return;
-                                    final delay = field.type ==
-                                            InspectionFieldType.dropdown
-                                        ? const Duration(milliseconds: 260)
-                                        : Duration.zero;
-                                    _scrollToField(nextFieldId, delay: delay);
+                                    _scrollToField(nextFieldId);
                                   },
                                 ),
                               );

@@ -99,6 +99,29 @@ class ValuationPhraseEngine {
     'cb_r_rubber': 'rubber membrane',
     'cb_r_single': 'single-ply membrane',
   };
+  static const _flatRoofIds = {
+    'cb_fr_felt': 'mineral felt',
+    'cb_fr_rubber': 'rubber membrane',
+    'cb_fr_single': 'single-ply membrane',
+  };
+  static const _otherRoofIds = {
+    'cb_or_clay': 'clay tiles',
+    'cb_or_concrete': 'concrete tiles',
+    'cb_or_natural': 'natural slate',
+    'cb_or_artificial': 'artificial slate',
+    'cb_or_fibre': 'fibre cement slates',
+    'cb_or_metal': 'metal sheeting',
+    'cb_or_felt': 'mineral felt',
+    'cb_or_rubber': 'rubber membrane',
+    'cb_or_single': 'single-ply membrane',
+  };
+  static const _oilFuelIds = {'cb_ol_oil': 'Oil-fired', 'cb_ol_lpg': 'LPG-fired'};
+  static const _oilTankIds = {'cb_ot_plastic': 'plastic', 'cb_ot_metal': 'metal'};
+  static const _oilWhereIds = {
+    'cb_ol_front': 'front garden',
+    'cb_ol_side': 'side garden',
+    'cb_ol_rear': 'rear garden',
+  };
   static const _rainwaterIds = {
     'cb_rw_pvc': 'PVC',
     'cb_rw_cast': 'cast iron',
@@ -109,8 +132,8 @@ class ValuationPhraseEngine {
     'cb_rw_gutters': 'gutters',
     'cb_rw_down': 'downpipes',
     'cb_rw_hoppers': 'hoppers',
-    'cb_rw_fittings': 'associated fittings',
   };
+  static const _rainwaterMaterialIds = ['cb_rw_pvc', 'cb_rw_cast', 'cb_rw_alum', 'cb_rw_steel', 'cb_rw_concrete', 'cb_rw_asbestos'];
   static const _chimneyIds = {
     'cb_ch_brick': 'brick',
     'cb_ch_stone': 'stone',
@@ -255,9 +278,21 @@ class ValuationPhraseEngine {
       case 'val_pitched_roof':
         final l = _clientList(a, _roofIds, otherCb: 'cb_r_other', otherText: 'et_r_other_text');
         return l.isEmpty ? const [] : ['The roof covering is formed in $l.'];
+      case 'val_flat_roof':
+        final l = _clientList(a, _flatRoofIds, otherCb: 'cb_fr_other', otherText: 'et_fr_other_text');
+        return l.isEmpty ? const [] : ['The flat roof covering is formed in $l.'];
+      case 'val_other_roof':
+        final l = _clientList(a, _otherRoofIds, otherCb: 'cb_or_other', otherText: 'et_or_other_text');
+        if (l.isEmpty) return const [];
+        final name = _val(a, 'et_other_roof_name');
+        final subject = name.isEmpty ? 'The other roof' : _capitalizeFirst(name);
+        return ['$subject covering is formed in $l.'];
       case 'val_rainwater_goods':
-        final l = _clientList(a, _rainwaterIds, otherCb: 'cb_rw_other', otherText: 'et_rw_other_text');
-        return l.isEmpty ? const [] : ['The rainwater goods comprise $l.'];
+        // Client 17 Nov: "and associated fittings" is part of the sentence, not a tick.
+        final items = _checkedLabels(a, _rainwaterMaterialIds, _rainwaterIds);
+        _addOther(items, a, 'cb_rw_other', 'et_rw_other_text');
+        items.addAll(_checkedLabels(a, const ['cb_rw_gutters', 'cb_rw_down', 'cb_rw_hoppers'], _rainwaterIds));
+        return items.isEmpty ? const [] : ['The rainwater goods comprise ${items.join(', ')}, and associated fittings.'];
       case 'val_chimney_stacks':
         final built = _clientList(a, _chimneyIds, otherCb: 'cb_ch_other', otherText: 'et_ch_other_text');
         final appear = _clientList(a, _chimneyAppear);
@@ -298,9 +333,21 @@ class ValuationPhraseEngine {
         return l.isEmpty ? const [] : ['The walls are formed in $l.'];
       case 'val_electric_material':
         final l = _clientList(a, _elecMeterIds, otherCb: 'cb_em_other', otherText: 'et_em_other_text');
-        return l.isEmpty
-            ? const []
-            : ['There is a mains electricity supply connected to the property, and the meter unit is located $l.'];
+        return [
+          if (l.isNotEmpty)
+            'There is a mains electricity supply connected to the property, and the meter unit is located $l.',
+          if (_isChecked(a['cb_em_dated'])) 'The meter unit is dated.',
+        ];
+      case 'val_oil_lpg':
+        final fuel = _checkedLabels(a, _oilFuelIds.keys.toList(), _oilFuelIds).join(' / ');
+        if (fuel.isEmpty) return const [];
+        final tank = _clientList(a, _oilTankIds, otherCb: 'cb_ot_other', otherText: 'et_ot_other_text');
+        final where = _clientList(a, _oilWhereIds, otherCb: 'cb_ol_other', otherText: 'et_ol_other_text');
+        return [
+          'The property is served by an $fuel heating system'
+              '${tank.isEmpty ? '' : ' with ${_article(tank)} $tank fuel storage tank(s)'}'
+              '${where.isEmpty ? '' : ' located at the $where'}.',
+        ];
       case 'val_hot_water_central_heating':
         final heat = _clientList(a, _heatingIds, otherCb: 'cb_h_other', otherText: 'et_h_other_text');
         final water = _clientList(a, _hotWaterIds, otherCb: 'cb_hw_other', otherText: 'et_hw_other_text');
@@ -475,6 +522,7 @@ class ValuationPhraseEngine {
         {
           'cb_svt_insects': 'Wood-boring Insects',
           'cb_svt_rot': 'Extensive Dry Rot',
+          'cb_svt_wet': 'Extensive Wet Rot',
         },
         'cb_svt_other',
         'et_svt_other_text',
@@ -1244,8 +1292,13 @@ class ValuationPhraseEngine {
       'cb_ext_roof': 'roof',
       'cb_ext_loft': 'loft',
     });
+    // Client 17 Nov: Age of Extension (Date of Extension) is printed inside the Extension sentence.
+    final extYear = _val(answers, 'et_age_extension');
+    final extWhen = extYear.isEmpty ? '' : ' in $extYear';
     if (extended.isNotEmpty) {
-      phrases.add('The property has been extended to provide ${_toWords(extended)} accommodation.');
+      phrases.add('The property has been extended$extWhen to provide ${_toWords(extended)} accommodation.');
+    } else if (extYear.isNotEmpty) {
+      phrases.add('The property has been extended in $extYear.');
     }
 
     if (_isChecked(answers['cb_is_listed_building'])) {

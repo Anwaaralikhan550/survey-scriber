@@ -176,9 +176,9 @@ void main() {
       expect(say('general_details', {'cb_ext_loft': 'true', 'cb_ext_rear': 'true', 'cb_ext_single': 'true'}),
           'The property has been extended to provide rear, single-storey and loft accommodation.');
     });
-    test('V5 the field is labelled Age of Extension (Date of Extension) and prints no extra sentence', () {
+    test('V5 the field is labelled Age of Extension (Date of Extension); since 17 Nov it prints inside the Extension sentence', () {
       expect(screens['general_details']!['et_age_extension']!['label'], 'Age of Extension (Date of Extension)');
-      expect(say('general_details', {'et_age_extension': '1995'}), isEmpty);
+      expect(say('general_details', {'et_age_extension': '1995'}), 'The property has been extended in 1995.');
     });
     test('V6 Listed Building prints the client sentence only', () {
       expect(say('general_details', {'cb_is_listed_building': 'true'}), 'The property is understood to be a listed building.');
@@ -309,9 +309,10 @@ void main() {
     }
 
     test('Roof: the client list in his order, one sentence per tick', () {
+      // 17 Nov: the three flat-roof materials moved to the Flat Roof screen (old answers keep printing here).
       expect(labelsOf('val_pitched_roof', 'cb_r_clay', 'cb_r_other'), [
         'clay tiles', 'concrete tiles', 'natural slate', 'artificial slate', 'fibre cement slates',
-        'metal sheeting', 'mineral felt', 'rubber membrane', 'single-ply membrane', 'other',
+        'metal sheeting', 'other',
       ]);
       const words = {
         'cb_r_clay': 'clay tiles', 'cb_r_concrete': 'concrete tiles', 'cb_r_natural': 'natural slate',
@@ -330,17 +331,18 @@ void main() {
     });
 
     test('Rainwater Goods', () {
-      expect(labelsOf('val_rainwater_goods', 'cb_rw_pvc', 'cb_rw_fittings'), [
+      // 17 Nov: "and associated fittings" is fixed text at the end, no longer a tick.
+      expect(labelsOf('val_rainwater_goods', 'cb_rw_pvc', 'cb_rw_hoppers'), [
         'PVC', 'cast iron', 'aluminium', 'steel', 'concrete', 'asbestos cement', 'other', 'Other (describe)',
-        'gutters', 'downpipes', 'hoppers', 'associated fittings',
+        'gutters', 'downpipes', 'hoppers',
       ]);
-      expect(say('val_rainwater_goods', {'cb_rw_pvc': 'true'}), 'The rainwater goods comprise PVC.');
+      expect(say('val_rainwater_goods', {'cb_rw_pvc': 'true'}), 'The rainwater goods comprise PVC, and associated fittings.');
       expect(say('val_rainwater_goods', {'cb_rw_cast': 'true', 'cb_rw_gutters': 'true', 'cb_rw_down': 'true'}),
-          'The rainwater goods comprise cast iron, gutters and downpipes.');
-      expect(say('val_rainwater_goods', {'cb_rw_asbestos': 'true', 'cb_rw_fittings': 'true'}),
-          'The rainwater goods comprise asbestos cement and associated fittings.');
+          'The rainwater goods comprise cast iron, gutters, downpipes, and associated fittings.');
+      expect(say('val_rainwater_goods', {'cb_rw_asbestos': 'true'}),
+          'The rainwater goods comprise asbestos cement, and associated fittings.');
       expect(say('val_rainwater_goods', {'cb_rw_other': 'true', 'et_rw_other_text': 'Lead', 'cb_rw_hoppers': 'true'}),
-          'The rainwater goods comprise hoppers and lead.');
+          'The rainwater goods comprise lead, hoppers, and associated fittings.');
     });
 
     test('Chimney', () {
@@ -696,7 +698,7 @@ void main() {
       expect(labelsOf('val_sv_cladding'), ['Additional concerns', 'No Compliant Fire Inspection Form (EWS1)', 'EWS1 Remediation Required', 'Ongoing Remediation Work', 'Others', 'Others (describe)']);
       expect(labelsOf('val_sv_movement'), ['Additional concerns', 'Structural Movement', 'Subsidence', 'Bowing Walls', 'Wall Tie Failure', 'Others', 'Others (describe)']);
       expect(labelsOf('val_sv_damp'), ['Additional concerns', 'Significant Penetrating Damp', 'Rising Damp', 'Others', 'Others (describe)']);
-      expect(labelsOf('val_sv_timber'), ['Additional concerns', 'Wood-boring Insects', 'Extensive Dry Rot', 'Others', 'Others (describe)']);
+      expect(labelsOf('val_sv_timber'), ['Additional concerns', 'Wood-boring Insects', 'Extensive Dry Rot', 'Extensive Wet Rot', 'Others', 'Others (describe)']);
       for (final (screen, tick) in [('val_sv_roof', 'cb_svr_other'), ('val_sv_cladding', 'cb_svc_other'), ('val_sv_movement', 'cb_svm_other'), ('val_sv_damp', 'cb_svd_other'), ('val_sv_timber', 'cb_svt_other')]) {
         final box = screens[screen]!.values.where((f) => f['type'] == 'text' && f['conditionalOn'] == tick);
         expect(box, hasLength(1), reason: screen);

@@ -106,7 +106,7 @@ void main() {
     expect(x, contains('<w:vAlign w:val="center"/>'));
     expect(x, contains('<w:t xml:space="preserve">General Details</w:t>'));
     expect(x, contains('<w:t xml:space="preserve">Rainwater Goods</w:t>'));
-    expect(x, contains('The rainwater goods comprise PVC, gutters and downpipes.'));
+    expect(x, contains('The rainwater goods comprise PVC, gutters, downpipes, and associated fittings.'));
   });
 
   test('Word: the sections flow on without a page break between them', () async {

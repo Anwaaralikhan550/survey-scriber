@@ -101,6 +101,29 @@ class ValuationAnswerValidator {
       detailId: 'et_other_824',
       label: 'roof covering',
     );
+    for (final pair in const [
+      ['cb_fr_other', 'et_fr_other_text', 'flat roof covering'],
+      ['cb_or_other', 'et_or_other_text', 'other roof covering'],
+      ['cb_ot_other', 'et_ot_other_text', 'fuel storage tank'],
+      ['cb_ol_other', 'et_ol_other_text', 'fuel storage tank location'],
+    ]) {
+      _requireOtherDetail(errors, answers, checkboxId: pair[0], detailId: pair[1], label: pair[2]);
+    }
+    if (screenId == 'val_oil_lpg' &&
+        !_checked(answers, 'cb_ol_oil') &&
+        !_checked(answers, 'cb_ol_lpg') &&
+        _countChecked(answers, const [
+              'cb_ot_plastic',
+              'cb_ot_metal',
+              'cb_ot_other',
+              'cb_ol_front',
+              'cb_ol_side',
+              'cb_ol_rear',
+              'cb_ol_other',
+            ]) >
+            0) {
+      errors.add('Tick Oil-fired or LPG-fired for the fuel storage tank.');
+    }
     return errors;
   }
 

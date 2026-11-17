@@ -458,6 +458,7 @@ class InspectionFieldInput extends StatelessWidget {
     required this.value,
     required this.onChanged,
     this.onDiscreteSelection,
+    this.inlineChoices = false,
     super.key,
   });
 
@@ -465,6 +466,11 @@ class InspectionFieldInput extends StatelessWidget {
   final String value;
   final ValueChanged<String> onChanged;
   final VoidCallback? onDiscreteSelection;
+
+  /// Show a single-choice field as on-screen radio-style tick boxes (one
+  /// selected at a time) instead of a pop-up list. The stored value is the
+  /// same option text either way. Used by the Valuation screens.
+  final bool inlineChoices;
 
   @override
   Widget build(BuildContext context) {
@@ -584,6 +590,16 @@ class InspectionFieldInput extends StatelessWidget {
             onChanged: onChanged,
           );
         }
+        if (inlineChoices) {
+          return InlineChoiceGroup(
+            label: field.label,
+            value: value,
+            options: field.offeredOptions(value),
+            textOf: field.optionText,
+            onChanged: onChanged,
+            onOptionCommitted: onDiscreteSelection,
+          );
+        }
         return _InspectionDropdown(
           label: field.label,
           value: value,
@@ -621,6 +637,136 @@ class InspectionFieldInput extends StatelessWidget {
           onChanged: onChanged,
         );
     }
+  }
+}
+
+/// A single-choice field shown as a heading plus one tick box per option.
+/// Only one option can be ticked at a time; tapping the ticked option again
+/// clears the answer. The value stored is the option text, exactly as the
+/// pop-up list stored it.
+class InlineChoiceGroup extends StatelessWidget {
+  const InlineChoiceGroup({
+    required this.label,
+    required this.value,
+    required this.options,
+    required this.textOf,
+    required this.onChanged,
+    this.onOptionCommitted,
+    super.key,
+  });
+
+  final String label;
+  final String value;
+  final List<String> options;
+  final String Function(String) textOf;
+  final ValueChanged<String> onChanged;
+  final VoidCallback? onOptionCommitted;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(2, 0, 2, 8),
+          child: Text(
+            label,
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: colors.primary,
+            ),
+          ),
+        ),
+        for (var i = 0; i < options.length; i++) ...[
+          if (i > 0) const SizedBox(height: 8),
+          _InlineChoiceRow(
+            key: ValueKey('choice:$label:${options[i]}'),
+            label: textOf(options[i]),
+            selected: options[i] == value,
+            onTap: () {
+              final selected = options[i] == value;
+              onChanged(selected ? '' : options[i]);
+              if (!selected) onOptionCommitted?.call();
+            },
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _InlineChoiceRow extends StatelessWidget {
+  const _InlineChoiceRow({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+    super.key,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    return Semantics(
+      container: true,
+      inMutuallyExclusiveGroup: true,
+      checked: selected,
+      label: label,
+      child: Material(
+        color: selected
+            ? colors.primaryContainer.withOpacity(0.15)
+            : Colors.transparent,
+        borderRadius: BorderRadius.circular(12),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: selected
+                    ? colors.primary.withOpacity(0.4)
+                    : colors.outlineVariant.withOpacity(0.5),
+              ),
+            ),
+            child: Row(
+              children: [
+                ExcludeSemantics(
+                  child: Icon(
+                    selected
+                        ? Icons.radio_button_checked_rounded
+                        : Icons.radio_button_unchecked_rounded,
+                    size: 24,
+                    color: selected ? colors.primary : colors.outline,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ExcludeSemantics(
+                    child: Text(
+                      label,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: selected ? FontWeight.w500 : FontWeight.w400,
+                        color: colors.onSurface,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

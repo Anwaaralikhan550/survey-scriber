@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "valuation_v2",
-  "screensAudited": 44,
+  "screensAudited": 45,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 505,
+   "distinctEmitted": 503,
    "approvedLegacyBank": 0,
-   "approvedCurrentBankOnly": 473,
+   "approvedCurrentBankOnly": 471,
    "unapproved": 0
   }
  },
@@ -79,13 +79,13 @@
    "sectionKey": "property_inspection",
    "screenId": "val_pitched_roof",
    "title": "Pitched Roof",
-   "dataFieldCount": 19,
-   "permutationCount": 35,
+   "dataFieldCount": 16,
+   "permutationCount": 32,
    "severities": [],
    "phraseStats": {
-    "total": 23,
+    "total": 20,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 22,
+    "approvedCurrentBankOnly": 19,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -98,38 +98,38 @@
    "sectionKey": "property_inspection",
    "screenId": "val_flat_roof",
    "title": "Flat Roof",
-   "dataFieldCount": 9,
-   "permutationCount": 19,
+   "dataFieldCount": 8,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 11,
+    "total": 10,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 9,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The flat roof covering is of mineral felt construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.",
-    "The flat roof covering is of asphalt construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.",
-    "The flat roof covering is of lead construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future."
+    "The flat roof covering is formed in mineral felt.",
+    "The flat roof covering is formed in rubber membrane.",
+    "The flat roof covering is formed in single-ply membrane."
    ]
   },
   {
    "sectionKey": "property_inspection",
    "screenId": "val_other_roof",
    "title": "Other Roof",
-   "dataFieldCount": 23,
-   "permutationCount": 37,
+   "dataFieldCount": 19,
+   "permutationCount": 33,
    "severities": [],
    "phraseStats": {
-    "total": 23,
+    "total": 21,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 22,
+    "approvedCurrentBankOnly": 20,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The secondary roof is covered with tile materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
-    "The secondary roof is covered with natural slate materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
-    "The secondary roof is covered with artificial slate materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment."
+    "The other roof covering is formed in clay tiles.",
+    "The other roof covering is formed in concrete tiles.",
+    "The other roof covering is formed in natural slate."
    ]
   },
   {
@@ -155,19 +155,19 @@
    "sectionKey": "property_inspection",
    "screenId": "val_rainwater_goods",
    "title": "Rainwater Goods",
-   "dataFieldCount": 15,
-   "permutationCount": 25,
+   "dataFieldCount": 14,
+   "permutationCount": 24,
    "severities": [],
    "phraseStats": {
-    "total": 17,
+    "total": 16,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 16,
+    "approvedCurrentBankOnly": 15,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The rainwater goods comprise PVC.",
-    "The rainwater goods comprise cast iron.",
-    "The rainwater goods comprise aluminium."
+    "The rainwater goods comprise PVC, and associated fittings.",
+    "The rainwater goods comprise cast iron, and associated fittings.",
+    "The rainwater goods comprise aluminium, and associated fittings."
    ]
   },
   {
@@ -571,13 +571,13 @@
    "sectionKey": "property_inspection",
    "screenId": "val_electric_material",
    "title": "Electricity",
-   "dataFieldCount": 25,
-   "permutationCount": 37,
+   "dataFieldCount": 26,
+   "permutationCount": 38,
    "severities": [],
    "phraseStats": {
-    "total": 24,
+    "total": 25,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 23,
+    "approvedCurrentBankOnly": 24,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -603,6 +603,25 @@
     "The property is connected to mains gas supply. The gas installation was not tested as part of this inspection. A current Gas Safety Certificate, issued by a Gas Safe registered engineer, should be obtained to confirm the safety and adequacy of the installation.",
     "The gas supply is lpg. A current Gas Safety Certificate, issued by a Gas Safe registered engineer, should be obtained.",
     "The gas installation is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration."
+   ]
+  },
+  {
+   "sectionKey": "property_inspection",
+   "screenId": "val_oil_lpg",
+   "title": "Oil / LPG Tank",
+   "dataFieldCount": 11,
+   "permutationCount": 13,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "The property is served by an Oil-fired heating system.",
+    "The property is served by an LPG-fired heating system.",
+    "The property is served by an Oil-fired / LPG-fired heating system with a plastic, metal and sample detail fuel storage tank(s) located at the front garden, side garden, rear garden and sample detail."
    ]
   },
   {
@@ -760,19 +779,19 @@
    "sectionKey": "condition_restrictions",
    "screenId": "val_sv_timber",
    "title": "Timber Defects",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
     "The following are the additional timber defects related valuation concerns: Wood-boring Insects.",
     "The following are the additional timber defects related valuation concerns: Extensive Dry Rot.",
-    "The following are the additional timber defects related valuation concerns: Wood-boring Insects, Extensive Dry Rot and sample detail."
+    "The following are the additional timber defects related valuation concerns: Extensive Wet Rot."
    ]
   },
   {

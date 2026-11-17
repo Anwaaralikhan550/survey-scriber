@@ -4062,6 +4062,82 @@
       "allowedTokens": [
         "FREE_TEXT"
       ]
+    },
+    "VAL_N17_0001": {
+      "screenId": "*",
+      "text": "The property is served by an [free text] heating system.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0002": {
+      "screenId": "*",
+      "text": "The property is served by an [free text] heating system with [free text] fuel storage tank(s).",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0003": {
+      "screenId": "*",
+      "text": "The property is served by an [free text] heating system located at the [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0004": {
+      "screenId": "*",
+      "text": "The property is served by an [free text] heating system with [free text] fuel storage tank(s) located at the [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0005": {
+      "screenId": "*",
+      "text": "The meter unit is dated.",
+      "allowedTokens": []
+    },
+    "VAL_N17_0006": {
+      "screenId": "*",
+      "text": "The property has been extended in [number] to provide [free text] accommodation.",
+      "allowedTokens": [
+        "FREE_TEXT",
+        "NUMBER"
+      ]
+    },
+    "VAL_N17_0007": {
+      "screenId": "*",
+      "text": "The property has been extended in [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_N17_0008": {
+      "screenId": "*",
+      "text": "The flat roof covering is formed in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0009": {
+      "screenId": "*",
+      "text": "The other roof covering is formed in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0010": {
+      "screenId": "*",
+      "text": "[free text] covering is formed in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0011": {
+      "screenId": "*",
+      "text": "The rainwater goods comprise [free text], and associated fittings.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
     }
   }
 }

@@ -315,6 +315,7 @@ class ReportBuilder {
     const services = {
       'val_electric_material',
       'val_gas',
+      'val_oil_lpg',
       'val_water',
       'val_hot_water_central_heating',
       'val_smoke_detectors',
