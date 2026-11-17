@@ -843,11 +843,22 @@
       "description": "Overall condition and other matters",
       "nodes": [
         {
+          "id": "val_limitations",
+          "title": "Limitations",
+          "type": "screen",
+          "parentId": null,
+          "order": 1,
+          "fields": [
+            { "id": "cb_lim_no_restrictions", "label": "No Restrictions", "type": "checkbox" },
+            { "id": "cb_lim_no_rear_access", "label": "No Rear Access", "type": "checkbox" }
+          ]
+        },
+        {
           "id": "overall_condition",
           "title": "Overall Condition",
           "type": "screen",
           "parentId": null,
-          "order": 1,
+          "order": 2,
           "fields": [
             { "id": "actv_overall_condition", "label": "Overall Condition", "type": "dropdown", "options": ["Reasonable", "Reasonable with repair"] },
             { "id": "et_restrictions", "label": "Restrictions", "type": "text" }
@@ -858,7 +869,7 @@
           "title": "Significant Valuation Consideration",
           "type": "group",
           "parentId": null,
-          "order": 2
+          "order": 3
         },
         {
           "id": "val_sv_roof",
@@ -969,7 +980,20 @@
             { "id": "et_share", "label": "Share (%)", "type": "number" },
             { "id": "et_after_works_value", "label": "After Works Value", "type": "text" },
             { "id": "et_retention", "label": "Retention", "type": "text" },
-            { "id": "cb_suitable_security", "label": "Suitable Security", "type": "checkbox" }
+            { "id": "cb_suitable_security", "label": "Suitable Security", "type": "checkbox" },
+            { "id": "label_reinstatement", "label": "Reinstatement", "type": "label" },
+            { "id": "et_reinstatement_value", "label": "Reinstatement Value", "type": "text" },
+            { "id": "cb_higher_reinstatement", "label": "Higher Reinstatement Value", "type": "checkbox" }
+          ]
+        },
+        {
+          "id": "valuation_matrix",
+          "title": "FBS Valuation Matrix",
+          "type": "screen",
+          "parentId": null,
+          "order": 2,
+          "fields": [
+            { "id": "et_matrix_grid", "label": "FBS Valuation Matrix", "type": "text" }
           ]
         },
         {
@@ -977,7 +1001,7 @@
           "title": "General Remarks & Notes",
           "type": "screen",
           "parentId": null,
-          "order": 2,
+          "order": 3,
           "fields": [
             { "id": "label_general_remarks", "label": "General Remarks", "type": "label" },
             { "id": "et_general_remarks", "label": "General Remarks", "type": "text" },
@@ -994,7 +1018,7 @@
           "title": "Scan Floor Plan",
           "type": "screen",
           "parentId": null,
-          "order": 3,
+          "order": 4,
           "fields": [
             { "id": "label_scan_floor_plan", "label": "Scan Floor Plan", "type": "label" }
           ]

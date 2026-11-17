@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "valuation_v2",
-  "screensAudited": 45,
+  "screensAudited": 47,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 503,
+   "distinctEmitted": 508,
    "approvedLegacyBank": 0,
-   "approvedCurrentBankOnly": 471,
+   "approvedCurrentBankOnly": 476,
    "unapproved": 0
   }
  },
@@ -682,6 +682,25 @@
   },
   {
    "sectionKey": "condition_restrictions",
+   "screenId": "val_limitations",
+   "title": "Limitations",
+   "dataFieldCount": 2,
+   "permutationCount": 4,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "The inspection of the grounds was visual only. Underground services, buried structures, and concealed defects could not be inspected or confirmed as part of this inspection.",
+    "No inspection restrictions: There were no unusual restrictions affecting my inspection of the grounds within the apparent ownership of the property.",
+    "Restricted access: Access to the rear or external elevations of the property was not available. Consequently, I was unable to inspect or comment on the condition or composition of the rear grounds. Comments are limited to those external areas that were visible and accessible at the time of the inspection."
+   ]
+  },
+  {
+   "sectionKey": "condition_restrictions",
    "screenId": "overall_condition",
    "title": "Overall Condition",
    "dataFieldCount": 2,
@@ -815,13 +834,13 @@
    "sectionKey": "valuation_completion",
    "screenId": "valuation",
    "title": "Valuation",
-   "dataFieldCount": 8,
-   "permutationCount": 10,
+   "dataFieldCount": 10,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 10,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 10,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -829,6 +848,20 @@
     "The pre-inspection estimated value provided to us was sample detail.",
     "In my opinion, the open market value of the property, subject to the assumptions, special assumptions, and conditions set out in this report, is considered to be adequate security for the proposed mortgage advance. The valuation opinion is provided for the stated purpose and remains subject to the assumptions, special assumptions, and limiting conditions in this report."
    ]
+  },
+  {
+   "sectionKey": "valuation_completion",
+   "screenId": "valuation_matrix",
+   "title": "FBS Valuation Matrix",
+   "dataFieldCount": 1,
+   "permutationCount": 3,
+   "severities": [],
+   "phraseStats": {
+    "total": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 0,
+    "unapproved": 0
+   }
   },
   {
    "sectionKey": "valuation_completion",

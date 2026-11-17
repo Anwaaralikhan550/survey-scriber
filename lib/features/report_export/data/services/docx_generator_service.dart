@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 
 import '../../../../core/utils/logger.dart';
+import '../../../property_valuation/domain/valuation_matrix.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
 import 'pdf_shared_utils.dart';
@@ -390,6 +391,11 @@ class DocxGeneratorService {
       }
     }
 
+    // FBS Valuation Matrix: typed by the surveyor, blank until then.
+    if (doc.reportType == ReportType.valuation && doc.valuationMatrix.isNotEmpty) {
+      _writeValuationMatrix(buf, doc.valuationMatrix);
+    }
+
     // AI Disclaimer
     if (doc.hasAiContent && doc.aiDisclaimer != null) {
       buf.write('<w:p/>'); // blank line
@@ -476,8 +482,16 @@ class DocxGeneratorService {
         '<w:t xml:space="preserve">${_escapeXml(screen.title)}</w:t></w:r></w:p></w:tc>');
     buf.write('<w:tc><w:tcPr><w:tcW w:w="7238" w:type="dxa"/></w:tcPr>');
     for (final text in paragraphs) {
-      buf.write('<w:p><w:pPr><w:spacing w:after="80"/><w:jc w:val="both"/></w:pPr>'
-          '<w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">${_escapeXml(text)}</w:t></w:r></w:p>');
+      // The sample report prints the lead words of the two Limitations notes in bold.
+      final lead = screen.screenId == 'val_limitations'
+          ? const ['No inspection restrictions:', 'Restricted access:'].where(text.startsWith).firstOrNull
+          : null;
+      buf.write('<w:p><w:pPr><w:spacing w:after="80"/><w:jc w:val="both"/></w:pPr>');
+      if (lead != null) {
+        buf.write('<w:r><w:rPr><w:b/><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">${_escapeXml(lead)} </w:t></w:r>');
+      }
+      buf.write('<w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">'
+          '${_escapeXml(lead == null ? text : text.substring(lead.length).trimLeft())}</w:t></w:r></w:p>');
     }
     buf.write('</w:tc></w:tr></w:tbl>');
     buf.write('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="60" w:lineRule="exact"/></w:pPr></w:p>');
@@ -1125,6 +1139,46 @@ class DocxGeneratorService {
           bold: i == 0,
           shading: shading,
         );
+      }
+      buf.write('</w:tr>');
+    }
+    buf.write('</w:tbl><w:p/>');
+  }
+
+  void _writeValuationMatrix(StringBuffer buf, List<List<String>> rows) {
+    const headers = ValuationMatrix.headers;
+    const widths = <int>[1500, 1250, 1250, 1250, 1250, 1250, 1250];
+    _writeHeading(buf, ValuationMatrix.title, 'Heading2');
+    buf.write('<w:tbl><w:tblPr><w:tblStyle w:val="ReportTable"/><w:tblW w:w="9000" w:type="dxa"/>');
+    buf.write('<w:tblLayout w:type="fixed"/>');
+    buf.write('<w:tblCellMar><w:top w:w="40" w:type="dxa"/><w:left w:w="80" w:type="dxa"/>');
+    buf.write('<w:bottom w:w="40" w:type="dxa"/><w:right w:w="80" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>');
+    for (final w in widths) {
+      buf.write('<w:gridCol w:w="$w"/>');
+    }
+    buf.write('</w:tblGrid>');
+    void cell(String text, int width, {bool bold = false, bool centre = true, String? shading}) {
+      buf.write('<w:tc><w:tcPr><w:tcW w:w="$width" w:type="dxa"/>');
+      if (shading != null) buf.write('<w:shd w:val="clear" w:color="auto" w:fill="$shading"/>');
+      buf.write('<w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:spacing w:before="0" w:after="0"/>');
+      buf.write(centre ? '<w:jc w:val="center"/>' : '<w:jc w:val="left"/>');
+      buf.write('</w:pPr><w:r><w:rPr>');
+      if (bold) buf.write('<w:b/><w:color w:val="24566A"/>');
+      buf.write('<w:sz w:val="16"/></w:rPr><w:t xml:space="preserve">');
+      buf.write(_escapeXml(text));
+      buf.write('</w:t></w:r></w:p></w:tc>');
+    }
+
+    buf.write('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
+    for (var i = 0; i < headers.length; i++) {
+      cell(headers[i], widths[i], bold: true, centre: i > 0, shading: 'EAF1F4');
+    }
+    buf.write('</w:tr>');
+    for (final row in rows) {
+      buf.write('<w:tr><w:trPr><w:trHeight w:val="300"/><w:cantSplit/></w:trPr>');
+      cell(row.isEmpty ? '' : row.first, widths[0], bold: true, centre: false);
+      for (var c = 1; c < headers.length; c++) {
+        cell(c < row.length ? row[c] : '', widths[c]);
       }
       buf.write('</w:tr>');
     }

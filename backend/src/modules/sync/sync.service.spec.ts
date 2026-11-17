@@ -66,6 +66,10 @@ describe('SyncService', () => {
     media: {
       findMany: jest.fn(),
     },
+    // Desktop editing: a push first checks that the survey's report is not finalised (none here).
+    report: {
+      findUnique: jest.fn().mockResolvedValue(null),
+    },
     $transaction: jest.fn(),
   };
 

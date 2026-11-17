@@ -78,6 +78,8 @@ Rules: auto-continue after each DONE step, no step skipped, wording only from th
 | V18 | Final | DONE locally (not pushed, no APK) | see git log | full flutter suite 5244 pass (one pin fixed: report_nodes regenerated), portal 36 pass, phrase audit clean, web screenshots proof/v18_*.png, v18damp2_2.png, v18cond_1.png, v18oc_1.png, v18purpose_1.png, v18sec_*.png; MATCH.md; client questions docx docs/client-valuation-2026-11-13/Client_Questions_Valuation_14Nov2026.docx |
 
 ## 6. NEXT ACTION
+**17 Nov 2026: the client answered the 13 questions and sent UI feedback. That work is in `docs/VALUATION-NOV17-PROGRESS.md` (all steps done locally). Read that file first.**
+
 ALL STEPS DONE locally (V-1 .. V18). Remaining, only with the user's say-so: git push, APK v15 (build with `flutter pub get` first; never copy a stale app-release.apk), send `Client_Questions_Valuation_14Nov2026.docx` to the client, remove the scratch probe `test/_scratch_valuation_nov13.dart`. Not tested: phone/APK, live server, signature/photo pages beyond bar colour.
 
 IMPORTANT valuation rules learned: every sentence the engine emits must match a template in `assets/property_valuation/phrase_texts.json` or `test/phrase_audit/phrase_permutation_audit_test.dart` fails (UNAPPROVED). Add templates with `add_templates.py` (`add([...], 'VAL_N13_Vx')`; `[free text]` / `[number]` are wildcards, need 3+ literal words).

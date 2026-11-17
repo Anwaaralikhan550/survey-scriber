@@ -140,4 +140,59 @@ describe('report content', () => {
     const added = applyChanges(content, [{ op: 'addBlock', sectionId: sec, block: { id: id(), type: 'paragraph', text: 'z', role: 'rating' } as never }]);
     expect(added[0].blocks[1].role).toBeUndefined();
   });
+
+  describe('FBS Valuation Matrix table (client 17 Nov 2026)', () => {
+    const headers = ['Best Match', 'Comp 1', 'Comp 2', 'Comp 3', 'Comp 4', 'Comp 5', 'Subject'];
+    const labels = ['Address', 'Date of Trans', 'Price', 'Size / Sqm', 'Bedrooms', 'Condition', 'Compare', 'Type', 'Tenure', 'Price/Sqm', 'Features', 'Adjustment', 'Amount', 'Adjustment', 'Amount', 'Adjustment', 'Amount'];
+    const matrix = () => {
+      const sec = id();
+      const blk = id();
+      const content = cleanContent([
+        {
+          id: sec,
+          key: 'VALUATION_MATRIX',
+          title: 'FBS Valuation Matrix',
+          blocks: [{ id: blk, type: 'table', role: 'matrix', required: true, table: { headers, rows: labels.map((l) => [l, '', '', '', '', '', '']) } }],
+        },
+      ]);
+      return { content, sec, blk };
+    };
+
+    it('the phone can upload the blank matrix: 17 rows by 7 columns, role matrix, template field', () => {
+      const { content } = matrix();
+      const b = content[0].blocks[0];
+      expect(b.role).toBe('matrix');
+      expect(b.required).toBe(true);
+      expect(b.table?.rows.length).toBe(17);
+      expect(b.table?.rows.every((r) => r.length === 7)).toBe(true);
+      expect(b.table?.rows.map((r) => r[0])).toEqual(labels);
+    });
+
+    it('a cell typed in the browser is saved, the rest stays blank, the input is not touched', () => {
+      const { content, sec, blk } = matrix();
+      const rows = content[0].blocks[0].table!.rows.map((r) => [...r]);
+      rows[0][1] = '12 High Street';
+      rows[2][6] = '£460,000';
+      const next = applyChanges(content, [{ op: 'updateBlock', sectionId: sec, blockId: blk, fields: { table: { headers, rows } } }]);
+      const out = next[0].blocks[0].table!.rows;
+      expect(out[0][1]).toBe('12 High Street');
+      expect(out[2][6]).toBe('£460,000');
+      expect(out.flat().filter((c) => c !== '' && !labels.includes(c)).length).toBe(2);
+      expect(content[0].blocks[0].table!.rows[0][1]).toBe('');
+    });
+
+    it('cell text is plain: tags are removed', () => {
+      const { content, sec, blk } = matrix();
+      const rows = content[0].blocks[0].table!.rows.map((r) => [...r]);
+      rows[0][1] = '<script>alert(1)</script>Flat 2 <b>x</b>';
+      const next = applyChanges(content, [{ op: 'updateBlock', sectionId: sec, blockId: blk, fields: { table: { headers, rows } } }]);
+      expect(next[0].blocks[0].table!.rows[0][1]).toBe('Flat 2 x');
+    });
+
+    it('the matrix cannot be deleted (template field) and its role cannot be set by an edit', () => {
+      const { content, sec, blk } = matrix();
+      expect(() => applyChanges(content, [{ op: 'deleteBlock', sectionId: sec, blockId: blk }])).toThrow();
+      expect(() => applyChanges(content, [{ op: 'updateBlock', sectionId: sec, blockId: blk, fields: { role: 'phrase' } }])).toThrow(/cannot be edited/);
+    });
+  });
 });

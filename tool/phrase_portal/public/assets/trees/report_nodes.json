@@ -410,6 +410,7 @@
   "val_gas",
   "val_hot_water_central_heating",
   "val_kitchen",
+  "val_limitations",
   "val_oil_lpg",
   "val_other_roof",
   "val_outbuildings",
@@ -431,6 +432,7 @@
   "val_walls_internal",
   "val_walls_type",
   "val_water",
-  "valuation"
+  "valuation",
+  "valuation_matrix"
  ]
 }

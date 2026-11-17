@@ -5,6 +5,7 @@ import '../../../property_inspection/domain/inspection_phrase_engine.dart';
 import '../../../property_inspection/domain/models/inspection_models.dart';
 import '../../../property_inspection/presentation/widgets/inspection_fields.dart'
     show shouldShowInspectionField, sanitizeInspectionFieldsForScreen;
+import '../../../property_valuation/domain/valuation_matrix.dart';
 import '../../../property_valuation/domain/valuation_phrase_engine.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
@@ -203,6 +204,12 @@ class ReportBuilder {
       accommodationSchedule: isInspection
           ? _buildAccommodationSchedule(rawData)
           : _buildValuationAccommodationSchedule(rawData),
+      // Valuation reports always carry the matrix, blank until the surveyor types into it.
+      valuationMatrix: isInspection
+          ? const []
+          : ValuationMatrix.tableRows(
+              ValuationMatrix.parse(_answersForScreen(rawData, ValuationMatrix.screenId)[ValuationMatrix.fieldId]),
+            ),
     );
   }
 
@@ -334,6 +341,8 @@ class ReportBuilder {
     final buckets = {for (final k in order) k: <ReportScreen>[]};
     for (final section in sections) {
       for (final screen in section.screens) {
+        // The matrix is a table of its own (ReportDocument.valuationMatrix), not an element box.
+        if (screen.screenId == ValuationMatrix.screenId) continue;
         final String key;
         switch (section.key) {
           case 'valuation_details':

@@ -79,6 +79,7 @@ class ReportDocument {
     this.aiDisclaimer,
     this.recommendationItems = const [],
     this.accommodationSchedule = const [],
+    this.valuationMatrix = const [],
   });
 
   final ReportType reportType;
@@ -108,6 +109,10 @@ class ReportDocument {
   /// reports. Room counts are data, not narrative phrases.
   final List<AccommodationScheduleRow> accommodationSchedule;
 
+  /// The FBS Valuation Matrix of a valuation report: the row name and the six cell texts of every row.
+  /// Empty for other reports. Typed by the surveyor, never generated.
+  final List<List<String>> valuationMatrix;
+
   bool get hasAiContent =>
       aiExecutiveSummary != null ||
       aiSectionNarratives.isNotEmpty ||
@@ -135,6 +140,7 @@ class ReportDocument {
     String? aiDisclaimer,
     List<ReportRecommendationItem>? recommendationItems,
     List<AccommodationScheduleRow>? accommodationSchedule,
+    List<List<String>>? valuationMatrix,
   }) {
     return ReportDocument(
       reportType: reportType ?? this.reportType,
@@ -151,6 +157,7 @@ class ReportDocument {
       recommendationItems: recommendationItems ?? this.recommendationItems,
       accommodationSchedule:
           accommodationSchedule ?? this.accommodationSchedule,
+      valuationMatrix: valuationMatrix ?? this.valuationMatrix,
     );
   }
 }

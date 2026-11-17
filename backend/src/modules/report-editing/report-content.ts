@@ -9,7 +9,7 @@ import { randomUUID } from 'crypto';
 export type BlockType = 'paragraph' | 'rating' | 'recommendation' | 'photo' | 'table';
 export type Rating = 'NI' | '1' | '2' | '3';
 /** What the phone's report builder produced this block from, so edits go back to the right place. */
-export type BlockRole = 'phrase' | 'note' | 'rating' | 'schedule';
+export type BlockRole = 'phrase' | 'note' | 'rating' | 'schedule' | 'matrix';
 
 export interface TableData {
   headers: string[];
@@ -72,7 +72,7 @@ export class ContentValidationError extends Error {
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const BLOCK_TYPES: BlockType[] = ['paragraph', 'rating', 'recommendation', 'photo', 'table'];
 const RATINGS: Rating[] = ['NI', '1', '2', '3'];
-const ROLES: BlockRole[] = ['phrase', 'note', 'rating', 'schedule'];
+const ROLES: BlockRole[] = ['phrase', 'note', 'rating', 'schedule', 'matrix'];
 
 export const LIMITS = {
   maxSections: 200,

@@ -6,7 +6,9 @@ import '../../../../app/router/routes.dart';
 import '../../../property_inspection/domain/models/inspection_models.dart';
 import '../../../property_inspection/presentation/widgets/inspection_fields.dart';
 import '../../../media/presentation/widgets/photo_grid.dart';
+import '../../domain/valuation_matrix.dart';
 import '../providers/valuation_providers.dart';
+import '../widgets/valuation_matrix_editor.dart';
 
 class ValuationScreenPage extends ConsumerStatefulWidget {
   const ValuationScreenPage({
@@ -106,6 +108,7 @@ class _ValuationScreenPageState extends ConsumerState<ValuationScreenPage> {
         .where((field) => shouldShowInspectionField(field, state.answers))
         .toList());
     final isFloorPlanScan = screenId == 'scan_floor_plan';
+    final isMatrix = screenId == ValuationMatrix.screenId;
     final floorPlanSectionId = 'valuation_v2_floor_plan_$surveyId';
 
     final phraseEngine = ref.watch(valuationPhraseEngineProvider);
@@ -163,6 +166,16 @@ class _ValuationScreenPageState extends ConsumerState<ValuationScreenPage> {
                             maxPhotos: 5,
                             crossAxisCount: 3,
                             showAddButton: true,
+                          ),
+                        ],
+                      )
+                    : isMatrix
+                    ? ListView(
+                        padding: const EdgeInsets.all(16),
+                        children: [
+                          ValuationMatrixEditor(
+                            value: state.answers[ValuationMatrix.fieldId] ?? '',
+                            onChanged: (next) => notifier.setAnswer(ValuationMatrix.fieldId, next),
                           ),
                         ],
                       )

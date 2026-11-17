@@ -249,4 +249,76 @@ void main() {
           '$lead Wood-boring Insects, Extensive Dry Rot and Extensive Wet Rot.');
     });
   });
+
+  group('A6 Limitations under Restrictions', () {
+    const standard = 'The inspection of the grounds was visual only. Underground services, buried structures, and concealed defects '
+        'could not be inspected or confirmed as part of this inspection.';
+    const noRestrictions = 'No inspection restrictions: There were no unusual restrictions affecting my inspection of the grounds '
+        'within the apparent ownership of the property.';
+    const noRear = 'Restricted access: Access to the rear or external elevations of the property was not available. '
+        'Consequently, I was unable to inspect or comment on the condition or composition of the rear grounds. '
+        'Comments are limited to those external areas that were visible and accessible at the time of the inspection.';
+    test('a Limitations screen comes first in Condition & Restrictions, before Overall Condition', () {
+      expect(nodes['val_limitations']!['title'], 'Limitations');
+      expect(nodes['val_limitations']!['parentId'], isNull);
+      expect(order.indexOf('val_limitations') + 1, order.indexOf('overall_condition'));
+      expect((nodes['val_limitations']!['order'] as int) < (nodes['overall_condition']!['order'] as int), isTrue);
+      expect([for (final f in screens['val_limitations']!.values) f['label']], ['No Restrictions', 'No Rear Access']);
+    });
+    test('the standard text is always there', () {
+      expect(engine.buildPhrases('val_limitations', {'cb_lim_no_restrictions': 'false'}), [standard]);
+    });
+    test('each tick adds its own paragraph, in the sample order', () {
+      expect(engine.buildPhrases('val_limitations', ticks(['cb_lim_no_restrictions'])), [standard, noRestrictions]);
+      expect(engine.buildPhrases('val_limitations', ticks(['cb_lim_no_rear_access'])), [standard, noRear]);
+      expect(engine.buildPhrases('val_limitations', ticks(['cb_lim_no_rear_access', 'cb_lim_no_restrictions'])),
+          [standard, noRestrictions, noRear]);
+    });
+    test('the words are the sample report words (Home Survey grounds limitations)', () {
+      final sample = File('docs/client-valuation-2026-11-13/sample_report_text.txt').readAsStringSync();
+      for (final line in [standard, noRestrictions, noRear]) {
+        expect(sample, contains(line));
+      }
+    });
+  });
+
+  group('A10 Reinstatement Value and Higher Reinstatement Value', () {
+    const lead = 'The reinstatement cost of your home represents the estimated cost of completely rebuilding the property '
+        'if it is destroyed, for example, by fire. This figure differs from the market value of the property, '
+        'as it relates solely to the cost of materials and labour required to reconstruct the building to its '
+        'current form. The estimated reinstatement cost for this property is';
+    test('two new fields at the end of the Valuation screen', () {
+      final f = screens['valuation']!;
+      expect(f['et_reinstatement_value']!['label'], 'Reinstatement Value');
+      expect(f['et_reinstatement_value']!['type'], 'text');
+      expect(f['cb_higher_reinstatement']!['label'], 'Higher Reinstatement Value');
+      expect(f['cb_higher_reinstatement']!['type'], 'checkbox');
+      final ids = f.keys.toList();
+      expect(ids.indexOf('et_reinstatement_value') > ids.indexOf('cb_suitable_security'), isTrue);
+    });
+    test('figures and words, exactly the client sentence', () {
+      expect(say('valuation', {'et_reinstatement_value': '517000'}),
+          '$lead £517,000 (Five Hundred and Seventeen Thousand Pounds).');
+      expect(say('valuation', {'et_reinstatement_value': '£517,000'}),
+          '$lead £517,000 (Five Hundred and Seventeen Thousand Pounds).');
+      expect(say('valuation', {'et_reinstatement_value': '1250000'}),
+          '$lead £1,250,000 (One Million Two Hundred and Fifty Thousand Pounds).');
+    });
+    test('the Higher Reinstatement Value tick prints its sentence', () {
+      expect(say('valuation', ticks(['cb_higher_reinstatement'])),
+          'The reinstatement cost exceeds the purchase price; this is not unusual and does not indicate an error.');
+    });
+    test('both together keep the order: amount first, then the higher sentence', () {
+      final out = engine.buildPhrases('valuation', ticks(['cb_higher_reinstatement'], {'et_reinstatement_value': '517000'}));
+      expect(out.length, 2);
+      expect(out[0], startsWith('The reinstatement cost of your home'));
+      expect(out[1], startsWith('The reinstatement cost exceeds'));
+    });
+    test('nothing entered prints nothing; the other Valuation sentences are unchanged', () {
+      expect(say('valuation', {}), '');
+      expect(say('valuation', {'et_purchase_price': '400000'}),
+          'Based on an analysis of recent comparable sales for similar properties in the locality, the agreed purchase price of '
+          '£400,000.00 (Four Hundred Thousand Pounds) appears reasonable in current market conditions.');
+    });
+  });
 }

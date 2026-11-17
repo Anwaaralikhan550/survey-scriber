@@ -1,0 +1,188 @@
+{
+ "general_details": {
+  "actv_status": "Occupied",
+  "actv_finishes": "Fully furnished",
+  "actv_carpeted": "Fully",
+  "actv_vl_reason": "Market Value",
+  "actv_weather": "Dry",
+  "actv_tenure": "Freehold",
+  "actv_type": "Semi-detached house",
+  "et_age": "1960",
+  "actv_bedrooms": "Three",
+  "cb_c_masonry": "true",
+  "cb_c_cavity": "true",
+  "cb_ext_rear": "true",
+  "cb_ext_single": "true",
+  "cb_is_listed_building": "true",
+  "cb_ext_side": "true",
+  "et_age_extension": "1995"
+ },
+ "no_of_rooms": {
+  "et_liv": "1",
+  "et_kit": "1",
+  "et_bed": "3",
+  "et_bath": "2",
+  "et_wc": "1",
+  "et_ut": "1",
+  "et_con": "1",
+  "et_other": "1",
+  "et_other_name": "Garage"
+ },
+ "accommodation_summary": {
+  "cb_garage": "true",
+  "cb_double": "true",
+  "cb_external_outbuildings": "true",
+  "et_describe": "Summer house",
+  "cb_external_garden": "true"
+ },
+ "val_pitched_roof": {
+  "cb_r_natural": "true",
+  "actv_condition_pitched_roof": "Good"
+ },
+ "val_flat_roof": {
+  "cb_fr_rubber": "true",
+  "cb_fr_single": "true",
+  "actv_condition_flat_roof": "Fair",
+  "et_notes_flat_roof": "Some ponding noted."
+ },
+ "val_walls_type": {
+  "cb_w_cavity": "true",
+  "cb_w_solid": "true",
+  "actv_condition_walls": "Reasonable",
+  "actv_building_movement": "Minor movement",
+  "et_wall_thickness": "300"
+ },
+ "val_external_joinery": {
+  "cb_wn_replacement": "true",
+  "cb_wn_pvcu": "true",
+  "actv_condition_ext_joinery": "Fair"
+ },
+ "val_gas": {
+  "actv_gas_supply": "Mains",
+  "cb_gm_outside": "true",
+  "actv_condition_gas": "Good"
+ },
+ "val_water": {
+  "actv_water_supply": "Mains",
+  "cb_sc_sink": "true",
+  "actv_condition_water": "Good"
+ },
+ "val_hot_water_central_heating": {
+  "cb_h_combi": "true",
+  "cb_hw_combi": "true",
+  "actv_condition_hw_ch": "Good"
+ },
+ "overall_condition": {
+  "actv_overall_condition": "Good"
+ },
+ "other_matters": {
+  "cb_flooding": "true",
+  "et_notes_flooding": "Low risk"
+ },
+ "energy_performance": {
+  "actv_epc_current_rating": "C",
+  "et_epc_current_score": "72",
+  "actv_epc_potential_rating": "B",
+  "et_epc_potential_score": "84"
+ },
+ "valuation": {
+  "et_purchase_price": "460000",
+  "cb_open_market_value": "true",
+  "et_reinstatement_value": "517000",
+  "cb_higher_reinstatement": "true"
+ },
+ "val_rainwater_goods": {
+  "cb_rw_pvc": "true",
+  "cb_rw_gutters": "true",
+  "cb_rw_down": "true",
+  "actv_condition_rainwater": "Good"
+ },
+ "val_chimney_stacks": {
+  "cb_ch_brick": "true",
+  "cb_ch_original": "true",
+  "actv_condition_chimney": "Good"
+ },
+ "val_decorations_ext": {
+  "actv_condition_dec_ext": "Good"
+ },
+ "val_floor_ext": {
+  "cb_f_concrete": "true",
+  "cb_f_timber": "true",
+  "actv_condition_floor_ext": "Good"
+ },
+ "val_garage": {
+  "cb_g_detached": "true",
+  "actv_condition_garage": "Good"
+ },
+ "val_outbuildings": {
+  "cb_o_summer": "true",
+  "actv_condition_outbuildings": "Reasonable"
+ },
+ "val_roof_space": {
+  "cb_rs_trussed": "true",
+  "actv_condition_roof_space": "Reasonable",
+  "cb_stored_items": "true"
+ },
+ "val_walls_internal": {
+  "cb_wi_masonry": "true",
+  "cb_wi_stud": "true",
+  "actv_condition_walls_int": "Good"
+ },
+ "val_kitchen": {
+  "cb_k_loc_kitchen": "true",
+  "cb_k_loc_utility": "true",
+  "cb_k_granite": "true",
+  "cb_k_quartz": "true",
+  "actv_condition_kitchen": "Good"
+ },
+ "val_bathroom": {
+  "cb_b_family": "true",
+  "cb_b_ensuite_shower": "true",
+  "actv_condition_bathroom": "Reasonable"
+ },
+ "val_damp_meter": {
+  "actv_damp_meter": "Damp Found",
+  "cb_dw_bathroom": "true",
+  "cb_dw_lounge": "true",
+  "cb_ds_rainwater": "true",
+  "actv_condition_damp": "Fair"
+ },
+ "val_electric_material": {
+  "cb_em_hall": "true",
+  "cb_rubber_cable": "true",
+  "actv_condition_electric": "Reasonable",
+  "cb_em_kitchen": "true",
+  "cb_em_dated": "true"
+ },
+ "val_sv_roof": {
+  "cb_svr_structural": "true",
+  "cb_svr_spray": "true"
+ },
+ "val_sv_damp": {
+  "cb_svd_rising": "true"
+ },
+ "val_sv_other": {
+  "et_sv_other_notes": "Flying freehold to the rear"
+ },
+ "val_other_roof": {
+  "et_other_roof_name": "garage roof",
+  "cb_or_felt": "true",
+  "actv_condition_other_roof": "Reasonable"
+ },
+ "val_oil_lpg": {
+  "cb_ol_oil": "true",
+  "cb_ot_plastic": "true",
+  "cb_ol_rear": "true"
+ },
+ "val_sv_timber": {
+  "cb_svt_rot": "true",
+  "cb_svt_wet": "true"
+ },
+ "val_limitations": {
+  "cb_lim_no_restrictions": "true",
+  "cb_lim_no_rear_access": "true"
+ },
+ "valuation_matrix": {
+  "et_matrix_grid": "[[\"12 High Street\", \"3 Mill Lane\", \"8 Park Road\", \"\", \"\", \"54 Gas Lane\"], [\"03/2026\", \"01/2026\", \"02/2026\", \"\", \"\", \"\"], [\"\\u00a3455,000\", \"\\u00a3470,000\", \"\\u00a3462,500\", \"\", \"\", \"\\u00a3460,000\"], [\"82\", \"85\", \"80\", \"\", \"\", \"84\"], [\"3\", \"3\", \"3\", \"\", \"\", \"3\"], [\"\", \"\", \"\", \"\", \"\", \"Good\"], [\"\", \"\", \"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\", \"\", \"Terrace\"], [\"\", \"\", \"\", \"\", \"\", \"Freehold\"], [\"\", \"\", \"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\", \"\", \"\"], [\"\", \"\", \"\", \"\", \"\", \"\"]]"
+ }
+}

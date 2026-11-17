@@ -77,6 +77,9 @@ function Block({ block, index, count, sections, sectionId, readOnly, active, onA
               {block.table.rows.map((row, r) => (
                 <tr key={r}>
                   {row.map((cell, c) => (
+                    block.role === 'matrix' && c === 0 ? (
+                      <th key={c} scope="row" className="rowname">{cell}</th>
+                    ) : (
                     <td key={c}>
                       <input
                         value={cell}
@@ -86,6 +89,7 @@ function Block({ block, index, count, sections, sectionId, readOnly, active, onA
                         onBlur={onBlur}
                       />
                     </td>
+                    )
                   ))}
                 </tr>
               ))}

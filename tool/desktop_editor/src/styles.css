@@ -102,6 +102,7 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .rating { display: flex; align-items: center; gap: 10px; }
 .rating select { padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); font-weight: 700; }
 .tablewrap { overflow-x: auto; }
+.block-table th.rowname { text-align: left; font-weight: 600; white-space: nowrap; padding: 6px 10px; background: var(--surface-2, #f1f4f6); }
 table { border-collapse: collapse; width: 100%; }
 th, td { border: 1px solid var(--line); padding: 0; text-align: left; }
 th { background: var(--brand-soft); padding: 6px 8px; font-size: 13px; }

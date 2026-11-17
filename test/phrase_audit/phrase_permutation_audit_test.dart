@@ -457,6 +457,8 @@ class ScreenFinding {
     'activity_no_of_rooms__third',
     'activity_no_of_rooms__other',
     'activity_no_of_rooms__roof_space',
+    // The FBS Valuation Matrix is a table the surveyor types (rendered as a table, never as prose).
+    'valuation_matrix',
   };
 
   bool get isGap =>

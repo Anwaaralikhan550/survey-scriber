@@ -8,6 +8,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import '../../../../core/utils/logger.dart';
+import '../../../property_valuation/domain/valuation_matrix.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
 import 'client_paragraph_rules.dart';
@@ -1028,7 +1029,8 @@ class PdfGeneratorService {
             } else if (doc.reportType == ReportType.valuation) {
               // The banner never sits alone at the foot of a page.
               widgets.add(pw.SizedBox(height: 8));
-              widgets.add(pw.NewPage(freeSpace: 150));
+              // The Valuation box (price, opinion, reinstatement) is tall and does not split: its banner needs more room.
+              widgets.add(pw.NewPage(freeSpace: section.key == 'valuation_completion' ? 290 : 150));
             } else {
               widgets.add(pw.SizedBox(height: 6));
               widgets.add(pw.Divider(
@@ -1267,6 +1269,11 @@ class PdfGeneratorService {
                 doc.accommodationSchedule, accent,
                 includeL2Intro: true));
           }
+        }
+
+        // FBS Valuation Matrix: typed by the surveyor, blank until then.
+        if (doc.reportType == ReportType.valuation && doc.valuationMatrix.isNotEmpty) {
+          widgets.addAll(_valuationMatrix(doc.valuationMatrix));
         }
 
         // AI Disclaimer
@@ -1637,6 +1644,27 @@ class PdfGeneratorService {
 
   /// One element of the valuation report (client sample, 13 Nov 2026): the element name in a shaded
   /// left cell, its sentences on the right.
+  /// The sample report prints the lead words of the two Limitations notes in bold.
+  pw.Widget _valuationParagraph(String screenId, String text) {
+    final clean = sanitize(text);
+    final lead = screenId == 'val_limitations'
+        ? const ['No inspection restrictions:', 'Restricted access:'].where(clean.startsWith).firstOrNull
+        : null;
+    if (lead == null) {
+      return pw.Text(clean, textAlign: pw.TextAlign.justify, style: const pw.TextStyle(fontSize: 9));
+    }
+    return pw.RichText(
+      textAlign: pw.TextAlign.justify,
+      text: pw.TextSpan(
+        style: const pw.TextStyle(fontSize: 9),
+        children: [
+          pw.TextSpan(text: lead, style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 9)),
+          pw.TextSpan(text: clean.substring(lead.length)),
+        ],
+      ),
+    );
+  }
+
   pw.Widget _valuationElement(ReportScreen screen) {
     final paragraphs = <String>[];
     if (_config.includePhrases && screen.phrases.isNotEmpty) {
@@ -1684,9 +1712,7 @@ class PdfGeneratorService {
                     for (final text in paragraphs)
                       pw.Padding(
                         padding: const pw.EdgeInsets.only(bottom: 4),
-                        child: pw.Text(sanitize(text),
-                            textAlign: pw.TextAlign.justify,
-                            style: const pw.TextStyle(fontSize: 9)),
+                        child: _valuationParagraph(screen.screenId, text),
                       ),
                   ],
                 ),
@@ -1736,6 +1762,65 @@ class PdfGeneratorService {
           ),
       ],
     );
+  }
+
+  List<pw.Widget> _valuationMatrix(List<List<String>> rows) {
+    const headers = ValuationMatrix.headers;
+    pw.Widget cell(String value, {bool header = false, bool name = false, bool centre = false}) {
+      return pw.Container(
+        alignment: centre ? pw.Alignment.center : pw.Alignment.centerLeft,
+        constraints: const pw.BoxConstraints(minHeight: 17),
+        padding: const pw.EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+        child: pw.Text(
+          sanitize(value),
+          style: pw.TextStyle(
+            fontSize: 8,
+            fontWeight: header || name ? pw.FontWeight.bold : pw.FontWeight.normal,
+            color: header || name ? PdfColor.fromHex('#24566A') : PdfSharedUtils.headerDark,
+          ),
+        ),
+      );
+    }
+
+    return <pw.Widget>[
+      pw.SizedBox(height: 14),
+      pw.Padding(
+        padding: const pw.EdgeInsets.only(left: 4, bottom: 4),
+        child: pw.Text(
+          ValuationMatrix.title,
+          style: pw.TextStyle(
+            fontWeight: pw.FontWeight.bold,
+            fontSize: 11,
+            color: PdfSharedUtils.headerDark,
+          ),
+        ),
+      ),
+      pw.Table(
+        border: pw.TableBorder.all(color: PdfColor.fromHex('#7F8C93'), width: 0.5),
+        columnWidths: const <int, pw.TableColumnWidth>{
+          0: pw.FlexColumnWidth(1.35),
+          1: pw.FlexColumnWidth(1),
+          2: pw.FlexColumnWidth(1),
+          3: pw.FlexColumnWidth(1),
+          4: pw.FlexColumnWidth(1),
+          5: pw.FlexColumnWidth(1),
+          6: pw.FlexColumnWidth(1),
+        },
+        children: <pw.TableRow>[
+          pw.TableRow(
+            decoration: pw.BoxDecoration(color: PdfColor.fromHex('#EAF1F4')),
+            children: [for (var i = 0; i < headers.length; i++) cell(headers[i], header: true, centre: i > 0)],
+          ),
+          for (final row in rows)
+            pw.TableRow(
+              children: [
+                cell(row.isEmpty ? '' : row.first, name: true),
+                for (var c = 1; c < headers.length; c++) cell(c < row.length ? row[c] : '', centre: true),
+              ],
+            ),
+        ],
+      ),
+    ];
   }
 
   List<pw.Widget> _accommodationSchedule(

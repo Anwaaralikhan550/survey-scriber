@@ -687,7 +687,8 @@ void main() {
     test('a group with six screens sits after Overall Condition and before the Valuation section', () {
       final sections = tree['sections'] as List;
       final ids = [for (final n in (sections[3] as Map)['nodes'] as List) (n as Map)['id']];
-      expect(ids, ['overall_condition', 'val_significant', 'val_sv_roof', 'val_sv_cladding', 'val_sv_movement', 'val_sv_damp', 'val_sv_timber', 'val_sv_other']);
+      // 17 Nov: the Limitations screen (client answer to Q9) comes first in Restrictions.
+      expect(ids, ['val_limitations', 'overall_condition', 'val_significant', 'val_sv_roof', 'val_sv_cladding', 'val_sv_movement', 'val_sv_damp', 'val_sv_timber', 'val_sv_other']);
       final group = ((sections[3] as Map)['nodes'] as List).firstWhere((n) => (n as Map)['id'] == 'val_significant') as Map;
       expect(group['title'], 'Significant Valuation Consideration');
       expect((sections[4] as Map)['key'], 'valuation_completion');

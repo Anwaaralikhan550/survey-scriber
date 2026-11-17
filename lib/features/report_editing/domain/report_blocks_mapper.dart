@@ -1,5 +1,6 @@
 import 'package:uuid/uuid.dart';
 
+import '../../property_valuation/domain/valuation_matrix.dart';
 import '../../report_export/domain/models/report_document.dart';
 
 /// Turns the phone's [ReportDocument] into the structured sections and blocks that the browser editor
@@ -13,6 +14,7 @@ class ReportBlocksMapper {
 
   static const _uuid = Uuid();
   static const scheduleKey = 'ACCOMMODATION';
+  static const matrixKey = 'VALUATION_MATRIX';
   static const scheduleHeaders = <String>[
     'Floor',
     'Living',
@@ -99,6 +101,25 @@ class ReportBlocksMapper {
         ],
       });
     }
+    if (doc.reportType == ReportType.valuation && doc.valuationMatrix.isNotEmpty) {
+      out.add({
+        'id': _uuid.v5(ns, 'sec:$matrixKey'),
+        'key': matrixKey,
+        'title': ValuationMatrix.title,
+        'blocks': [
+          {
+            'id': _uuid.v5(ns, 'blk:$matrixKey:table'),
+            'type': 'table',
+            'role': 'matrix',
+            'required': true,
+            'table': {
+              'headers': ValuationMatrix.headers,
+              'rows': doc.valuationMatrix,
+            },
+          },
+        ],
+      });
+    }
     return out;
   }
 
@@ -136,7 +157,13 @@ class ReportBlocksMapper {
           ),
       ];
     }
-    return doc.copyWith(sections: sections, accommodationSchedule: schedule);
+    var matrix = doc.valuationMatrix;
+    final matrixRows = _scheduleTable(byKey[matrixKey]);
+    if (matrixRows != null && doc.reportType == ReportType.valuation) {
+      // Row names stay as they are; only the typed cells come back from the browser.
+      matrix = ValuationMatrix.tableRows(ValuationMatrix.gridFromTableRows(matrixRows));
+    }
+    return doc.copyWith(sections: sections, accommodationSchedule: schedule, valuationMatrix: matrix);
   }
 
   static ReportScreen _applyToScreen(ReportScreen screen, Map<String, dynamic>? edited) {
