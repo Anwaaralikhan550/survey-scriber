@@ -16,7 +16,10 @@ export type EditingErrorCode =
   | 'AI_UNAVAILABLE'
   | 'FILE_INVALID'
   | 'FILE_TOO_LARGE'
-  | 'FILE_EXISTS';
+  | 'FILE_EXISTS'
+  | 'ARCHIVE_INVALID'
+  | 'ARCHIVE_REPORT_ID_COLLISION'
+  | 'ARCHIVE_NOT_OWNER';
 
 export function editingError(status: HttpStatus, code: EditingErrorCode, message: string, details?: unknown): HttpException {
   return new HttpException({ error: code, message, ...(details !== undefined ? { details } : {}) }, status);
@@ -38,5 +41,9 @@ export const Errors = {
   fileInvalid: (message: string) => editingError(HttpStatus.UNPROCESSABLE_ENTITY, 'FILE_INVALID', message),
   fileTooLarge: (maxMb: number) => editingError(HttpStatus.PAYLOAD_TOO_LARGE, 'FILE_TOO_LARGE', `The file is larger than ${maxMb} MB`),
   fileExists: (message: string, details?: unknown) => editingError(HttpStatus.CONFLICT, 'FILE_EXISTS', message, details),
+  archiveInvalid: (message: string) => editingError(HttpStatus.UNPROCESSABLE_ENTITY, 'ARCHIVE_INVALID', message),
+  archiveCollision: (reportId: string) =>
+    editingError(HttpStatus.CONFLICT, 'ARCHIVE_REPORT_ID_COLLISION', 'This report already exists in SurveyScriber, so the archive was not restored. Nothing was overwritten.', { reportId }),
+  archiveNotOwner: () => editingError(HttpStatus.FORBIDDEN, 'ARCHIVE_NOT_OWNER', 'This archive belongs to another user and cannot be restored by you'),
   csrf: () => editingError(HttpStatus.FORBIDDEN, 'CSRF_INVALID', 'Missing or wrong CSRF token'),
 };

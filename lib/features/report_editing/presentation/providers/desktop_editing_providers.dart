@@ -12,6 +12,7 @@ import '../../../../core/network/api_client.dart';
 import '../../../report_export/presentation/providers/export_providers.dart';
 import '../../data/media_dao_photos.dart';
 import '../../data/photo_sync_service.dart';
+import '../../data/report_archive_client.dart';
 import '../../data/report_editing_api.dart';
 import 'desktop_edit_store_provider.dart';
 import 'desktop_editing_controller.dart';
@@ -19,6 +20,11 @@ import 'desktop_editing_controller.dart';
 export 'desktop_edit_store_provider.dart';
 
 final reportEditingApiProvider = Provider<ReportEditingApi>((ref) => ReportEditingApi(ref.watch(dioProvider)));
+
+final reportArchiveClientProvider = Provider<ReportArchiveClient>((ref) => ReportArchiveClient(ref.watch(reportEditingApiProvider)));
+
+/// Where downloaded archives are kept on the phone.
+Future<Directory> archivesDirectory() async => Directory(p.join((await getApplicationDocumentsDirectory()).path, 'archives'));
 
 final photoSyncServiceProvider = Provider<PhotoSyncService>((ref) {
   return PhotoSyncService(
@@ -47,6 +53,8 @@ final desktopEditingProvider = StateNotifierProvider.autoDispose.family<DesktopE
     store: ref.watch(desktopEditStoreProvider),
     photos: ref.watch(photoSyncServiceProvider),
     buildDocument: () => ref.read(exportServiceProvider).buildDocumentForEditing(args.surveyId, valuation: args.isValuation),
+    archive: ref.watch(reportArchiveClientProvider),
+    archiveDir: archivesDirectory,
     heldBack: () async => (await _heldBackItems(ref, args.surveyId)).length,
     releaseHeldBack: () async {
       final dao = ref.read(syncQueueDaoProvider);

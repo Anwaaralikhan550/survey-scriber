@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 /// A failed desktop-editing call. [code] is the backend's error code (spec section 16), or `NETWORK`.
@@ -33,13 +35,36 @@ class CurrentLink {
 }
 
 class CloudReportInfo {
-  const CloudReportInfo({required this.version, required this.status, required this.updatedAt});
+  const CloudReportInfo({required this.version, required this.status, required this.updatedAt, this.restoredFromArchive = false});
   final int version;
   final String status;
   final DateTime updatedAt;
+
+  /// The report was brought back from a SurveyScriber archive (Remote Editor v1.4 section 14.2).
+  final bool restoredFromArchive;
 }
 
 /// A report document the cloud now holds.
+/// The complete archive ZIP of a report (Remote Editor v1.4 section 14): the bytes and the SHA-256 the server computed.
+class ArchiveDownload {
+  const ArchiveDownload({required this.bytes, required this.sha256, required this.fileName});
+  final List<int> bytes;
+  final String sha256;
+  final String fileName;
+}
+
+/// What a restore brought back.
+class RestoredArchive {
+  const RestoredArchive({required this.reportId, required this.status, required this.version, required this.sections, required this.media, required this.documents, required this.importedEvents});
+  final String reportId;
+  final String status;
+  final int version;
+  final int sections;
+  final int media;
+  final int documents;
+  final int importedEvents;
+}
+
 class StoredReportFile {
   const StoredReportFile({required this.id, required this.sha256, required this.duplicate});
   final String id;
@@ -227,6 +252,55 @@ class ReportEditingApi {
     return StoredReportFile(id: b['id'] as String, sha256: b['sha256'] as String, duplicate: b['duplicate'] == true);
   }
 
+  /// Builds and downloads the complete archive of the report as the cloud holds it.
+  Future<ArchiveDownload> downloadArchive(String surveyId) async {
+    final Response<List<int>> res;
+    try {
+      res = await _dio.post<List<int>>(
+        'reports/$surveyId/archive',
+        options: Options(responseType: ResponseType.bytes, validateStatus: (_) => true, receiveTimeout: const Duration(minutes: 5)),
+      );
+    } on DioException catch (e) {
+      throw ReportEditingException(code: 'NETWORK', message: e.message ?? 'No connection to SurveyScriber');
+    }
+    final status = res.statusCode ?? 0;
+    final data = res.data ?? const <int>[];
+    if (status >= 400) throw _errorOfBytes(status, data);
+    final sha = res.headers.value('x-archive-sha256');
+    if (sha == null || data.isEmpty) throw ReportEditingException(code: 'ERROR', message: 'The archive came back incomplete', status: status);
+    final disposition = res.headers.value('content-disposition') ?? '';
+    final name = RegExp(r'filename="([^"]+)"').firstMatch(disposition)?.group(1) ?? 'surveyscriber-archive.zip';
+    return ArchiveDownload(bytes: data, sha256: sha, fileName: name);
+  }
+
+  /// Sends an archive ZIP for restoring. The cloud validates everything and refuses to overwrite an existing report.
+  Future<RestoredArchive> restoreArchive(List<int> bytes, String fileName) async {
+    final form = FormData.fromMap({'file': MultipartFile.fromBytes(bytes, filename: fileName)});
+    final b = await _call('POST', 'reports/restore-archive', data: form);
+    final counts = b['counts'] is Map ? Map<String, dynamic>.from(b['counts'] as Map) : <String, dynamic>{};
+    return RestoredArchive(
+      reportId: b['reportId'] as String,
+      status: b['status'] as String,
+      version: b['version'] as int,
+      sections: (counts['sections'] as num?)?.toInt() ?? 0,
+      media: (counts['media'] as num?)?.toInt() ?? 0,
+      documents: (counts['documents'] as num?)?.toInt() ?? 0,
+      importedEvents: (counts['importedEvents'] as num?)?.toInt() ?? 0,
+    );
+  }
+
+  ReportEditingException _errorOfBytes(int status, List<int> data) {
+    var body = <String, dynamic>{};
+    try {
+      final decoded = jsonDecode(utf8.decode(data));
+      if (decoded is Map) body = Map<String, dynamic>.from(decoded);
+    } on Object {
+      // not JSON: the status alone decides
+    }
+    if (status == 429) return const ReportEditingException(code: 'RATE_LIMITED', message: 'Too many requests', status: 429);
+    return ReportEditingException(code: body['error'] as String? ?? (status == 401 ? 'UNAUTHORIZED' : 'ERROR'), message: body['message'] as String? ?? 'Request failed', status: status);
+  }
+
   Future<EditLinkInfo> createLink(String surveyId) async {
     final b = await _call('POST', 'reports/$surveyId/edit-links');
     return EditLinkInfo(linkId: b['linkId'] as String, url: b['url'] as String, expiresAt: DateTime.parse(b['expiresAt'] as String));
@@ -246,7 +320,7 @@ class ReportEditingApi {
   Future<CloudReportInfo?> latest(String surveyId) async {
     try {
       final b = await _call('GET', 'reports/$surveyId/latest');
-      return CloudReportInfo(version: b['version'] as int, status: b['status'] as String, updatedAt: DateTime.parse(b['updatedAt'] as String));
+      return CloudReportInfo(version: b['version'] as int, status: b['status'] as String, updatedAt: DateTime.parse(b['updatedAt'] as String), restoredFromArchive: b['restoredFromArchive'] == true);
     } on ReportEditingException catch (e) {
       if (e.code == 'NOT_FOUND') return null;
       rethrow;

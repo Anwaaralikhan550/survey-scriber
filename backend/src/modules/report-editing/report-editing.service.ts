@@ -211,7 +211,7 @@ export class ReportEditingService {
 
   async latest(user: Owner, reportId: string) {
     const r = await this.assertReportOwner(reportId, user);
-    return { reportId, version: r.version, status: r.status, updatedAt: r.updatedAt };
+    return { reportId, version: r.version, status: r.status, updatedAt: r.updatedAt, restoredFromArchive: r.restoredAt !== null, restoredAt: r.restoredAt };
   }
 
   /** Spec section 12: the owner fetches the canonical report and version to replace the phone's working copy. */

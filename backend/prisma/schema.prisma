@@ -1165,6 +1165,9 @@ model Report {
   activeEditLinkId String?      @map("active_edit_link_id") @db.Uuid
   finalisedAt      DateTime?    @map("finalised_at")
   finalVersion     Int?         @map("final_version")
+  /// Set when the report was restored from a SurveyScriber archive (Remote Editor spec v1.4 section 14.2)
+  restoredAt       DateTime?    @map("restored_at")
+  restoredFromSha256 String?    @map("restored_from_sha256") @db.VarChar(64)
   createdAt        DateTime     @default(now()) @map("created_at")
   updatedAt        DateTime     @updatedAt @map("updated_at")
 
@@ -1301,6 +1304,8 @@ model ReportAuditEvent {
   actorName     String?  @map("actor_name") @db.VarChar(80) // the unverified display name of a link session
   sessionId     String?  @map("session_id") @db.Uuid
   source        String   @db.VarChar(20) // BROWSER | PHONE | RESTORE | AI
+  /// true for history that came in with a restored archive (timestamps and actors are the original ones)
+  imported      Boolean  @default(false)
   createdAt     DateTime @default(now()) @map("created_at")
 
   report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
@@ -1368,4 +1373,24 @@ model Review {
 
   @@index([reportId, version])
   @@map("reviews")
+}
+
+/// ReportArchiveImport - every attempt to restore a SurveyScriber archive and what came of it (Remote Editor spec v1.4 section 8).
+/// No foreign key to the report: the record of an attempt, also a refused one, stays when the report is purged.
+model ReportArchiveImport {
+  id               String   @id @default(uuid()) @db.Uuid
+  uploaderId       String   @map("uploader_id") @db.Uuid
+  fileName         String?  @map("file_name") @db.VarChar(255)
+  size             Int
+  sha256           String   @db.VarChar(64)
+  /// RESTORED | REJECTED
+  outcome          String   @db.VarChar(12)
+  /// ARCHIVE_INVALID | ARCHIVE_REPORT_ID_COLLISION | ARCHIVE_NOT_OWNER ... (empty when restored)
+  errorCode        String?  @map("error_code") @db.VarChar(40)
+  message          String?  @db.VarChar(500)
+  restoredReportId String?  @map("restored_report_id") @db.Uuid
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  @@index([uploaderId, createdAt])
+  @@map("report_archive_imports")
 }

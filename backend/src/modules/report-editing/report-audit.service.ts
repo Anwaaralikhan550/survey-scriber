@@ -27,6 +27,7 @@ const LIFECYCLE_ACTIONS = [
   'REPORT_FINALISED', 'REPORT_REOPENED', 'REPORT_ORIGINAL_FILE_STORED', 'REPORT_FINAL_FILE_STORED',
   'PHOTO_UPLOADED', 'PHOTO_UPDATED', 'PHOTO_REPLACED', 'PHOTO_DELETED', 'PHOTOS_ASSIGNED',
   'AI_SUGGESTION_ACCEPTED', 'AI_SUGGESTION_ACCEPTED_MODIFIED', 'AI_SUGGESTION_REJECTED',
+  'REPORT_ARCHIVE_EXPORTED', 'REPORT_ARCHIVE_RESTORED', 'PHOTO_DELETED_ON_PHONE', 'SIGNATURE_DELETED', 'PHOTO_ANNOTATED',
 ];
 
 /**
@@ -152,6 +153,7 @@ export class ReportAuditService {
         actorName: e.actorName,
         actorNameVerified: false,
         source: e.source,
+        imported: e.imported,
         at: e.createdAt,
       })),
       lifecycle,

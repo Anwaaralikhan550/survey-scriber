@@ -15,6 +15,7 @@ import { OriginalSnapshotService } from './original-snapshot.service';
 import { Errors } from './editing.errors';
 import { ReportAuditService } from './report-audit.service';
 import { ReportMediaService } from './report-media.service';
+import { ReportArchiveService } from './report-archive.service';
 import { RestoreVersionDto, UploadSnapshotDto } from './dto/editing.dto';
 import { AssignPhotosDto, ReviewActionDto, ReviewDecisionDto } from './dto/photos.dto';
 import { ReviewService } from './review.service';
@@ -37,7 +38,31 @@ export class ReportEditingController {
     private readonly originals: OriginalSnapshotService,
     private readonly fieldAudit: ReportAuditService,
     private readonly media: ReportMediaService,
+    private readonly archive: ReportArchiveService,
   ) {}
+
+  /** Restore a complete SurveyScriber archive (spec v1.4 section 14.2). multipart: file. Never overwrites an existing report. */
+  @Post('restore-archive')
+  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 256 * 1024 * 1024, files: 1, fields: 2 } }))
+  restoreArchive(@CurrentUser() user: Owner, @UploadedFile() file: { buffer: Buffer; originalname?: string } | undefined, @Req() req: Request) {
+    return this.archive.restore(user, file, req);
+  }
+
+  /** The complete archive ZIP of a report: documents, data, pictures, audit, manifest with checksums (spec v1.4 section 14.1). */
+  @Post(':id/archive')
+  @HttpCode(HttpStatus.OK)
+  async buildArchive(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Res({ passthrough: true }) res: Response, @Req() req: Request) {
+    const a = await this.archive.export(user, id, req);
+    res.set({
+      'Content-Type': 'application/zip',
+      'Content-Length': String(a.zip.length),
+      'Content-Disposition': `attachment; filename="${a.fileName}"`,
+      'X-Archive-Sha256': a.sha256,
+      'X-Content-Type-Options': 'nosniff',
+      'Cache-Control': 'private, no-store',
+    });
+    return new StreamableFile(a.zip);
+  }
 
   @Put(':id/snapshot')
   uploadSnapshot(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: UploadSnapshotDto, @Req() req: Request) {

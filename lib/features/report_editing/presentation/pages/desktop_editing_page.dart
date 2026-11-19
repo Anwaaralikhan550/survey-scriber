@@ -156,6 +156,12 @@ class _DesktopEditingPageState extends ConsumerState<DesktopEditingPage> with Wi
     if (reason != null) await ref.read(desktopEditingProvider(_args).notifier).reopenReport(reason);
   }
 
+  Future<void> _downloadArchive() async {
+    final path = await ref.read(desktopEditingProvider(_args).notifier).downloadArchive();
+    if (path == null || !mounted) return;
+    await Share.shareXFiles([XFile(path, mimeType: 'application/zip')], subject: 'Archive: ${widget.surveyTitle}');
+  }
+
   void _export(String title) => ExportBottomSheet.show(
         context,
         surveyId: widget.surveyId,
@@ -225,6 +231,7 @@ class _DesktopEditingPageState extends ConsumerState<DesktopEditingPage> with Wi
                     _Row('In SurveyScriber', s.cloudVersion == null ? 'Not sent yet' : 'Version ${s.cloudVersion}'),
                     _Row('On this phone', s.appVersion == null ? 'Not sent yet' : 'Version ${s.appVersion}'),
                     if (s.finalised) const _Row('Report', 'Finalised'),
+                    if (s.restoredFromArchive) const _Row('History', 'Restored from archive', key: Key('restored_row')),
                     if (s.heldBackChanges > 0) ...[
                       const SizedBox(height: 8),
                       _Banner(
@@ -434,6 +441,23 @@ class _DesktopEditingPageState extends ConsumerState<DesktopEditingPage> with Wi
                     'Only you can finalise the report. Anyone with the link can read and edit it while the link is live, so share it only with people you trust.',
                     style: theme.textTheme.bodySmall?.copyWith(color: scheme.onSurfaceVariant),
                   ),
+                  const SizedBox(height: 12),
+                  if (s.hasCloudReport) ...[
+                    card([
+                      Text('Archive', style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'One ZIP file with the report, its original and final documents, pictures and full history. Keep it in your own secure storage. Downloading it does not extend how long SurveyScriber keeps the report.',
+                      ),
+                      const SizedBox(height: 12),
+                      OutlinedButton.icon(
+                        key: const Key('download_archive'),
+                        onPressed: s.busy ? null : _downloadArchive,
+                        icon: const Icon(Icons.archive_outlined),
+                        label: const Text('Download complete archive'),
+                      ),
+                    ]),
+                  ],
                 ],
               ),
             ),
@@ -442,7 +466,7 @@ class _DesktopEditingPageState extends ConsumerState<DesktopEditingPage> with Wi
 }
 
 class _Row extends StatelessWidget {
-  const _Row(this.label, this.value);
+  const _Row(this.label, this.value, {super.key});
   final String label;
   final String value;
 

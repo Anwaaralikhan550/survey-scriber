@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../report_export/domain/models/report_document.dart';
 import '../../data/desktop_edit_store.dart';
 import '../../data/photo_sync_service.dart';
+import '../../data/report_archive_client.dart';
 import '../../data/report_editing_api.dart';
 import '../../domain/report_blocks_mapper.dart';
 
@@ -28,6 +30,7 @@ class DesktopEditingState {
     this.review,
     this.heldBackChanges = 0,
     this.conflicts = const [],
+    this.restoredFromArchive = false,
   });
 
   final bool loading;
@@ -60,6 +63,9 @@ class DesktopEditingState {
   /// After a synchronise: screens changed on the computer AND on the phone since they last agreed. The owner decides each.
   final List<ScreenConflict> conflicts;
 
+  /// The cloud report was restored from a SurveyScriber archive.
+  final bool restoredFromArchive;
+
   bool get hasCloudReport => cloudVersion != null;
   bool get updateAvailable => cloudVersion != null && appVersion != null && cloudVersion! > appVersion!;
   bool get finalised => cloudStatus == 'FINALISING' || cloudStatus == 'FINALISED';
@@ -83,6 +89,7 @@ class DesktopEditingState {
     Object? review = _keep,
     int? heldBackChanges,
     List<ScreenConflict>? conflicts,
+    bool? restoredFromArchive,
   }) {
     return DesktopEditingState(
       loading: loading ?? this.loading,
@@ -102,6 +109,7 @@ class DesktopEditingState {
       review: identical(review, _keep) ? this.review : review as ReviewInfo?,
       heldBackChanges: heldBackChanges ?? this.heldBackChanges,
       conflicts: conflicts ?? this.conflicts,
+      restoredFromArchive: restoredFromArchive ?? this.restoredFromArchive,
     );
   }
 
@@ -125,6 +133,8 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
     this.photos,
     this.heldBack,
     this.releaseHeldBack,
+    this.archive,
+    this.archiveDir,
     DateTime Function()? now,
   })  : _now = now ?? DateTime.now,
         super(const DesktopEditingState());
@@ -135,6 +145,8 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
   final String reportType;
   final ReportEditingApi api;
   final DesktopEditStore store;
+  final ReportArchiveClient? archive;
+  final Future<Directory> Function()? archiveDir;
 
   /// The phone's report as it would be exported right now.
   final Future<ReportDocument> Function() buildDocument;
@@ -205,6 +217,7 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
           review: review,
           cloudVersion: cloud.version,
           cloudStatus: cloud.status,
+          restoredFromArchive: cloud.restoredFromArchive,
           linkActive: link.active,
           linkId: link.linkId,
           linkExpiresAt: link.expiresAt,
@@ -388,6 +401,20 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
         _requireInSync();
         _setReview(await api.resetReview(surveyId, expectedVersion: state.cloudVersion!));
       }, done: 'The report is a draft again. Earlier approvals no longer stand.');
+
+  /// Downloads the complete archive ZIP of the report as the cloud holds it and returns the saved file's path (null when it failed;
+  /// the reason is in [DesktopEditingState.error]). Downloading does not change the report or its retention period.
+  Future<String?> downloadArchive() async {
+    String? saved;
+    await _guarded(() async {
+      final client = archive;
+      final dir = archiveDir;
+      if (client == null || dir == null) throw const ReportEditingException(code: 'ERROR', message: 'Archive download is not available here.');
+      final file = await client.download(surveyId, await dir());
+      saved = file.path;
+    }, done: 'The archive is ready. Keep it in your own secure storage.');
+    return saved;
+  }
 
   /// Go back to the wording the phone generates from the answers.
   Future<void> discardEdits() => _guarded(() async {

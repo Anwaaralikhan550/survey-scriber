@@ -9,6 +9,7 @@ import '../../../../shared/presentation/widgets/survey_card.dart';
 import '../../../admin/data/datasources/exports_datasource.dart';
 import '../../../admin/presentation/providers/exports_provider.dart';
 import '../providers/reports_provider.dart';
+import '../../../report_editing/presentation/widgets/restore_archive_flow.dart';
 
 class ReportsPage extends ConsumerWidget {
   const ReportsPage({super.key});
@@ -82,6 +83,20 @@ class ReportsPage extends ConsumerWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            IconButton(
+              key: const Key('restore_archive'),
+              onPressed: () => restoreArchivedReport(context, ref),
+              icon: const Icon(Icons.unarchive_outlined, size: 22),
+              tooltip: 'Restore archived report',
+              style: IconButton.styleFrom(
+                backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                minimumSize: const Size(44, 44),
               ),
             ),
             const SizedBox(width: 8),

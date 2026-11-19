@@ -48,6 +48,7 @@ class _Cloud extends ReportEditingApi {
   DateTime? expires;
   bool offline = false;
   bool conflictOnUpload = false;
+  bool restored = false;
   List<Map<String, dynamic>> content = [];
 
   void _net() {
@@ -86,7 +87,7 @@ class _Cloud extends ReportEditingApi {
   @override
   Future<CloudReportInfo?> latest(String surveyId) async {
     _net();
-    return version == null ? null : CloudReportInfo(version: version!, status: 'DRAFT', updatedAt: DateTime.now());
+    return version == null ? null : CloudReportInfo(version: version!, status: 'DRAFT', updatedAt: DateTime.now(), restoredFromArchive: restored);
   }
 
   @override
@@ -198,6 +199,28 @@ void main() {
     expect(find.textContaining('left'), findsOneWidget);
     expect(find.byKey(const Key('notice_banner')), findsOneWidget);
     await _shot(tester, '02_link_live');
+  });
+
+  testWidgets('Archive: a report in the cloud offers Download complete archive and says what it holds; a new survey does not', (tester) async {
+    await open(tester);
+    expect(find.byKey(const Key('download_archive')), findsNothing);
+    await tester.tap(find.byKey(const Key('generate_link')));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(find.byKey(const Key('download_archive')), 300, scrollable: find.byType(Scrollable).first);
+    expect(find.byKey(const Key('download_archive')), findsOneWidget);
+    expect(find.text('Download complete archive'), findsOneWidget);
+    expect(find.textContaining('does not extend how long SurveyScriber keeps the report'), findsOneWidget);
+    expect(find.byKey(const Key('restored_row')), findsNothing);
+    await _shot(tester, '10_archive_card');
+  });
+
+  testWidgets('a report restored from an archive is visibly marked', (tester) async {
+    cloud.version = 3;
+    cloud.restored = true;
+    await open(tester);
+    expect(find.byKey(const Key('restored_row')), findsOneWidget);
+    expect(find.text('Restored from archive'), findsOneWidget);
+    await _shot(tester, '11_restored_marker');
   });
 
   testWidgets('Copy puts the link on the clipboard', (tester) async {

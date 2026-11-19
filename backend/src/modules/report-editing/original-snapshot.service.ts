@@ -56,6 +56,26 @@ export class OriginalSnapshotService {
          ${json}::jsonb, encode(sha256(convert_to((${json}::jsonb)::text, 'UTF8')), 'hex'), ${p.userId}::uuid)`;
   }
 
+  /**
+   * Puts the original of a restored report back (archive restore, spec v1.4 section 14.2): exactly the archived snapshot, written once,
+   * immutable from then on. Returns the checksum PostgreSQL computed, so the caller can compare it with the one in the archive.
+   */
+  async restore(
+    tx: Tx,
+    p: { reportId: string; userId: string; schemaVersion: number; surveyType: string; treeVersionId: string | null; phraseBankVersionId: string | null; generatedAt: Date; appVersion: string | null; snapshot: unknown },
+  ): Promise<string> {
+    const json = JSON.stringify(p.snapshot);
+    const rows = await tx.$queryRaw<{ checksum: string }[]>`
+      INSERT INTO report_original_snapshots
+        (id, report_id, schema_version, survey_type, tree_version_id, phrase_bank_version_id, generated_at, app_version, snapshot, checksum, created_by)
+      VALUES
+        (${randomUUID()}::uuid, ${p.reportId}::uuid, ${p.schemaVersion}, ${p.surveyType}, ${p.treeVersionId}, ${p.phraseBankVersionId},
+         (to_timestamp(${p.generatedAt.getTime() / 1000}) AT TIME ZONE 'UTC'), ${p.appVersion},
+         ${json}::jsonb, encode(sha256(convert_to((${json}::jsonb)::text, 'UTF8')), 'hex'), ${p.userId}::uuid)
+      RETURNING checksum`;
+    return rows[0].checksum;
+  }
+
   /** The owner (or an admin) reads the original: the snapshot, whether it is still intact, and its original documents. */
   async read(user: Owner, reportId: string) {
     const report = await this.prisma.report.findUnique({ where: { id: reportId } });

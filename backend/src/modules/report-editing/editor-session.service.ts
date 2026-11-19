@@ -138,6 +138,7 @@ export class EditorSessionService {
       status: r.status,
       version: r.version,
       updatedAt: r.updatedAt,
+      restoredFromArchive: r.restoredAt !== null,
       linkExpiresAt: ctx.link.expiresAt,
       readOnly: ctx.readOnly,
       readOnlyReason: ctx.readOnlyReason ?? null,
