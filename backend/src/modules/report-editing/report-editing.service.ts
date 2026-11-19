@@ -5,6 +5,7 @@ import { Request } from 'express';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuditService } from '../audit/audit.service';
 import { OriginalSnapshotService } from './original-snapshot.service';
+import { ReportAuditService } from './report-audit.service';
 import { ContentValidationError, ReportContent, cleanContent } from './report-content';
 import { Errors } from './editing.errors';
 import { newToken } from './token.util';
@@ -30,6 +31,7 @@ export class ReportEditingService {
     private readonly config: ConfigService,
     private readonly audit: AuditService,
     private readonly originals: OriginalSnapshotService,
+    private readonly fieldAudit: ReportAuditService,
   ) {}
 
   private get linkTtlHours(): number {
@@ -116,12 +118,19 @@ export class ReportEditingService {
           content,
           meta: { treeVersionId: dto.treeVersionId, phraseBankVersionId: dto.phraseBankVersionId, generatedAt: dto.generatedAt, appVersion: dto.appVersion },
         });
+        await this.fieldAudit.recordNote(tx, { reportId: surveyId, version: created.version, actor: `owner:${user.id}`, source: 'PHONE' }, {
+          entityType: 'REPORT',
+          field: 'original',
+          op: 'ORIGINAL',
+          after: { sections: content.length, blocks: content.reduce((n, s) => n + s.blocks.length, 0) },
+        });
         return { version: created.version, updatedAt: created.updatedAt, created: true, invalidated: false };
       }
       const locked = await this.lockReport(tx, surveyId);
       if (LOCKED.includes(locked.status)) throw Errors.finalised();
       if (dto.baseVersion !== locked.version) throw Errors.conflict(locked.version);
       const next = locked.version + 1;
+      await this.fieldAudit.recordChanges(tx, { reportId: surveyId, version: next, actor: `owner:${user.id}`, source: 'PHONE' }, existing.content as unknown as ReportContent, content);
       const updated = await tx.report.update({
         where: { id: surveyId },
         data: { content: content as unknown as Prisma.InputJsonValue, version: next, reportType: dto.reportType },
@@ -227,6 +236,8 @@ export class ReportEditingService {
       if (LOCKED.includes(locked.status)) throw Errors.finalised();
       if (baseVersion !== locked.version) throw Errors.conflict(locked.version);
       const next = locked.version + 1;
+      const current = await tx.report.findUniqueOrThrow({ where: { id: reportId }, select: { content: true } });
+      await this.fieldAudit.recordChanges(tx, { reportId, version: next, actor: `owner:${user.id}`, source: 'RESTORE' }, current.content as unknown as ReportContent, old.content as unknown as ReportContent);
       await tx.report.update({ where: { id: reportId }, data: { content: old.content as Prisma.InputJsonValue, version: next } });
       await tx.reportVersion.create({
         data: { reportId, version: next, content: old.content as Prisma.InputJsonValue, savedBy: `owner:${user.id}`, reason: 'RESTORE' },

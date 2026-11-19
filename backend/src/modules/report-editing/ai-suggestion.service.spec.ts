@@ -36,9 +36,10 @@ function setup(opts: { reply?: string; fail?: boolean; version?: number } = {}) 
       return { text: opts.reply ?? 'The roof has 12 slipped tiles; please call 07700 900123.', inputTokens: 1, outputTokens: 1 };
     }),
   };
-  const svc = new AiSuggestionService(prisma as never, gemini as never, audit as never);
-  const ctx = { report: { id: REPORT }, readOnly: false } as unknown as EditorContext;
-  return { svc, ctx, audit, prisma, gemini };
+  const fieldAudit = { recordNote: jest.fn().mockResolvedValue(undefined) };
+  const svc = new AiSuggestionService(prisma as never, gemini as never, audit as never, fieldAudit as never);
+  const ctx = { report: { id: REPORT }, session: { id: 'session-1' }, readOnly: false } as unknown as EditorContext;
+  return { svc, ctx, audit, prisma, gemini, fieldAudit };
 }
 
 const codeOf = async (p: Promise<unknown>) => {
@@ -144,11 +145,14 @@ describe('AiSuggestionService', () => {
   });
 
   it('outcomes are recorded only for a suggestion this report was given', async () => {
-    const { svc, ctx, prisma, audit } = setup();
+    const { svc, ctx, prisma, audit, fieldAudit } = setup();
     prisma.auditLog.findFirst.mockResolvedValueOnce(null);
     expect(await codeOf(svc.recordOutcome(ctx, REPORT, { suggestionId: PARA, blockId: PARA, outcome: 'ACCEPTED' }))).toEqual({ status: 404, code: 'NOT_FOUND' });
     prisma.auditLog.findFirst.mockResolvedValueOnce({ id: 'x' });
     await svc.recordOutcome(ctx, REPORT, { suggestionId: PARA, blockId: PARA, outcome: 'ACCEPTED_MODIFIED', action: 'IMPROVE', finalLength: 40 });
     expect(audit.log).toHaveBeenCalledWith(expect.objectContaining({ action: 'AI_SUGGESTION_ACCEPTED_MODIFIED', metadata: expect.objectContaining({ finalLength: 40 }) }));
+    expect(fieldAudit.recordNote).toHaveBeenCalledWith(prisma, expect.objectContaining({ source: 'AI', actor: 'session:session-1' }), expect.objectContaining({ op: 'AI_ACCEPTED', entityId: PARA }));
+    // a refused outcome (unknown suggestion) leaves nothing in the history
+    expect(fieldAudit.recordNote).toHaveBeenCalledTimes(1);
   });
 });

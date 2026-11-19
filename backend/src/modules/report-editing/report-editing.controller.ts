@@ -12,6 +12,7 @@ import { ReportEditingService, Owner } from './report-editing.service';
 import { ReportPhotosService } from './report-photos.service';
 import { ReportFilesService } from './report-files.service';
 import { OriginalSnapshotService } from './original-snapshot.service';
+import { ReportAuditService } from './report-audit.service';
 import { RestoreVersionDto, UploadSnapshotDto } from './dto/editing.dto';
 import { AssignPhotosDto, ReviewActionDto, ReviewDecisionDto } from './dto/photos.dto';
 import { ReviewService } from './review.service';
@@ -32,6 +33,7 @@ export class ReportEditingController {
     private readonly finalisation: FinalisationService,
     private readonly files: ReportFilesService,
     private readonly originals: OriginalSnapshotService,
+    private readonly fieldAudit: ReportAuditService,
   ) {}
 
   @Put(':id/snapshot')
@@ -101,6 +103,18 @@ export class ReportEditingController {
   @Get(':id/original')
   original(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string) {
     return this.originals.read(user, id);
+  }
+
+  /** The amendment history: who changed which field from what to what, and the report's lifecycle events. */
+  @Get(':id/audit')
+  auditTrail(
+    @CurrentUser() user: Owner,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Query('sinceVersion') sinceVersion?: string,
+    @Query('limit') limit?: string,
+  ) {
+    const num = (v?: string) => (v !== undefined && /^\d{1,9}$/.test(v) ? Number(v) : undefined);
+    return this.fieldAudit.read(user, id, { sinceVersion: num(sinceVersion), limit: num(limit) });
   }
 
   @Get(':id/latest')

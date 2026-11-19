@@ -4,6 +4,7 @@ import { Request } from 'express';
 import { ActorType, AuditEntityType } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuditService } from '../audit/audit.service';
+import { ReportAuditService } from './report-audit.service';
 import { AiGeminiService, GeminiError } from '../ai/ai-gemini.service';
 import { EditorContext } from './editor-session.service';
 import { Errors, editingError } from './editing.errors';
@@ -34,6 +35,7 @@ export class AiSuggestionService {
     private readonly prisma: PrismaService,
     private readonly gemini: AiGeminiService,
     private readonly audit: AuditService,
+    private readonly fieldAudit: ReportAuditService,
   ) {}
 
   private log(action: string, reportId: string, req: Request | undefined, metadata: Record<string, unknown>) {
@@ -98,6 +100,15 @@ export class AiSuggestionService {
     });
     if (!created) throw editingError(HttpStatus.NOT_FOUND, 'NOT_FOUND', 'Unknown suggestion');
     await this.log(`AI_SUGGESTION_${dto.outcome}`, reportId, req, { suggestionId: dto.suggestionId, blockId: dto.blockId, action: dto.action, finalLength: dto.finalLength });
+    // The amendment history also says that the accepted wording came from an AI suggestion the user accepted (or that one was rejected).
+    if (/^(ACCEPTED|ACCEPTED_MODIFIED|REJECTED)$/.test(dto.outcome)) {
+      const report = await this.prisma.report.findUniqueOrThrow({ where: { id: reportId }, select: { version: true } });
+      await this.fieldAudit.recordNote(
+        this.prisma,
+        { reportId, version: report.version, actor: `session:${ctx.session.id}`, sessionId: ctx.session.id, source: 'AI' },
+        { entityType: 'BLOCK', entityId: dto.blockId, field: 'text', op: dto.outcome === 'REJECTED' ? 'AI_REJECTED' : 'AI_ACCEPTED', after: { suggestionId: dto.suggestionId, outcome: dto.outcome, action: dto.action ?? null } },
+      );
+    }
     return { ok: true };
   }
 

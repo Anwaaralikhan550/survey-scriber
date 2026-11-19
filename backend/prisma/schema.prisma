@@ -1171,6 +1171,7 @@ model Report {
   finalisations ReportFinalisation[]
   files         ReportFile[]
   originalSnapshot ReportOriginalSnapshot?
+  auditEvents   ReportAuditEvent[]
 
   @@index([ownerUserId])
   @@index([status])
@@ -1273,6 +1274,32 @@ model ReportOriginalSnapshot {
   report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
 
   @@map("report_original_snapshots")
+}
+
+/// ReportAuditEvent - one field-level amendment (Remote Editor spec v1.4 sections 10 and 18): which field of which block or
+/// section changed, from what to what, in which report version, by whom and from where. Append-only (trigger in the migration).
+model ReportAuditEvent {
+  id            String   @id @default(uuid()) @db.Uuid
+  reportId      String   @map("report_id") @db.Uuid
+  reportVersion Int      @map("report_version")
+  entityType    String   @map("entity_type") @db.VarChar(20) // SECTION | BLOCK | REPORT | AI
+  entityId      String?  @map("entity_id") @db.Uuid
+  sectionId     String?  @map("section_id") @db.Uuid
+  sectionKey    String?  @map("section_key") @db.VarChar(100)
+  field         String   @db.VarChar(30)
+  op            String   @db.VarChar(30) // ADD | UPDATE | DELETE | MOVE | ORIGINAL | AI_ACCEPTED | AI_REJECTED
+  beforeValue   Json?    @map("before_value") @db.JsonB
+  afterValue    Json?    @map("after_value") @db.JsonB
+  actor         String   @db.VarChar(80) // owner:<userId> | session:<sessionId>
+  sessionId     String?  @map("session_id") @db.Uuid
+  source        String   @db.VarChar(20) // BROWSER | PHONE | RESTORE | AI
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@index([reportId, createdAt])
+  @@index([reportId, reportVersion])
+  @@map("report_audit_events")
 }
 
 /// EditLink - a bearer link to edit one report in the browser. Only the SHA-256 hash of the token is stored.

@@ -4,6 +4,7 @@ import { ActorType, AuditEntityType, EditLink, EditLinkStatus, EditorSession, Pr
 import { Request } from 'express';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuditService } from '../audit/audit.service';
+import { ReportAuditService } from './report-audit.service';
 import { ContentValidationError, ReportContent, applyChanges } from './report-content';
 import { Errors } from './editing.errors';
 import { newToken, safeEqualHex, sha256 } from './token.util';
@@ -30,6 +31,7 @@ export class EditorSessionService {
     private readonly prisma: PrismaService,
     private readonly config: ConfigService,
     private readonly audit: AuditService,
+    private readonly fieldAudit: ReportAuditService,
   ) {}
 
   private get sessionMinutes(): number {
@@ -169,6 +171,7 @@ export class EditorSessionService {
         if (dto.baseVersion !== cur.version) throw Errors.conflict(cur.version);
         const next = applyChanges(cur.content as ReportContent, dto.changes);
         const version = cur.version + 1;
+        await this.fieldAudit.recordChanges(tx, { reportId, version, actor: `session:${ctx.session.id}`, sessionId: ctx.session.id, source: 'BROWSER' }, cur.content as ReportContent, next);
         await tx.report.update({ where: { id: reportId }, data: { content: next as unknown as Prisma.InputJsonValue, version } });
         const row = await tx.reportVersion.create({
           data: {
