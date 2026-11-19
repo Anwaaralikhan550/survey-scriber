@@ -1,13 +1,16 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, ParseUUIDPipe, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, ParseUUIDPipe, Post, Put, Query, Req, Res, StreamableFile, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { createReadStream } from 'fs';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserRole } from '@prisma/client';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { ReportEditingService, Owner } from './report-editing.service';
 import { ReportPhotosService } from './report-photos.service';
+import { ReportFilesService } from './report-files.service';
 import { RestoreVersionDto, UploadSnapshotDto } from './dto/editing.dto';
 import { AssignPhotosDto, ReviewActionDto, ReviewDecisionDto } from './dto/photos.dto';
 import { ReviewService } from './review.service';
@@ -26,6 +29,7 @@ export class ReportEditingController {
     private readonly photos: ReportPhotosService,
     private readonly review: ReviewService,
     private readonly finalisation: FinalisationService,
+    private readonly files: ReportFilesService,
   ) {}
 
   @Put(':id/snapshot')
@@ -52,6 +56,43 @@ export class ReportEditingController {
     @Req() req: Request,
   ) {
     return this.service.cancelLink(user, id, linkId, req);
+  }
+
+  /** Original and final PDF/Word documents (spec v1.4 sections 5 and 16). multipart: file + state (ORIGINAL | FINAL). */
+  @Post(':id/files')
+  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 64 * 1024 * 1024, files: 1, fields: 4 } }))
+  uploadFile(
+    @CurrentUser() user: Owner,
+    @Param('id', ParseUUIDPipe) id: string,
+    @UploadedFile() file: { buffer: Buffer; originalname?: string } | undefined,
+    @Body('state') state: string,
+    @Req() req: Request,
+  ) {
+    return this.files.upload(user, id, file, state, req);
+  }
+
+  @Get(':id/files')
+  listFiles(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string) {
+    return this.files.list(user, id);
+  }
+
+  @Get(':id/files/:fileId')
+  async downloadFile(
+    @CurrentUser() user: Owner,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Param('fileId', ParseUUIDPipe) fileId: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const f = await this.files.forDownload(user, id, fileId);
+    res.set({
+      'Content-Type': f.mimeType,
+      'Content-Length': String(f.size),
+      'Content-Disposition': `attachment; filename="${f.fileName.replace(/"/g, '')}"`,
+      'X-Content-Type-Options': 'nosniff',
+      'Cache-Control': 'private, no-store',
+      ETag: `"${f.sha256}"`,
+    });
+    return new StreamableFile(createReadStream(f.path));
   }
 
   @Get(':id/latest')

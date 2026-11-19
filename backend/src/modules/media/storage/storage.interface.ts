@@ -36,6 +36,17 @@ export interface StorageService {
   exists(storagePath: string): Promise<boolean>;
 
   /**
+   * Store a file atomically and prove it: the bytes go to a temporary file, are renamed into place, and the stored
+   * size and SHA-256 are read back and compared with what was sent. Used for report documents (Remote Editor v1.4).
+   * @returns relative storage path, size and lower-case hex SHA-256
+   * @throws if the stored file does not match what was written (nothing is left behind)
+   */
+  storeVerified(directory: string, fileId: string, buffer: Buffer, extension: string): Promise<{ storagePath: string; size: number; sha256: string }>;
+
+  /** SHA-256 (lower-case hex) of a stored file, read from disk. */
+  checksum(storagePath: string): Promise<string>;
+
+  /**
    * Get the full absolute path for a storage path
    * Used for streaming files
    */

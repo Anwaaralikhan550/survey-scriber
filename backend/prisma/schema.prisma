@@ -1169,6 +1169,7 @@ model Report {
   reviews  Review[]
   sessions EditorSession[]
   finalisations ReportFinalisation[]
+  files         ReportFile[]
 
   @@index([ownerUserId])
   @@index([status])
@@ -1213,6 +1214,42 @@ model ReportFinalisation {
   @@unique([reportId, cycle])
   @@index([reportId])
   @@map("report_finalisations")
+}
+
+enum ReportFileState {
+  ORIGINAL
+  FINAL
+  ARCHIVE
+}
+
+enum ReportFileKind {
+  PDF
+  DOCX
+  ZIP
+}
+
+/// ReportFile - a stored document of a report (Remote Editor spec v1.4 sections 5 and 6): the original PDF/DOCX made after the
+/// inspection (never replaced), the final PDF/DOCX of an edit cycle, and archive ZIPs. The bytes live on the storage volume,
+/// the row holds the storage key, size and SHA-256. One ORIGINAL per kind and one FINAL per cycle and kind (partial unique
+/// indexes in the migration SQL).
+model ReportFile {
+  id          String          @id @default(uuid()) @db.Uuid
+  reportId    String          @map("report_id") @db.Uuid
+  state       ReportFileState
+  kind        ReportFileKind
+  fileName    String          @map("file_name") @db.VarChar(255)
+  storagePath String          @map("storage_path") @db.VarChar(500)
+  size        Int
+  sha256      String          @db.VarChar(64)
+  cycle       Int             @default(1)
+  version     Int?
+  uploadedBy  String          @map("uploaded_by") @db.Uuid
+  createdAt   DateTime        @default(now()) @map("created_at")
+
+  report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@index([reportId, state])
+  @@map("report_files")
 }
 
 /// EditLink - a bearer link to edit one report in the browser. Only the SHA-256 hash of the token is stored.

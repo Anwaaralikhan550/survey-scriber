@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs/promises';
 import * as fsSync from 'fs';
 import * as path from 'path';
+import { createHash } from 'crypto';
 import { StorageService } from './storage.interface';
 
 /**
@@ -111,6 +112,49 @@ export class LocalStorageService implements StorageService {
     this.logger.log('Stored file: ' + storagePath + ' (' + buffer.length + ' bytes)');
 
     return storagePath;
+  }
+
+  async storeVerified(
+    directory: string,
+    fileId: string,
+    buffer: Buffer,
+    extension: string,
+  ): Promise<{ storagePath: string; size: number; sha256: string }> {
+    if (!this.isValidDirectoryPath(directory)) throw new BadRequestException('Invalid directory format');
+    if (!this.isValidUuid(fileId)) throw new BadRequestException('Invalid fileId format');
+    if (!this.isValidExtension(extension)) throw new BadRequestException('Invalid file extension');
+    const expected = createHash('sha256').update(buffer).digest('hex');
+    const targetDir = path.join(this.rootPath, directory);
+    const fileName = fileId + '.' + extension;
+    const finalPath = path.join(targetDir, fileName);
+    const tempPath = path.join(targetDir, '.' + fileId + '.part');
+    await fs.mkdir(targetDir, { recursive: true });
+    try {
+      const handle = await fs.open(tempPath, 'wx');
+      try {
+        await handle.writeFile(buffer);
+        await handle.sync();
+      } finally {
+        await handle.close();
+      }
+      await fs.rename(tempPath, finalPath);
+      const stat = await fs.stat(finalPath);
+      const actual = createHash('sha256').update(await fs.readFile(finalPath)).digest('hex');
+      if (stat.size !== buffer.length || actual !== expected) {
+        throw new Error('stored file does not match the uploaded bytes');
+      }
+    } catch (error) {
+      await fs.unlink(tempPath).catch(() => undefined);
+      await fs.unlink(finalPath).catch(() => undefined);
+      throw error;
+    }
+    const storagePath = directory + '/' + fileName;
+    this.logger.log('Stored verified file: ' + storagePath + ' (' + buffer.length + ' bytes)');
+    return { storagePath, size: buffer.length, sha256: expected };
+  }
+
+  async checksum(storagePath: string): Promise<string> {
+    return createHash('sha256').update(await this.retrieve(storagePath)).digest('hex');
   }
 
   async retrieve(storagePath: string): Promise<Buffer> {
