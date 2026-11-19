@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:uuid/uuid.dart';
 
 import '../../property_valuation/domain/valuation_matrix.dart';
@@ -123,9 +125,30 @@ class ReportBlocksMapper {
     return out;
   }
 
+  /// What each screen says, as one text: section key -> its blocks in order. Used to tell what changed where.
+  static Map<String, String> screenTexts(List<Map<String, dynamic>> sections) {
+    String blockText(Map<String, dynamic> b) {
+      switch (b['type']) {
+        case 'rating':
+          return 'rating:${b['rating']}|${b['text'] ?? ''}';
+        case 'table':
+          return 'table:${jsonEncode(b['table'])}';
+        default:
+          return '${b['text'] ?? ''}';
+      }
+    }
+
+    return {
+      for (final s in sections)
+        if (s['key'] != scheduleKey && s['key'] != matrixKey)
+          s['key'] as String: [for (final b in (s['blocks'] as List? ?? const [])) blockText(b as Map<String, dynamic>)].join('\n'),
+    };
+  }
+
   /// The document with the browser's edits in it. Screens the editor does not know about stay as they are.
-  static ReportDocument applyEdits(ReportDocument doc, List<Map<String, dynamic>> edited) {
-    final byKey = {for (final s in edited) s['key'] as String: s};
+  /// Screens in [keep] stay as the phone made them (the owner chose to keep them after a synchronise).
+  static ReportDocument applyEdits(ReportDocument doc, List<Map<String, dynamic>> edited, {Set<String> keep = const {}}) {
+    final byKey = {for (final s in edited) if (!keep.contains(s['key'])) s['key'] as String: s};
     final sections = <ReportSection>[
       for (final section in doc.sections)
         ReportSection(

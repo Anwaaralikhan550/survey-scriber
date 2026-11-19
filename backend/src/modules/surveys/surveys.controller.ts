@@ -41,6 +41,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { Roles } from '../auth/decorators/roles.decorator';
+import { RemoteEditChange, RemoteEditGuard } from '../report-editing/remote-edit.guard';
 import { NotificationEmailService } from '../notifications/notification-email.service';
 import { SendReportDto, SendReportResponseDto } from './dto/send-report.dto';
 import { ReportDataResponseDto } from './dto/report-data.dto';
@@ -208,6 +209,8 @@ export class SurveysController {
     return this.surveysService.findOne(id, user);
   }
 
+  @RemoteEditChange('survey')
+  @UseGuards(RemoteEditGuard)
   @Put(':id')
   @Roles(UserRole.ADMIN, UserRole.MANAGER, UserRole.SURVEYOR)
   // Relaxed rate limits for offline-first sync.
@@ -239,6 +242,8 @@ export class SurveysController {
     return this.surveysService.update(id, dto, user);
   }
 
+  @RemoteEditChange('survey')
+  @UseGuards(RemoteEditGuard)
   @Delete(':id')
   @Roles(UserRole.ADMIN, UserRole.MANAGER, UserRole.SURVEYOR)
   @ApiOperation({ summary: 'Soft delete a survey (marks as deleted)' })

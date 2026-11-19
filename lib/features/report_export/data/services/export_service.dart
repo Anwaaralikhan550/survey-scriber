@@ -162,7 +162,7 @@ class ExportService {
     if (store == null) return document;
     final record = await store.read(surveyId);
     if (!record.hasEdits) return document;
-    return ReportBlocksMapper.applyEdits(document, record.syncedSections!);
+    return ReportBlocksMapper.applyEdits(document, record.syncedSections!, keep: record.kept.toSet());
   }
 
   /// Maximum number of AI retry attempts (initial + retries).

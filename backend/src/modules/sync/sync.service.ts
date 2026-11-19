@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { UserRole, SurveyStatus, SurveyType, ReportStatus } from '@prisma/client';
+import { UserRole, SurveyStatus, SurveyType } from '@prisma/client';
+import { CONFLICT_MESSAGE, FINALISED_MESSAGE, reportGate } from '../report-editing/report-gate';
 import {
   completeLinkedBooking,
   unlinkDeletedSurvey,
@@ -89,10 +90,18 @@ export class SyncService {
 
       // Process each operation
       for (const operation of dto.operations) {
-        const result = await this.processOperation(tx, operation, user);
+        const result = await this.processOperation(tx, operation, user, dto.reportVersions);
         results.push(result);
       }
     });
+
+    // A change refused because the survey was edited on a computer must be judged again on the retry:
+    // forget the batch key, so the same batch is not answered "duplicate, success" later.
+    if (results.some((r) => r.errorCode === 'REPORT_VERSION_CONFLICT')) {
+      await this.prisma.syncIdempotency
+        .deleteMany({ where: { userId: user.id, idempotencyKey: dto.idempotencyKey } })
+        .catch(() => undefined);
+    }
 
     const serverTimestamp = new Date();
     const allSuccess = results.every((r) => r.success);
@@ -310,16 +319,11 @@ export class SyncService {
     tx: Parameters<Parameters<typeof this.prisma.$transaction>[0]>[0],
     operation: SyncOperationDto,
     user: AuthenticatedUser,
+    reportVersions?: Record<string, number>,
   ): Promise<SyncOperationResultDto> {
     try {
-      // A finalised report is locked: the phone cannot change the survey behind it (desktop editing spec, section 15).
-      if (await this.isReportLocked(tx, operation)) {
-        return {
-          operationId: operation.operationId,
-          success: false,
-          error: 'REPORT_FINALISED: this report has been finalised and can no longer be changed',
-        };
-      }
+      const refused = await this.reportGate(tx, operation, reportVersions);
+      if (refused) return refused;
       switch (operation.entityType) {
         case SyncEntityType.SURVEY:
           return await this.processSurveyOperation(tx, operation, user);
@@ -347,12 +351,17 @@ export class SyncService {
     }
   }
 
-  /** True when the operation touches a survey whose editable report is finalising or finalised. */
-  private async isReportLocked(
+  /**
+   * Remote Editor (spec v1.4 sections 10 and 11): the phone cannot change the survey behind a finalised report, and cannot
+   * overwrite a survey that was edited on a computer with a copy that has not taken those edits (stale push). A refused change is
+   * answered with a code the phone shows; nothing is applied and nothing is silently dropped. Returns null when the change may go on.
+   */
+  private async reportGate(
     tx: Parameters<Parameters<typeof this.prisma.$transaction>[0]>[0],
     operation: SyncOperationDto,
-  ): Promise<boolean> {
-    if (operation.operationType === SyncOperationType.CREATE) return false;
+    reportVersions?: Record<string, number>,
+  ): Promise<SyncOperationResultDto | null> {
+    if (operation.operationType === SyncOperationType.CREATE) return null;
     let surveyId: string | undefined;
     if (operation.entityType === SyncEntityType.SURVEY) {
       surveyId = operation.entityId;
@@ -366,9 +375,19 @@ export class SyncService {
       });
       surveyId = answer?.section.surveyId;
     }
-    if (!surveyId) return false;
-    const report = await tx.report.findUnique({ where: { id: surveyId }, select: { status: true } });
-    return report?.status === ReportStatus.FINALISING || report?.status === ReportStatus.FINALISED;
+    if (!surveyId) return null;
+    const refusal = await reportGate(tx as never, surveyId, reportVersions?.[surveyId]);
+    if (!refusal) return null;
+    if (refusal.code === 'REPORT_FINALISED') {
+      return { operationId: operation.operationId, success: false, errorCode: 'REPORT_FINALISED', error: `REPORT_FINALISED: ${FINALISED_MESSAGE}` };
+    }
+    return {
+      operationId: operation.operationId,
+      success: false,
+      errorCode: 'REPORT_VERSION_CONFLICT',
+      currentReportVersion: refusal.currentVersion,
+      error: `REPORT_VERSION_CONFLICT: ${CONFLICT_MESSAGE(refusal.currentVersion)}`,
+    };
   }
 
   private async processSurveyOperation(

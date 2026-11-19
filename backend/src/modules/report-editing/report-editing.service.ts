@@ -50,6 +50,11 @@ export class ReportEditingService {
     return survey;
   }
 
+  /** The owner (or an admin) of the report; anyone else gets FORBIDDEN, a missing report NOT_FOUND. */
+  async assertOwner(user: Owner, reportId: string) {
+    return this.assertReportOwner(reportId, user);
+  }
+
   private async assertReportOwner(reportId: string, user: Owner) {
     const report = await this.prisma.report.findUnique({ where: { id: reportId } });
     if (!report) throw Errors.notFound();

@@ -33,11 +33,13 @@ class _Store extends DesktopEditStore {
   @override
   Future<DesktopEditRecord> read(String surveyId) async => record;
   @override
-  Future<void> saveUploaded(String surveyId, int version) async => record = DesktopEditRecord(appVersion: version, syncedSections: record.syncedSections);
+  Future<void> saveUploaded(String surveyId, int version, {Map<String, String>? baseline}) async => record = record.copyWith(appVersion: version, baseline: baseline);
   @override
-  Future<void> saveSynced(String surveyId, int version, List<Map<String, dynamic>> sections) async => record = DesktopEditRecord(appVersion: version, syncedSections: sections);
+  Future<void> saveSynced(String surveyId, int version, List<Map<String, dynamic>> sections, {Map<String, String>? baseline}) async => record = record.copyWith(appVersion: version, syncedSections: sections, baseline: baseline, kept: const []);
   @override
-  Future<void> clearEdits(String surveyId) async => record = DesktopEditRecord(appVersion: record.appVersion);
+  Future<void> clearEdits(String surveyId) async => record = record.copyWith(syncedSections: null, kept: const []);
+  @override
+  Future<void> saveKept(String surveyId, List<String> screenKeys) async => record = record.copyWith(kept: screenKeys);
 }
 
 /// A cloud with the review rules of the backend, in memory.

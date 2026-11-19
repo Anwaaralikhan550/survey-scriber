@@ -7,6 +7,7 @@ import '../../../../app/theme/app_spacing.dart';
 import '../../../report_export/domain/models/report_document.dart';
 import '../../../report_export/presentation/widgets/export_bottom_sheet.dart';
 import '../../data/report_editing_api.dart';
+import '../providers/desktop_editing_controller.dart';
 import '../providers/desktop_editing_providers.dart';
 
 /// Owner screen for desktop editing (spec section 7 Screen H): make, copy, share and cancel the edit link,
@@ -24,6 +25,7 @@ class DesktopEditingPage extends ConsumerStatefulWidget {
 
 class _DesktopEditingPageState extends ConsumerState<DesktopEditingPage> with WidgetsBindingObserver {
   late final DesktopEditingArgs _args = DesktopEditingArgs(surveyId: widget.surveyId, isValuation: widget.isValuation);
+  bool _conflictDialogOpen = false;
 
   @override
   void initState() {
@@ -34,6 +36,21 @@ class _DesktopEditingPageState extends ConsumerState<DesktopEditingPage> with Wi
       c.refresh();
       c.startPolling();
     });
+    ref.listenManual(desktopEditingProvider(_args), (previous, next) {
+      if (next.conflicts.isNotEmpty && !_conflictDialogOpen) _askAboutConflicts(next.conflicts);
+    });
+  }
+
+  /// After a synchronise: screens changed on the computer and on the phone since they last agreed. The owner decides each one.
+  Future<void> _askAboutConflicts(List<ScreenConflict> conflicts) async {
+    _conflictDialogOpen = true;
+    final keep = await showDialog<Set<String>>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => _ConflictDialog(conflicts: conflicts),
+    );
+    _conflictDialogOpen = false;
+    if (keep != null && mounted) await ref.read(desktopEditingProvider(_args).notifier).resolveConflicts(keep);
   }
 
   @override
@@ -208,6 +225,17 @@ class _DesktopEditingPageState extends ConsumerState<DesktopEditingPage> with Wi
                     _Row('In SurveyScriber', s.cloudVersion == null ? 'Not sent yet' : 'Version ${s.cloudVersion}'),
                     _Row('On this phone', s.appVersion == null ? 'Not sent yet' : 'Version ${s.appVersion}'),
                     if (s.finalised) const _Row('Report', 'Finalised'),
+                    if (s.heldBackChanges > 0) ...[
+                      const SizedBox(height: 8),
+                      _Banner(
+                        key: const Key('held_back_banner'),
+                        icon: Icons.pause_circle_outline_rounded,
+                        color: scheme.errorContainer,
+                        onColor: scheme.onErrorContainer,
+                        text: '${s.heldBackChanges} of your changes to this report were not sent, because it was edited on a computer first. '
+                            'Nothing is lost. Tap Synchronise to take those edits; your changes are then sent.',
+                      ),
+                    ],
                     if (s.updateAvailable) ...[
                       const SizedBox(height: 8),
                       _Banner(
@@ -643,4 +671,47 @@ class _ReopenDialogState extends State<_ReopenDialog> {
           ),
         ],
       );
+}
+
+/// "Changed on both sides": the owner chooses, per screen, whose wording stays. Nothing is decided silently.
+class _ConflictDialog extends StatefulWidget {
+  const _ConflictDialog({required this.conflicts});
+  final List<ScreenConflict> conflicts;
+
+  @override
+  State<_ConflictDialog> createState() => _ConflictDialogState();
+}
+
+class _ConflictDialogState extends State<_ConflictDialog> {
+  final Set<String> _keepMine = {};
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      key: const Key('conflict_dialog'),
+      title: const Text('Changed here and on the computer'),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('These screens were changed on the computer and also on this phone. Choose whose wording to use for each. You can change your mind by synchronising again.'),
+            const SizedBox(height: 8),
+            for (final c in widget.conflicts)
+              SwitchListTile(
+                key: Key('keep_${c.key}'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(c.title),
+                subtitle: Text(_keepMine.contains(c.key) ? 'Keep my wording' : "Use the computer's wording"),
+                value: _keepMine.contains(c.key),
+                onChanged: (v) => setState(() => v ? _keepMine.add(c.key) : _keepMine.remove(c.key)),
+              ),
+          ],
+        ),
+      ),
+      actions: [
+        FilledButton(key: const Key('conflicts_apply'), onPressed: () => Navigator.pop(context, _keepMine), child: const Text('Apply')),
+      ],
+    );
+  }
 }

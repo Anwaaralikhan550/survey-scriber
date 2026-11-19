@@ -27,6 +27,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { Roles } from '../auth/decorators/roles.decorator';
+import { RemoteEditChange, RemoteEditGuard } from '../report-editing/remote-edit.guard';
 
 interface AuthenticatedUser {
   id: string;
@@ -75,6 +76,8 @@ export class SectionsController {
     return this.sectionsService.create(surveyId, dto, user);
   }
 
+  @RemoteEditChange('section')
+  @UseGuards(RemoteEditGuard)
   @Put('sections/:id')
   @Roles(UserRole.ADMIN, UserRole.SURVEYOR)
   @ApiOperation({ summary: 'Update a section' })
@@ -100,6 +103,8 @@ export class SectionsController {
     return this.sectionsService.update(id, dto, user);
   }
 
+  @RemoteEditChange('section')
+  @UseGuards(RemoteEditGuard)
   @Delete('sections/:id')
   @Roles(UserRole.ADMIN, UserRole.SURVEYOR)
   @ApiOperation({ summary: 'Delete a section' })

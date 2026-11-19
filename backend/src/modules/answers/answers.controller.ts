@@ -27,6 +27,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { Roles } from '../auth/decorators/roles.decorator';
+import { RemoteEditChange, RemoteEditGuard } from '../report-editing/remote-edit.guard';
 
 interface AuthenticatedUser {
   id: string;
@@ -75,6 +76,8 @@ export class AnswersController {
     return this.answersService.create(sectionId, dto, user);
   }
 
+  @RemoteEditChange('answer')
+  @UseGuards(RemoteEditGuard)
   @Put('answers/:id')
   @Roles(UserRole.ADMIN, UserRole.SURVEYOR)
   @ApiOperation({ summary: 'Update an answer' })
@@ -100,6 +103,8 @@ export class AnswersController {
     return this.answersService.update(id, dto, user);
   }
 
+  @RemoteEditChange('answer')
+  @UseGuards(RemoteEditGuard)
   @Delete('answers/:id')
   @Roles(UserRole.ADMIN, UserRole.SURVEYOR)
   @ApiOperation({ summary: 'Delete an answer' })

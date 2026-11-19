@@ -84,6 +84,41 @@ export class ReportAuditService {
     };
   }
 
+  /**
+   * What changed in the report after [sinceVersion] (spec v1.4 sections 10 and 17): the version and status now, and the sections
+   * and blocks that were amended, from the amendment history. A phone or a browser asks this to know whether it is behind and
+   * where, without downloading the report.
+   */
+  async changesSince(reportId: string, sinceVersion: number) {
+    const report = await this.prisma.report.findUnique({ where: { id: reportId }, select: { version: true, status: true, content: true } });
+    if (!report) throw Errors.notFound();
+    const events = await this.prisma.reportAuditEvent.findMany({
+      where: { reportId, reportVersion: { gt: sinceVersion } },
+      orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+      select: { reportVersion: true, entityType: true, entityId: true, sectionId: true, sectionKey: true, field: true, op: true, source: true },
+    });
+    const titles = new Map<string, string>((report.content as unknown as ReportContent).map((s) => [s.id, s.title]));
+    const sections = new Map<string, { sectionId: string; sectionKey: string | null; title: string | null; blockIds: Set<string>; fields: Set<string> }>();
+    for (const e of events) {
+      if (!e.sectionId || e.entityType === 'REPORT' || e.entityType === 'AI') continue;
+      const s = sections.get(e.sectionId) ?? { sectionId: e.sectionId, sectionKey: e.sectionKey, title: titles.get(e.sectionId) ?? null, blockIds: new Set<string>(), fields: new Set<string>() };
+      if (e.entityType === 'BLOCK' && e.entityId) s.blockIds.add(e.entityId);
+      s.fields.add(e.field);
+      sections.set(e.sectionId, s);
+    }
+    return {
+      reportId,
+      version: report.version,
+      status: report.status,
+      sinceVersion,
+      changed: report.version > sinceVersion,
+      fromPhone: events.some((e) => e.source === 'PHONE'),
+      fromBrowser: events.some((e) => e.source === 'BROWSER'),
+      restored: events.some((e) => e.source === 'RESTORE'),
+      sections: [...sections.values()].map((s) => ({ sectionId: s.sectionId, sectionKey: s.sectionKey, title: s.title, blockIds: [...s.blockIds], fields: [...s.fields] })),
+    };
+  }
+
   /** The owner (or an admin) reads the history: field amendments, oldest first, and the lifecycle events of the report. */
   async read(user: Owner, reportId: string, q: { sinceVersion?: number; limit?: number }) {
     const report = await this.prisma.report.findUnique({ where: { id: reportId } });

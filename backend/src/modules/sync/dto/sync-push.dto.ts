@@ -124,4 +124,13 @@ export class SyncPushDto {
   @ValidateNested({ each: true })
   @Type(() => SyncOperationDto)
   operations: SyncOperationDto[];
+
+  @ApiPropertyOptional({
+    description:
+      'Remote Editor: for surveys that were edited on a computer, the cloud report version this phone has taken. A change to such a survey is refused when the version is missing or older than the cloud report.',
+    example: { '550e8400-e29b-41d4-a716-446655440000': 7 },
+  })
+  @IsOptional()
+  @IsObject()
+  reportVersions?: Record<string, number>;
 }

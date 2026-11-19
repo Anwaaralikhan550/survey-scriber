@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post, Put, Req, Res, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post, Put, Query, Req, Res, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import { ConfigService } from '@nestjs/config';
@@ -7,6 +7,8 @@ import { Public } from '../auth/decorators/public.decorator';
 import { EditorSessionService } from './editor-session.service';
 import { EDITOR_COOKIE, EditorRequest, EditorSecurityHeadersInterceptor, EditorSessionGuard } from './editor.guard';
 import { OpenLinkDto, ReviewerNameDto, SaveChangesDto } from './dto/editing.dto';
+import { ReportAuditService } from './report-audit.service';
+import { Errors } from './editing.errors';
 
 /** Token attempts per IP (spec 17). Production defaults; the browser tests start the server with higher values. */
 const OPEN_LIMITS = {
@@ -23,6 +25,7 @@ export class EditorController {
   constructor(
     private readonly sessions: EditorSessionService,
     private readonly config: ConfigService,
+    private readonly audit: ReportAuditService,
   ) {}
 
   /** Exchange the link token for the session cookie. The page then removes the token from its URL. */
@@ -59,6 +62,16 @@ export class EditorController {
   @HttpCode(HttpStatus.OK)
   setName(@Body() dto: ReviewerNameDto, @Req() req: EditorRequest) {
     return this.sessions.setReviewerName(req.editor, dto.name, req);
+  }
+
+  /** What changed after a version (for the browser to reconcile after a conflict). Allowed while read-only. */
+  @Public()
+  @UseGuards(EditorSessionGuard)
+  @Get('reports/:id/changes')
+  changes(@Param('id', ParseUUIDPipe) id: string, @Req() req: EditorRequest, @Query('sinceVersion') sinceVersion?: string) {
+    if (req.editor.report.id !== id) throw Errors.forbidden();
+    if (sinceVersion === undefined || !/^\d{1,9}$/.test(sinceVersion)) throw Errors.validation('sinceVersion must be a whole number', 'sinceVersion');
+    return this.audit.changesSince(id, Number(sinceVersion));
   }
 
   @Public()

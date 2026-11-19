@@ -1,10 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
+import '../../../../core/database/app_database.dart';
 import '../../../../core/database/database_providers.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../report_export/presentation/providers/export_providers.dart';
@@ -45,5 +47,29 @@ final desktopEditingProvider = StateNotifierProvider.autoDispose.family<DesktopE
     store: ref.watch(desktopEditStoreProvider),
     photos: ref.watch(photoSyncServiceProvider),
     buildDocument: () => ref.read(exportServiceProvider).buildDocumentForEditing(args.surveyId, valuation: args.isValuation),
+    heldBack: () async => (await _heldBackItems(ref, args.surveyId)).length,
+    releaseHeldBack: () async {
+      final dao = ref.read(syncQueueDaoProvider);
+      for (final item in await _heldBackItems(ref, args.surveyId)) {
+        await dao.resolveConflictKeepLocal(item.id);
+      }
+    },
   );
 });
+
+/// Changes of this survey that the cloud refused because the report was edited on a computer first. They wait in the queue
+/// (status conflict), nothing is lost; after a synchronise they are put back to be sent.
+Future<List<SyncQueueData>> _heldBackItems(Ref ref, String surveyId) async {
+  final items = await ref.read(syncQueueDaoProvider).getConflictItems();
+  bool ofThisSurvey(SyncQueueData item) {
+    if (item.entityType == 'survey') return item.entityId == surveyId;
+    try {
+      final payload = jsonDecode(item.payload);
+      return payload is Map && payload['surveyId'] == surveyId;
+    } on FormatException {
+      return false;
+    }
+  }
+
+  return items.where(ofThisSurvey).toList();
+}

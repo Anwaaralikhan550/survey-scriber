@@ -9,6 +9,7 @@ import '../../features/auth/presentation/providers/auth_notifier.dart';
 import '../../features/auth/presentation/providers/auth_state.dart';
 import '../../features/config/presentation/providers/config_providers.dart';
 import '../../features/media/data/services/media_upload_service.dart';
+import '../../features/report_editing/presentation/providers/desktop_edit_store_provider.dart';
 import '../../features/surveys/presentation/providers/survey_invalidation.dart';
 import '../../shared/domain/entities/survey.dart' as entities;
 import '../../shared/domain/entities/survey_answer.dart' as entities;
@@ -58,6 +59,7 @@ class SyncConflictException implements Exception {
 /// Provider for SyncManager
 final syncManagerProvider = Provider<SyncManager>((ref) {
   final apiClient = ref.watch(apiClientProvider);
+  final editStore = ref.watch(desktopEditStoreProvider);
   final syncQueueDao = ref.watch(syncQueueDaoProvider);
   final mediaUploadService = ref.watch(mediaUploadServiceProvider);
   final surveysDao = ref.watch(surveysDaoProvider);
@@ -75,6 +77,7 @@ final syncManagerProvider = Provider<SyncManager>((ref) {
     answersDao: answersDao,
     mediaDao: mediaDao,
     db: db,
+    reportVersionFor: (surveyId) async => (await editStore.read(surveyId)).appVersion,
   );
 });
 
@@ -576,6 +579,7 @@ class SyncManager {
     required this.answersDao,
     required this.mediaDao,
     required this.db,
+    this.reportVersionFor,
   });
 
   /// Maximum number of times a dependency-not-found (404) error will be
@@ -595,6 +599,9 @@ class SyncManager {
   final SurveyAnswersDao answersDao;
   final MediaDao mediaDao;
   final AppDatabase db;
+
+  /// The cloud report version this phone has for a survey (desktop editing), sent with changes to that survey.
+  final Future<int?> Function(String surveyId)? reportVersionFor;
 
   /// Stream of connectivity changes
   Stream<List<ConnectivityResult>> get connectivityStream =>
@@ -1201,7 +1208,7 @@ class SyncManager {
           await apiClient.post('surveys', data: createPayload);
         case SyncAction.update:
           try {
-            await apiClient.put('surveys/$entityId', data: payload);
+            await apiClient.put('surveys/$entityId', data: payload, options: await _reportVersionOptions(surveyId: entityId));
           } on NotFoundException {
             // UPSERT: Server doesn't have this survey (DB reset, data loss).
             // Auto-create via POST so dependents (sections, answers) can sync.
@@ -1243,7 +1250,7 @@ class SyncManager {
           }
         case SyncAction.delete:
           try {
-            await apiClient.delete('surveys/$entityId');
+            await apiClient.delete('surveys/$entityId', options: await _reportVersionOptions(surveyId: entityId));
           } on NotFoundException {
             // Entity already gone — treat as success
             AppLogger.d(
@@ -1280,6 +1287,21 @@ class SyncManager {
       }
       rethrow;
     }
+  }
+
+  /// The cloud report version this phone has, as the X-Report-Version header (Remote Editor spec v1.4 section 11). The server holds
+  /// back a change to a survey that was edited on a computer unless the phone has taken those edits. Null when the phone has no
+  /// cloud report for the survey, or the survey cannot be worked out.
+  Future<Options?> _reportVersionOptions({String? surveyId, String? sectionId}) async {
+    final source = reportVersionFor;
+    if (source == null) return null;
+    var id = surveyId;
+    if (id == null && sectionId != null) {
+      id = (await sectionsDao.getSectionById(sectionId))?.surveyId;
+    }
+    if (id == null) return null;
+    final version = await source(id);
+    return version == null ? null : Options(headers: {'X-Report-Version': '$version'});
   }
 
   /// Check if error is a 409 conflict.
@@ -1363,7 +1385,7 @@ class SyncManager {
           final updatePayload = Map<String, dynamic>.from(bodyPayload)
             ..remove('sectionTypeKey');
           try {
-            await apiClient.put('sections/$entityId', data: updatePayload);
+            await apiClient.put('sections/$entityId', data: updatePayload, options: await _reportVersionOptions(surveyId: surveyId, sectionId: entityId));
           } on NotFoundException {
             // UPSERT: Server doesn't have this section (DB reset, data loss).
             // Auto-create via POST so dependents (answers) can sync.
@@ -1424,7 +1446,7 @@ class SyncManager {
           }
         case SyncAction.delete:
           try {
-            await apiClient.delete('sections/$entityId');
+            await apiClient.delete('sections/$entityId', options: await _reportVersionOptions(surveyId: surveyId, sectionId: entityId));
           } on NotFoundException {
             // Entity already gone — treat as success
             AppLogger.d(
@@ -1503,7 +1525,7 @@ class SyncManager {
           }
         case SyncAction.update:
           try {
-            await apiClient.put('answers/$entityId', data: bodyPayload);
+            await apiClient.put('answers/$entityId', data: bodyPayload, options: await _reportVersionOptions(surveyId: surveyIdHint, sectionId: sectionId));
           } on NotFoundException {
             // UPSERT: Server doesn't have this answer (DB reset, data loss).
             // Auto-create via POST.
@@ -1561,7 +1583,7 @@ class SyncManager {
           }
         case SyncAction.delete:
           try {
-            await apiClient.delete('answers/$entityId');
+            await apiClient.delete('answers/$entityId', options: await _reportVersionOptions(surveyId: surveyIdHint, sectionId: sectionId));
           } on NotFoundException {
             // Entity already gone — treat as success
             AppLogger.d(

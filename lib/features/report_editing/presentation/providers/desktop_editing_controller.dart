@@ -26,6 +26,8 @@ class DesktopEditingState {
     this.hasEdits = false,
     this.checkedAt,
     this.review,
+    this.heldBackChanges = 0,
+    this.conflicts = const [],
   });
 
   final bool loading;
@@ -52,6 +54,12 @@ class DesktopEditingState {
   /// The review workflow state of the cloud report (null until it has been read).
   final ReviewInfo? review;
 
+  /// Changes made on the phone that the cloud refused because the report was edited on a computer first (kept, not lost).
+  final int heldBackChanges;
+
+  /// After a synchronise: screens changed on the computer AND on the phone since they last agreed. The owner decides each.
+  final List<ScreenConflict> conflicts;
+
   bool get hasCloudReport => cloudVersion != null;
   bool get updateAvailable => cloudVersion != null && appVersion != null && cloudVersion! > appVersion!;
   bool get finalised => cloudStatus == 'FINALISING' || cloudStatus == 'FINALISED';
@@ -73,6 +81,8 @@ class DesktopEditingState {
     bool? hasEdits,
     DateTime? checkedAt,
     Object? review = _keep,
+    int? heldBackChanges,
+    List<ScreenConflict>? conflicts,
   }) {
     return DesktopEditingState(
       loading: loading ?? this.loading,
@@ -90,10 +100,19 @@ class DesktopEditingState {
       hasEdits: hasEdits ?? this.hasEdits,
       checkedAt: checkedAt ?? this.checkedAt,
       review: identical(review, _keep) ? this.review : review as ReviewInfo?,
+      heldBackChanges: heldBackChanges ?? this.heldBackChanges,
+      conflicts: conflicts ?? this.conflicts,
     );
   }
 
   static const Object _keep = Object();
+}
+
+/// One report screen that was changed both on the computer and on the phone since they last agreed.
+class ScreenConflict {
+  const ScreenConflict({required this.key, required this.title});
+  final String key;
+  final String title;
 }
 
 class DesktopEditingController extends StateNotifier<DesktopEditingState> {
@@ -104,6 +123,8 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
     required this.store,
     required this.buildDocument,
     this.photos,
+    this.heldBack,
+    this.releaseHeldBack,
     DateTime Function()? now,
   })  : _now = now ?? DateTime.now,
         super(const DesktopEditingState());
@@ -120,6 +141,10 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
 
   /// Keeps the phone's photos and the cloud's in step. Null where photos are not wanted (tests).
   final PhotoSyncService? photos;
+
+  /// How many of this survey's changes the cloud refused (stale push), and a way to send them again. Null in tests.
+  final Future<int> Function()? heldBack;
+  final Future<void> Function()? releaseHeldBack;
   final DateTime Function() _now;
   Timer? _poll;
   bool _disposed = false;
@@ -159,7 +184,8 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
   Future<void> _refresh() async {
     final record = await store.read(surveyId);
     final url = await store.vault.read(surveyId);
-    var next = state.copyWith(appVersion: record.appVersion, hasEdits: record.hasEdits, linkUrl: url, loading: false);
+    final held = await heldBack?.call() ?? 0;
+    var next = state.copyWith(appVersion: record.appVersion, hasEdits: record.hasEdits, linkUrl: url, loading: false, heldBackChanges: held);
     try {
       final cloud = await api.latest(surveyId);
       if (cloud == null) {
@@ -206,7 +232,7 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
       reportType: reportType,
       sections: ReportBlocksMapper.toSections(doc),
     );
-    await store.saveUploaded(surveyId, up.version);
+    await store.saveUploaded(surveyId, up.version, baseline: ReportBlocksMapper.screenTexts(ReportBlocksMapper.toSections(doc)));
     // File the phone's uploaded photos under report sections (only photos nobody organised yet).
     final filed = await photos?.push(surveyId, doc, up.version);
     if (filed != null) {
@@ -272,13 +298,30 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
         _set(state.copyWith(linkActive: false, linkId: null, linkUrl: null, linkExpiresAt: null));
       }, done: 'Link cancelled. It no longer opens the report.');
 
-  /// Take the cloud report, with the browser's edits, as this phone's copy (spec section 12).
+  /// Take the cloud report, with the browser's edits, as this phone's copy (spec section 12). A screen changed on the computer AND
+  /// on the phone since they last agreed is listed in [DesktopEditingState.conflicts] for the owner to decide; nothing is
+  /// overwritten silently. Changes the cloud refused earlier are sent again afterwards.
   Future<void> synchronise() async {
     PhotoSyncSummary? summary;
     await _guarded(() async {
+      final before = await store.read(surveyId);
       final synced = await api.sync(surveyId);
-      await store.saveSynced(surveyId, synced.version, synced.sections);
-      _set(state.copyWith(cloudVersion: synced.version, cloudStatus: synced.status, appVersion: synced.version, hasEdits: true));
+      final theirs = ReportBlocksMapper.screenTexts(synced.sections);
+      final conflicts = <ScreenConflict>[];
+      if (before.baseline.isNotEmpty) {
+        final mine = ReportBlocksMapper.screenTexts(ReportBlocksMapper.toSections(await buildDocument()));
+        final titles = {for (final s in synced.sections) s['key'] as String: '${s['title'] ?? s['key']}'};
+        for (final key in theirs.keys) {
+          final base = before.baseline[key];
+          if (base == null) continue;
+          final computerChanged = theirs[key] != base;
+          final phoneChanged = mine[key] != null && mine[key] != base;
+          if (computerChanged && phoneChanged && mine[key] != theirs[key]) conflicts.add(ScreenConflict(key: key, title: titles[key] ?? key));
+        }
+      }
+      await store.saveSynced(surveyId, synced.version, synced.sections, baseline: theirs);
+      await releaseHeldBack?.call();
+      _set(state.copyWith(cloudVersion: synced.version, cloudStatus: synced.status, appVersion: synced.version, hasEdits: true, heldBackChanges: 0, conflicts: conflicts));
       summary = await photos?.pull(surveyId);
     }, done: 'Synchronised. Your PDF and Word reports now use the edited wording.');
     final s = summary;
@@ -287,6 +330,18 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
     } else if (s != null && s.failed > 0 && state.error == null) {
       _set(state.copyWith(notice: '${state.notice ?? 'Synchronised.'} ${s.describe()}. Synchronise again to retry.'));
     }
+  }
+
+  /// The owner's decision for the screens in [DesktopEditingState.conflicts]: the ones in [keepMine] keep the phone's wording,
+  /// the others take the computer's.
+  Future<void> resolveConflicts(Set<String> keepMine) async {
+    await store.saveKept(surveyId, keepMine.toList());
+    final kept = keepMine.length;
+    final taken = state.conflicts.length - kept;
+    _set(state.copyWith(
+      conflicts: const [],
+      notice: 'Done. $kept screen${kept == 1 ? '' : 's'} keep your wording, $taken take${taken == 1 ? 's' : ''} the computer\'s.',
+    ));
   }
 
   static const _approveNeedsSync = 'Synchronise first, so you approve exactly what you have read.';

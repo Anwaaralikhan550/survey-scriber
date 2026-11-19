@@ -6,6 +6,7 @@ import { SurveysController } from './surveys.controller';
 import { SurveysService } from './surveys.service';
 import { NotificationEmailService } from '../notifications/notification-email.service';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { PrismaService } from '../prisma/prisma.service';
 import { ROLES_KEY } from '../auth/decorators/roles.decorator';
 
 /**
@@ -35,6 +36,8 @@ describe('SurveysController RBAC', () => {
           provide: NotificationEmailService,
           useValue: {},
         },
+        // The report rule guard on the phone's update and delete routes needs the database; the role checks do not.
+        { provide: PrismaService, useValue: {} },
         Reflector,
       ],
     }).compile();

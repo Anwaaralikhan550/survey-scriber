@@ -31,6 +31,18 @@ export class SyncOperationResultDto {
     example: false,
   })
   duplicate?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Machine-readable reason when the change was refused on purpose (REPORT_VERSION_CONFLICT, REPORT_FINALISED)',
+    example: 'REPORT_VERSION_CONFLICT',
+  })
+  errorCode?: string;
+
+  @ApiPropertyOptional({
+    description: 'REPORT_VERSION_CONFLICT: the cloud report version the phone has to synchronise to first',
+    example: 8,
+  })
+  currentReportVersion?: number;
 }
 
 export class SyncPushResponseDto {

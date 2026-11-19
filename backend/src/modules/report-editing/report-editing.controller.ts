@@ -12,6 +12,7 @@ import { ReportEditingService, Owner } from './report-editing.service';
 import { ReportPhotosService } from './report-photos.service';
 import { ReportFilesService } from './report-files.service';
 import { OriginalSnapshotService } from './original-snapshot.service';
+import { Errors } from './editing.errors';
 import { ReportAuditService } from './report-audit.service';
 import { RestoreVersionDto, UploadSnapshotDto } from './dto/editing.dto';
 import { AssignPhotosDto, ReviewActionDto, ReviewDecisionDto } from './dto/photos.dto';
@@ -115,6 +116,18 @@ export class ReportEditingController {
   ) {
     const num = (v?: string) => (v !== undefined && /^\d{1,9}$/.test(v) ? Number(v) : undefined);
     return this.fieldAudit.read(user, id, { sinceVersion: num(sinceVersion), limit: num(limit) });
+  }
+
+  /** What changed after a version: lets the phone see that the computer has newer edits, and where, without downloading the report. */
+  @Get(':id/changes')
+  async changes(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Query('sinceVersion') sinceVersion?: string) {
+    await this.service.assertOwner(user, id);
+    return this.fieldAudit.changesSince(id, this.sinceOf(sinceVersion));
+  }
+
+  private sinceOf(raw?: string): number {
+    if (raw === undefined || !/^\d{1,9}$/.test(raw)) throw Errors.validation('sinceVersion must be a whole number', 'sinceVersion');
+    return Number(raw);
   }
 
   @Get(':id/latest')
