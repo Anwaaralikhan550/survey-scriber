@@ -78,6 +78,25 @@ const SECURITY = ['content-security-policy', 'x-frame-options', 'x-content-type-
   check('nginx stops token guessing (429 after the burst)', codes.includes(429) && codes.indexOf(429) <= 8, `first 429 at try ${codes.indexOf(429) + 1}`);
   await sleep(7000); // let the limiter refill before the real browser flow
 
+  // ---- v1.4: body limits of the phone's report routes (no login: the backend answers 401 when nginx lets the body through) ----
+  const ID = '11111111-2222-4333-8444-555555555555';
+  const post = async (url, mb) => {
+    try {
+      const r = await fetch(BASE + url, { method: 'POST', headers: { 'Content-Type': 'application/octet-stream' }, body: Buffer.alloc(mb * 1024 * 1024) });
+      return r.status;
+    } catch (e) {
+      return `error ${e.cause && e.cause.code ? e.cause.code : e.message}`;
+    }
+  };
+  check('a report document of 20 MB reaches the backend (nginx allows 64 MB there)', (await post(`/api/v1/reports/${ID}/files`, 20)) === 401);
+  check('a report document of 70 MB is stopped by nginx (413)', (await post(`/api/v1/reports/${ID}/files`, 70)) === 413);
+  check('a 14 MB body to another phone route is still stopped by nginx (413)', (await post('/api/v1/media/upload', 14)) === 413);
+  check('an archive of 100 MB reaches the backend (nginx allows 260 MB there)', (await post('/api/v1/reports/restore-archive', 100)) === 401);
+  check('an archive of 270 MB is stopped by nginx (413)', (await post('/api/v1/reports/restore-archive', 270)) === 413);
+  check('building an archive is proxied (backend answers 401 without a login)', (await fetch(`${BASE}/api/v1/reports/${ID}/archive`, { method: 'POST' })).status === 401);
+  check('the retention routes are proxied (401 without a login)', (await fetch(`${BASE}/api/v1/reports/${ID}/retention`)).status === 401 && (await fetch(`${BASE}/api/v1/reports/retention/overview`)).status === 401);
+  await sleep(2000);
+
   // ---- a real edit in Chrome through nginx ----
   const s = await seed();
   const link = await newLink(s.token, s.surveyId);

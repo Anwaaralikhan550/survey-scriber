@@ -16,5 +16,8 @@ Ready-made nginx files are in `deploy/` (headers incl. `frame-ancestors 'none'` 
 rate limit on the token page, `/editor` reload fallback, 13 MB uploads, long timeout for AI, TLS example). The full steps, environment variables,
 smoke test and what was verified are in `docs/desktop-editing/DEPLOYMENT.md`. Serve `dist/` and proxy `/api/` to the backend on the **same host** so the cookie stays first-party.
 
+## v1.4 (19 Nov 2026)
+Reviewer display-name dialog, original/final files, archive, retention. New nginx locations (report document 64 MB, archive restore 260 MB) are in `deploy/editor-locations.conf`; `deploy/run-local.ps1` runs backend and editor on one PC. Deployment, backup policy, retention operation and the old-dump list: `docs/remote-editor-v14/DEPLOY-NOTES.md`.
+
 ## Browser test
 `tmp/desktop-editing/p20_editor.js` drives the real backend and this build with Chrome (65 checks, screenshots in `tmp/desktop-editing/proof/`). The other scripts are listed in `docs/desktop-editing/ACCEPTANCE.md`.
