@@ -43,6 +43,12 @@ export interface StorageService {
    */
   storeVerified(directory: string, fileId: string, buffer: Buffer, extension: string): Promise<{ storagePath: string; size: number; sha256: string }>;
 
+  /**
+   * Remove a whole directory of stored files (the retention purge of a report: its pictures, its documents). Not found is not an error.
+   * @returns how many files were removed
+   */
+  deleteDirectory(directory: string): Promise<number>;
+
   /** SHA-256 (lower-case hex) of a stored file, read from disk. */
   checksum(storagePath: string): Promise<string>;
 

@@ -153,6 +153,27 @@ export class LocalStorageService implements StorageService {
     return { storagePath, size: buffer.length, sha256: expected };
   }
 
+  async deleteDirectory(directory: string): Promise<number> {
+    if (!this.isValidDirectoryPath(directory)) throw new BadRequestException('Invalid directory format');
+    const target = path.join(this.rootPath, directory);
+    if (!target.startsWith(this.rootPath + path.sep)) throw new BadRequestException('Invalid directory format');
+    const count = async (dir: string): Promise<number> => {
+      let n = 0;
+      for (const e of await fs.readdir(dir, { withFileTypes: true })) n += e.isDirectory() ? await count(path.join(dir, e.name)) : 1;
+      return n;
+    };
+    let files: number;
+    try {
+      files = await count(target);
+    } catch (error: unknown) {
+      if ((error as { code?: string }).code === 'ENOENT') return 0;
+      throw error;
+    }
+    await fs.rm(target, { recursive: true, force: true });
+    this.logger.log('Deleted directory: ' + directory + ' (' + files + ' files)');
+    return files;
+  }
+
   async checksum(storagePath: string): Promise<string> {
     return createHash('sha256').update(await this.retrieve(storagePath)).digest('hex');
   }

@@ -45,6 +45,34 @@ class CloudReportInfo {
 }
 
 /// A report document the cloud now holds.
+/// Where a report stands in the retention policy (Remote Editor v1.4 section 15).
+class ReportRetentionInfo {
+  const ReportRetentionInfo({
+    this.policy,
+    this.deleteAt,
+    this.daysLeft,
+    this.protectedReason,
+    this.warningDays = const [],
+    this.warningsSent = const [],
+    this.holdActive = false,
+    this.holdReason,
+    this.holdByRole,
+    this.graceUntil,
+  });
+
+  /// `FINALISED` (60 days from finalisation), `DRAFT` (30 days from the last change) or null while a review is in progress.
+  final String? policy;
+  final DateTime? deleteAt;
+  final int? daysLeft;
+  final String? protectedReason;
+  final List<int> warningDays;
+  final List<int> warningsSent;
+  final bool holdActive;
+  final String? holdReason;
+  final String? holdByRole;
+  final DateTime? graceUntil;
+}
+
 /// The complete archive ZIP of a report (Remote Editor v1.4 section 14): the bytes and the SHA-256 the server computed.
 class ArchiveDownload {
   const ArchiveDownload({required this.bytes, required this.sha256, required this.fileName});
@@ -250,6 +278,40 @@ class ReportEditingApi {
     final form = FormData.fromMap({'state': state, 'file': MultipartFile.fromBytes(bytes, filename: fileName)});
     final b = await _call('POST', 'reports/$surveyId/files', data: form);
     return StoredReportFile(id: b['id'] as String, sha256: b['sha256'] as String, duplicate: b['duplicate'] == true);
+  }
+
+  /// Null when the report is not in the cloud.
+  Future<ReportRetentionInfo?> retention(String surveyId) async {
+    try {
+      final b = await _call('GET', 'reports/$surveyId/retention');
+      final hold = b['legalHold'] is Map ? Map<String, dynamic>.from(b['legalHold'] as Map) : const <String, dynamic>{};
+      final warnings = (b['warnings'] as List? ?? const []).map((w) => Map<String, dynamic>.from(w as Map)).toList();
+      DateTime? date(Object? v) => v is String ? DateTime.tryParse(v) : null;
+      return ReportRetentionInfo(
+        policy: b['policy'] as String?,
+        deleteAt: date(b['deleteAt']),
+        daysLeft: (b['daysLeft'] as num?)?.toInt(),
+        protectedReason: b['protectedReason'] as String?,
+        warningDays: [for (final w in warnings) (w['day'] as num).toInt()],
+        warningsSent: [for (final w in warnings) if (w['sent'] == true) (w['day'] as num).toInt()],
+        holdActive: hold['active'] == true,
+        holdReason: hold['reason'] as String?,
+        holdByRole: hold['placedByRole'] as String?,
+        graceUntil: date(b['graceUntil']),
+      );
+    } on ReportEditingException catch (e) {
+      if (e.code == 'NOT_FOUND') return null;
+      rethrow;
+    }
+  }
+
+  /// Admin or Manager: a documented legal hold; the report is not deleted while it stands. The owner is told.
+  Future<void> placeLegalHold(String surveyId, String reason) async {
+    await _call('POST', 'reports/$surveyId/legal-hold', data: {'reason': reason});
+  }
+
+  Future<void> releaseLegalHold(String surveyId, String reason) async {
+    await _call('DELETE', 'reports/$surveyId/legal-hold', data: {'reason': reason});
   }
 
   /// Builds and downloads the complete archive of the report as the cloud holds it.

@@ -31,6 +31,7 @@ class DesktopEditingState {
     this.heldBackChanges = 0,
     this.conflicts = const [],
     this.restoredFromArchive = false,
+    this.retention,
   });
 
   final bool loading;
@@ -66,6 +67,9 @@ class DesktopEditingState {
   /// The cloud report was restored from a SurveyScriber archive.
   final bool restoredFromArchive;
 
+  /// How long the cloud keeps this report, its reminders and any legal hold (null until read).
+  final ReportRetentionInfo? retention;
+
   bool get hasCloudReport => cloudVersion != null;
   bool get updateAvailable => cloudVersion != null && appVersion != null && cloudVersion! > appVersion!;
   bool get finalised => cloudStatus == 'FINALISING' || cloudStatus == 'FINALISED';
@@ -90,6 +94,7 @@ class DesktopEditingState {
     int? heldBackChanges,
     List<ScreenConflict>? conflicts,
     bool? restoredFromArchive,
+    Object? retention = _keep,
   }) {
     return DesktopEditingState(
       loading: loading ?? this.loading,
@@ -110,6 +115,7 @@ class DesktopEditingState {
       heldBackChanges: heldBackChanges ?? this.heldBackChanges,
       conflicts: conflicts ?? this.conflicts,
       restoredFromArchive: restoredFromArchive ?? this.restoredFromArchive,
+      retention: identical(retention, _keep) ? this.retention : retention as ReportRetentionInfo?,
     );
   }
 
@@ -193,6 +199,15 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
     }
   }
 
+  /// The retention state is a courtesy: when it cannot be read the page simply does not show it.
+  Future<ReportRetentionInfo?> _retention() async {
+    try {
+      return await api.retention(surveyId);
+    } on ReportEditingException {
+      return state.retention;
+    }
+  }
+
   Future<void> _refresh() async {
     final record = await store.read(surveyId);
     final url = await store.vault.read(surveyId);
@@ -224,6 +239,7 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
           linkUrl: link.active ? url : null,
           offline: false,
           checkedAt: _now(),
+          retention: await _retention(),
         );
       }
     } on ReportEditingException catch (e) {
@@ -401,6 +417,17 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
         _requireInSync();
         _setReview(await api.resetReview(surveyId, expectedVersion: state.cloudVersion!));
       }, done: 'The report is a draft again. Earlier approvals no longer stand.');
+
+  /// Admin or Manager: a documented legal hold. [reason] is kept with who and when; the owner is told.
+  Future<void> placeLegalHold(String reason) => _guarded(() async {
+        await api.placeLegalHold(surveyId, reason.trim());
+        _set(state.copyWith(retention: await api.retention(surveyId)));
+      }, done: 'Legal hold placed. The report will not be deleted while it stands. The owner has been told.');
+
+  Future<void> releaseLegalHold(String reason) => _guarded(() async {
+        await api.releaseLegalHold(surveyId, reason.trim());
+        _set(state.copyWith(retention: await api.retention(surveyId)));
+      }, done: 'Legal hold released. The normal retention rules apply again after a short grace period.');
 
   /// Downloads the complete archive ZIP of the report as the cloud holds it and returns the saved file's path (null when it failed;
   /// the reason is in [DesktopEditingState.error]). Downloading does not change the report or its retention period.

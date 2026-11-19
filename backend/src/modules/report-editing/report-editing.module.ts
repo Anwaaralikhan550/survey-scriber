@@ -13,6 +13,8 @@ import { OriginalSnapshotService } from './original-snapshot.service';
 import { ReportAuditService } from './report-audit.service';
 import { ReportMediaService } from './report-media.service';
 import { ReportArchiveService } from './report-archive.service';
+import { ReportRetentionService } from './report-retention.service';
+import { AuthModule } from '../auth/auth.module';
 import { EditorReviewController } from './editor-review.controller';
 import { ReviewService } from './review.service';
 import { FinalisationService } from './finalisation.service';
@@ -22,7 +24,7 @@ import { LocalStorageService } from '../media/storage/local-storage.service';
 import { STORAGE_SERVICE } from '../media/storage/storage.interface';
 
 @Module({
-  imports: [PrismaModule, AiModule],
+  imports: [PrismaModule, AiModule, AuthModule],
   controllers: [ReportEditingController, EditorController, EditorPhotosController, EditorReviewController, EditorAiController],
   providers: [
     ReportEditingService,
@@ -35,6 +37,7 @@ import { STORAGE_SERVICE } from '../media/storage/storage.interface';
     ReportAuditService,
     ReportMediaService,
     ReportArchiveService,
+    ReportRetentionService,
     ReviewService,
     AiSuggestionService,
     FinalisationService,

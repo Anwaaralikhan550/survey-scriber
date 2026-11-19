@@ -105,6 +105,14 @@ export class EmailService {
     await this.sendEmail(toEmail, subject, html, text);
   }
 
+  /** A plain notice to a user (the report retention warnings and legal-hold notices). The text is escaped for the HTML copy. */
+  async sendNotice(toEmail: string, subject: string, text: string): Promise<void> {
+    const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const paragraphs = text.split(/\n{2,}/).map((p) => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`);
+    const html = `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.5;color:#1f2933">${paragraphs.join('')}</div>`;
+    await this.sendEmail(toEmail, subject, html, text);
+  }
+
   private async sendEmail(
     to: string,
     subject: string,

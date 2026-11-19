@@ -13,8 +13,10 @@ import '../providers/desktop_editing_providers.dart';
 /// Owner screen for desktop editing (spec section 7 Screen H): make, copy, share and cancel the edit link,
 /// see the cloud and phone versions, and synchronise the browser's edits into this phone's reports.
 class DesktopEditingPage extends ConsumerStatefulWidget {
-  const DesktopEditingPage({required this.surveyId, required this.isValuation, this.surveyTitle = 'Survey', super.key});
+  const DesktopEditingPage({required this.surveyId, required this.isValuation, this.surveyTitle = 'Survey', this.canManageHold = false, super.key});
 
+  /// Admin and Manager may place and release a legal hold.
+  final bool canManageHold;
   final String surveyId;
   final bool isValuation;
   final String surveyTitle;
@@ -154,6 +156,13 @@ class _DesktopEditingPageState extends ConsumerState<DesktopEditingPage> with Wi
   Future<void> _askReopen() async {
     final reason = await showDialog<String>(context: context, builder: (ctx) => const _ReopenDialog());
     if (reason != null) await ref.read(desktopEditingProvider(_args).notifier).reopenReport(reason);
+  }
+
+  Future<void> _askHold({required bool release}) async {
+    final reason = await showDialog<String>(context: context, builder: (ctx) => _HoldDialog(release: release));
+    if (reason == null || !mounted) return;
+    final c = ref.read(desktopEditingProvider(_args).notifier);
+    await (release ? c.releaseLegalHold(reason) : c.placeLegalHold(reason));
   }
 
   Future<void> _downloadArchive() async {
@@ -442,6 +451,20 @@ class _DesktopEditingPageState extends ConsumerState<DesktopEditingPage> with Wi
                     style: theme.textTheme.bodySmall?.copyWith(color: scheme.onSurfaceVariant),
                   ),
                   const SizedBox(height: 12),
+                  if (s.retention != null) ...[
+                    card([
+                      Text('How long SurveyScriber keeps this report', key: const Key('retention_title'), style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+                      const SizedBox(height: 8),
+                      _RetentionBody(info: s.retention!),
+                      if (widget.canManageHold) ...[
+                        const SizedBox(height: 12),
+                        s.retention!.holdActive
+                            ? OutlinedButton.icon(key: const Key('release_hold'), onPressed: s.busy ? null : () => _askHold(release: true), icon: const Icon(Icons.lock_open_rounded), label: const Text('Release legal hold'))
+                            : OutlinedButton.icon(key: const Key('place_hold'), onPressed: s.busy ? null : () => _askHold(release: false), icon: const Icon(Icons.gavel_rounded), label: const Text('Place legal hold')),
+                      ],
+                    ]),
+                    const SizedBox(height: 12),
+                  ],
                   if (s.hasCloudReport) ...[
                     card([
                       Text('Archive', style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
@@ -735,6 +758,110 @@ class _ConflictDialogState extends State<_ConflictDialog> {
       ),
       actions: [
         FilledButton(key: const Key('conflicts_apply'), onPressed: () => Navigator.pop(context, _keepMine), child: const Text('Apply')),
+      ],
+    );
+  }
+}
+
+
+/// What the cloud will do with the report and when (spec section 15), in plain words.
+class _RetentionBody extends StatelessWidget {
+  const _RetentionBody({required this.info});
+  final ReportRetentionInfo info;
+
+  static String _date(DateTime d) {
+    const m = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    final u = d.toUtc();
+    return '${u.day} ${m[u.month - 1]} ${u.year}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final lines = <Widget>[];
+    if (info.holdActive) {
+      lines.add(_Banner(
+        key: const Key('hold_banner'),
+        icon: Icons.gavel_rounded,
+        color: scheme.tertiaryContainer,
+        onColor: scheme.onTertiaryContainer,
+        text: 'Legal hold: this report will not be deleted while the hold stands. Reason: ${info.holdReason ?? 'not given'}.',
+      ));
+    } else if (info.policy == null) {
+      lines.add(const Text('The report is being reviewed or finalised, so it is kept while that work goes on.', key: Key('retention_protected')));
+    } else if (info.deleteAt != null) {
+      final left = info.daysLeft ?? 0;
+      final days = '$left day${left == 1 ? '' : 's'}';
+      lines.add(Text(
+        info.policy == 'FINALISED'
+            ? 'This final report stays in SurveyScriber until ${_date(info.deleteAt!)} ($days left): 60 days after it was finalised.'
+            : 'This draft stays until ${_date(info.deleteAt!)} ($days left): 30 days after the last change. Working on it starts the 30 days again; opening it does not.',
+        key: const Key('retention_text'),
+      ));
+      if (info.graceUntil != null) {
+        lines.add(Text('A legal hold was released, so it is kept until at least ${_date(info.graceUntil!)}.', key: const Key('retention_grace')));
+      }
+      if (info.warningDays.isNotEmpty) {
+        final sent = info.warningsSent;
+        lines.add(Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: Text(
+            'Reminders come on day ${info.warningDays.join(', ')}${sent.isEmpty ? '' : ' (sent: day ${sent.join(', ')})'}.',
+            key: const Key('retention_reminders'),
+            style: TextStyle(color: scheme.onSurfaceVariant),
+          ),
+        ));
+      }
+    }
+    lines.add(Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: Text(
+        'Downloading the archive does not extend or pause this. Keep your own copy: you are responsible for your long-term record.',
+        key: const Key('retention_archive_note'),
+        style: TextStyle(color: scheme.onSurfaceVariant),
+      ),
+    ));
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: lines);
+  }
+}
+
+class _HoldDialog extends StatefulWidget {
+  const _HoldDialog({required this.release});
+  final bool release;
+
+  @override
+  State<_HoldDialog> createState() => _HoldDialogState();
+}
+
+class _HoldDialogState extends State<_HoldDialog> {
+  final _c = TextEditingController();
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ok = _c.text.trim().length >= 3;
+    return AlertDialog(
+      key: const Key('hold_dialog'),
+      title: Text(widget.release ? 'Release the legal hold?' : 'Place a legal hold?'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(widget.release
+              ? 'The normal retention rules apply again after a short grace period. The owner is told.'
+              : 'The report will not be deleted while the hold stands. The owner is told, with your reason. The hold is recorded with your name and the time.'),
+          const SizedBox(height: 12),
+          TextField(key: const Key('hold_reason'), controller: _c, maxLength: 500, maxLines: 3, onChanged: (_) => setState(() {}), decoration: const InputDecoration(labelText: 'Reason (required)', border: OutlineInputBorder())),
+        ],
+      ),
+      actions: [
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+        FilledButton(key: const Key('hold_confirm'), onPressed: ok ? () => Navigator.of(context).pop(_c.text.trim()) : null, child: Text(widget.release ? 'Release' : 'Place hold')),
       ],
     );
   }

@@ -18,6 +18,9 @@ require('tsconfig-paths').register({
 module.exports = async function globalSetup() {
   // Set environment before importing app
   process.env.LOG_LEVEL = 'error';
+  // Retention: the tests drive the job themselves; reports count from long ago, and the hourly job stays out of the way.
+  process.env.REPORT_RETENTION_STARTS_AT = '2000-01-01T00:00:00.000Z';
+  process.env.REPORT_RETENTION_ENABLED = 'false';
 
   const { Test } = require('@nestjs/testing');
   const { ValidationPipe, VersioningType } = require('@nestjs/common');

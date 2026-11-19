@@ -16,6 +16,8 @@ import { Errors } from './editing.errors';
 import { ReportAuditService } from './report-audit.service';
 import { ReportMediaService } from './report-media.service';
 import { ReportArchiveService } from './report-archive.service';
+import { ReportRetentionService } from './report-retention.service';
+import { HoldReasonDto, RunRetentionDto } from './dto/retention.dto';
 import { RestoreVersionDto, UploadSnapshotDto } from './dto/editing.dto';
 import { AssignPhotosDto, ReviewActionDto, ReviewDecisionDto } from './dto/photos.dto';
 import { ReviewService } from './review.service';
@@ -39,7 +41,24 @@ export class ReportEditingController {
     private readonly fieldAudit: ReportAuditService,
     private readonly media: ReportMediaService,
     private readonly archive: ReportArchiveService,
+    private readonly retention: ReportRetentionService,
   ) {}
+
+  /** What the cloud monitors for retention: coming deadlines, active holds, the deletion queue and its outcomes. Admin and Manager. */
+  @Get('retention/overview')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
+  retentionOverview(@CurrentUser() user: Owner) {
+    return this.retention.overview(user);
+  }
+
+  /** Runs the retention job now (it also runs hourly). Admin only. `asOf` is for rehearsals and is refused in production. */
+  @Post('retention/run')
+  @HttpCode(HttpStatus.OK)
+  @Roles(UserRole.ADMIN)
+  runRetention(@Body() dto: RunRetentionDto) {
+    if (dto.asOf && process.env.NODE_ENV === 'production') throw Errors.validation('asOf is not allowed in production', 'asOf');
+    return this.retention.run(dto.asOf ? new Date(dto.asOf) : new Date(), { retryFailed: dto.retryFailed });
+  }
 
   /** Restore a complete SurveyScriber archive (spec v1.4 section 14.2). multipart: file. Never overwrites an existing report. */
   @Post('restore-archive')
@@ -62,6 +81,26 @@ export class ReportEditingController {
       'Cache-Control': 'private, no-store',
     });
     return new StreamableFile(a.zip);
+  }
+
+  /** Where the report stands in the retention policy: deadline, warnings, legal hold (spec section 15). */
+  @Get(':id/retention')
+  retentionOf(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string) {
+    return this.retention.view(user, id);
+  }
+
+  /** A documented legal or complaint hold: the report is not deleted while it stands. Admin and Manager; the owner is told. */
+  @Post(':id/legal-hold')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
+  placeHold(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: HoldReasonDto, @Req() req: Request) {
+    return this.retention.placeHold(user, id, dto.reason, req);
+  }
+
+  @Delete(':id/legal-hold')
+  @HttpCode(HttpStatus.OK)
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
+  releaseHold(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: HoldReasonDto, @Req() req: Request) {
+    return this.retention.releaseHold(user, id, dto.reason, req);
   }
 
   @Put(':id/snapshot')

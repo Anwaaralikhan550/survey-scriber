@@ -639,6 +639,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             surveyId: id,
             isValuation: state.uri.queryParameters['valuation'] == 'true',
             surveyTitle: state.uri.queryParameters['title'] ?? 'Survey',
+            canManageHold: {UserRole.admin, UserRole.manager}.contains(ProviderScope.containerOf(context).read(authNotifierProvider).user?.role),
           );
         },
       ),

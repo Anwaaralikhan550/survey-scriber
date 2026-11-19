@@ -616,6 +616,10 @@ enum NotificationType {
   BOOKING_CHANGE_REQUEST_REJECTED
   // Report email delivery
   REPORT_SENT
+  // Remote Editor v1.4 retention
+  REPORT_RETENTION_WARNING
+  REPORT_LEGAL_HOLD
+  REPORT_PURGED
 }
 
 /// RecipientType - distinguishes between staff users and clients
@@ -1181,6 +1185,8 @@ model Report {
   files         ReportFile[]
   originalSnapshot ReportOriginalSnapshot?
   auditEvents   ReportAuditEvent[]
+  retention     ReportRetention?
+  holds         ReportLegalHold[]
 
   @@index([ownerUserId])
   @@index([status])
@@ -1393,4 +1399,66 @@ model ReportArchiveImport {
 
   @@index([uploaderId, createdAt])
   @@map("report_archive_imports")
+}
+
+/// ReportRetention - where a report stands in the retention policy (Remote Editor spec v1.4 section 15). Recomputed by the retention job
+/// from the report's own dates; it holds only what the job must remember: which warnings were sent for the current anchor, and the grace
+/// after a legal hold was released. Meaningful activity moves the anchor, which clears the warnings.
+model ReportRetention {
+  reportId   String    @id @map("report_id") @db.Uuid
+  /// FINALISED (60 days from finalisation) | DRAFT (30 days from the last meaningful activity)
+  policy     String    @db.VarChar(12)
+  anchorAt   DateTime  @map("anchor_at")
+  deleteAt   DateTime  @map("delete_at")
+  /// day numbers of the warnings already sent for this anchor, e.g. {30,45}
+  warnedDays Int[]     @map("warned_days")
+  /// after a hold is released the report is not purged before this moment
+  graceUntil DateTime? @map("grace_until")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@index([deleteAt])
+  @@map("report_retention")
+}
+
+/// ReportLegalHold - a documented legal/complaint hold (spec 15.2, 15.3). Placed and released by Admin or Manager with a reason; the report
+/// is never purged while a hold is active (released_at is null). One active hold per report (partial unique index in the migration).
+model ReportLegalHold {
+  id            String    @id @default(uuid()) @db.Uuid
+  reportId      String    @map("report_id") @db.Uuid
+  reason        String    @db.VarChar(500)
+  placedBy      String    @map("placed_by") @db.Uuid
+  placedByRole  String    @map("placed_by_role") @db.VarChar(20)
+  placedAt      DateTime  @default(now()) @map("placed_at")
+  releasedBy    String?   @map("released_by") @db.Uuid
+  releasedAt    DateTime? @map("released_at")
+  releaseReason String?   @map("release_reason") @db.VarChar(500)
+
+  report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@index([reportId])
+  @@map("report_legal_holds")
+}
+
+/// ReportDeletion - the idempotent deletion queue and, once done, the minimal tombstone: identifier, dates, policy and outcome; no report
+/// content (spec 15.3). No foreign key to the report, so it outlives it.
+model ReportDeletion {
+  id            String    @id @default(uuid()) @db.Uuid
+  reportId      String    @unique @map("report_id") @db.Uuid
+  ownerUserId   String    @map("owner_user_id") @db.Uuid
+  policy        String    @db.VarChar(12)
+  anchorAt      DateTime  @map("anchor_at")
+  deleteAt      DateTime  @map("delete_at")
+  /// PENDING (queued or retrying) | DONE | FAILED (gave up retrying: needs an operator)
+  status        String    @db.VarChar(10)
+  attempts      Int       @default(0)
+  nextAttemptAt DateTime  @map("next_attempt_at")
+  lastError     String?   @map("last_error") @db.VarChar(300)
+  filesDeleted  Int       @default(0) @map("files_deleted")
+  purgedAt      DateTime? @map("purged_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  @@index([status, nextAttemptAt])
+  @@map("report_deletions")
 }
