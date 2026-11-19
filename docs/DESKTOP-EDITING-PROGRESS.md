@@ -62,3 +62,5 @@ Backend tests need the E2E harness (VALUATION progress section 6c: docker `ss_e2
 - 16 Nov: D2 done. Real bugs found by the browser test and fixed: spaces typed right after Add paragraph re-triggered the button; a failed save repeated itself and re-opened the conflict dialog; two saves fired together on SAVE click (blur + click); typing after a save merged into the earlier undo step; conflict dialog counted the colleague's change; duplicate read-only chip; iPad portrait blank gap (grid align-content).
 - 16 Nov: D1 coded, migration verified on fresh DB `ss_desk`, e2e 33/33 + unit 10/10 green. Fixed TestAppModule drift (4 modules missing) so e2e boots. Docker Desktop had to be started by hand.
 - 16 Nov: spec read in full; stack/sync/data facts verified; Track C docx made; plan and D0 locked; plan approved by user.
+
+**19 Nov 2026: spec v1.4 follow-up is planned and locked in `docs/REMOTE-EDITOR-V14-PLAN.md`; progress in `docs/REMOTE-EDITOR-V14-PROGRESS.md`.**
