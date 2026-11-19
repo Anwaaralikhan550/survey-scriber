@@ -14,6 +14,7 @@ import { ReportFilesService } from './report-files.service';
 import { OriginalSnapshotService } from './original-snapshot.service';
 import { Errors } from './editing.errors';
 import { ReportAuditService } from './report-audit.service';
+import { ReportMediaService } from './report-media.service';
 import { RestoreVersionDto, UploadSnapshotDto } from './dto/editing.dto';
 import { AssignPhotosDto, ReviewActionDto, ReviewDecisionDto } from './dto/photos.dto';
 import { ReviewService } from './review.service';
@@ -35,6 +36,7 @@ export class ReportEditingController {
     private readonly files: ReportFilesService,
     private readonly originals: OriginalSnapshotService,
     private readonly fieldAudit: ReportAuditService,
+    private readonly media: ReportMediaService,
   ) {}
 
   @Put(':id/snapshot')
@@ -128,6 +130,49 @@ export class ReportEditingController {
   private sinceOf(raw?: string): number {
     if (raw === undefined || !/^\d{1,9}$/.test(raw)) throw Errors.validation('sinceVersion must be a whole number', 'sinceVersion');
     return Number(raw);
+  }
+
+  /** Every picture and signature of the report, also the replaced and deleted ones (nothing is destroyed). */
+  @Get(':id/media')
+  listMedia(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string) {
+    return this.media.list(user, id);
+  }
+
+  /** The stored bytes of one picture, also a replaced or deleted one. */
+  @Get(':id/media/:mediaId/file')
+  async mediaFile(
+    @CurrentUser() user: Owner,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Param('mediaId', ParseUUIDPipe) mediaId: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const f = await this.media.file(user, id, mediaId);
+    res.set({
+      'Content-Type': f.mimeType,
+      'Content-Length': String(f.size),
+      'Content-Disposition': `inline; filename="${f.fileName.replace(/[^A-Za-z0-9._ -]/g, '_')}"`,
+      'X-Content-Type-Options': 'nosniff',
+      'Cache-Control': 'private, no-store',
+      ETag: f.etag,
+    });
+    return new StreamableFile(createReadStream(f.path));
+  }
+
+  @Get(':id/media/:mediaId/annotations')
+  getAnnotations(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Param('mediaId', ParseUUIDPipe) mediaId: string) {
+    return this.media.getAnnotations(user, id, mediaId);
+  }
+
+  /** The drawing the surveyor made on a photo (elements as plain data); an empty list removes it. */
+  @Put(':id/media/:mediaId/annotations')
+  putAnnotations(
+    @CurrentUser() user: Owner,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Param('mediaId', ParseUUIDPipe) mediaId: string,
+    @Body() body: { annotations?: unknown },
+    @Req() req: Request,
+  ) {
+    return this.media.putAnnotations(user, id, mediaId, body?.annotations, req);
   }
 
   @Get(':id/latest')

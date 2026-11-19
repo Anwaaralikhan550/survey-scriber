@@ -5,6 +5,7 @@ import { UserRole, MediaType } from '@prisma/client';
 import { MediaService } from './media.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { StorageService, STORAGE_SERVICE } from './storage/storage.interface';
+import { AuditService } from '../audit/audit.service';
 import sharp from 'sharp';
 
 describe('MediaService', () => {
@@ -47,9 +48,14 @@ describe('MediaService', () => {
     media: {
       create: jest.fn(),
       findUnique: jest.fn(),
+      update: jest.fn(),
       delete: jest.fn(),
     },
+    report: {
+      findUnique: jest.fn().mockResolvedValue(null),
+    },
   };
+  const mockAuditService = { log: jest.fn().mockResolvedValue(undefined) };
 
   const mockStorageService = {
     store: jest.fn(),
@@ -72,6 +78,7 @@ describe('MediaService', () => {
         { provide: PrismaService, useValue: mockPrismaService },
         { provide: STORAGE_SERVICE, useValue: mockStorageService },
         { provide: ConfigService, useValue: mockConfigService },
+        { provide: AuditService, useValue: mockAuditService },
       ],
     }).compile();
 
@@ -332,6 +339,22 @@ describe('MediaService', () => {
       expect(result.success).toBe(true);
       expect(result.id).toBe(mockMedia.id);
       expect(mockStorageService.delete).toHaveBeenCalledWith(mockMedia.storagePath);
+    });
+
+    it('a survey with a report keeps the file and the record: the media is only marked deleted, and audited', async () => {
+      mockPrismaService.report.findUnique.mockResolvedValueOnce({ id: mockMedia.surveyId });
+      mockPrismaService.media.findUnique.mockResolvedValue(mockMedia);
+      mockPrismaService.media.update.mockResolvedValue(mockMedia);
+      mockStorageService.delete.mockClear();
+      mockPrismaService.media.delete.mockClear();
+
+      const result = await service.delete(mockMedia.id, mockUser);
+
+      expect(result).toEqual({ success: true, id: mockMedia.id });
+      expect(mockStorageService.delete).not.toHaveBeenCalled();
+      expect(mockPrismaService.media.delete).not.toHaveBeenCalled();
+      expect(mockPrismaService.media.update).toHaveBeenCalledWith({ where: { id: mockMedia.id }, data: { deletedAt: expect.any(Date) } });
+      expect(mockAuditService.log).toHaveBeenCalledWith(expect.objectContaining({ action: expect.stringMatching(/PHOTO_DELETED_ON_PHONE|SIGNATURE_DELETED/), entityId: mockMedia.surveyId }));
     });
 
     it('should reject delete for non-owner', async () => {

@@ -19,6 +19,7 @@ class LocalPhoto {
     this.caption,
     this.sortOrder = 0,
     this.synced = false,
+    this.annotations,
   });
 
   final String id;
@@ -31,6 +32,9 @@ class LocalPhoto {
   final String? caption;
   final int sortOrder;
   final bool synced;
+
+  /// The drawing made on the photo (the elements as plain data), when there is one.
+  final List<dynamic>? annotations;
 }
 
 /// The phone's photo records and files, as the photo sync needs them (backed by the media table in the app).
@@ -161,10 +165,25 @@ class PhotoSyncService {
     ];
   }
 
+  /// The drawings made on photos are kept in the cloud with the photo. A failure never blocks the report: the next send tries again.
+  Future<void> pushAnnotations(String surveyId, List<LocalPhoto> photos) async {
+    for (final ph in photos) {
+      final drawing = ph.annotations;
+      if (!ph.synced || ph.remoteId == null || drawing == null || drawing.isEmpty) continue;
+      try {
+        await api.putAnnotations(surveyId, ph.remoteId!, drawing);
+      } on ReportEditingException {
+        // finalised, newer on a computer, or offline: left for the next send
+      }
+    }
+  }
+
   /// After the report is sent: file the phone's photos under sections. Returns the new cloud version, or null
   /// when there was nothing to do or the cloud moved meanwhile (the next send tries again).
   Future<int?> push(String surveyId, ReportDocument doc, int expectedVersion) async {
-    final items = assignmentsFor(doc, await local.forSurvey(surveyId));
+    final photos = await local.forSurvey(surveyId);
+    await pushAnnotations(surveyId, photos);
+    final items = assignmentsFor(doc, photos);
     if (items.isEmpty) return null;
     try {
       final r = await api.assignPhotos(surveyId, expectedVersion: expectedVersion, items: items);

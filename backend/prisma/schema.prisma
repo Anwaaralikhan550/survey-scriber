@@ -252,6 +252,12 @@ model Media {
   caption     String?   @db.VarChar(1000)
   sortOrder   Int       @default(0) @map("sort_order")
   sectionKey  String?   @map("section_key") @db.VarChar(100)
+  /// Remote Editor spec v1.4 section 9: PHONE = taken or uploaded by the phone (an original of the inspection), EDITOR = added in the browser
+  source      String    @default("PHONE") @db.VarChar(10)
+  /// The photo that replaced this one in the browser. The old file and record are kept, never destroyed.
+  replacedById String?  @map("replaced_by_id") @db.Uuid
+  /// The drawing the surveyor made on the photo (elements as JSON), kept with the photo
+  annotations Json?     @db.JsonB
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
   deletedAt   DateTime? @map("deleted_at")

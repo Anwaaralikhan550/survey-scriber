@@ -36,6 +36,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { Roles } from '../auth/decorators/roles.decorator';
+import { RemoteEditChange, RemoteEditGuard } from '../report-editing/remote-edit.guard';
 
 interface AuthenticatedUser {
   id: string;
@@ -194,6 +195,8 @@ export class MediaController {
     return new StreamableFile(fileStream);
   }
 
+  @RemoteEditChange('media')
+  @UseGuards(RemoteEditGuard)
   @Delete(':id')
   @Roles(UserRole.ADMIN, UserRole.SURVEYOR)
   @ApiOperation({

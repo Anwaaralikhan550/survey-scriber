@@ -280,6 +280,11 @@ class ReportEditingApi {
     return (version: b['version'] as int, changed: b['changed'] as int);
   }
 
+  /// The drawing made on a photo on the phone, kept with the photo in the cloud (an empty list removes it).
+  Future<void> putAnnotations(String surveyId, String remoteId, List<dynamic> elements) async {
+    await _call('PUT', 'reports/$surveyId/media/$remoteId/annotations', data: {'annotations': elements});
+  }
+
   /// The picture itself.
   Future<List<int>> downloadPhoto(String remoteId) async {
     final Response<List<int>> res;

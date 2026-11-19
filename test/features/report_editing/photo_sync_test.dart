@@ -48,9 +48,9 @@ class _Local implements LocalPhotos {
   @override
   Future<String> newFilePath(String surveyId, String extension) async => '${dir.path}/photo_${n++}.$extension';
 
-  LocalPhoto add(String id, {String? remote, String section = 'roof', String? caption, int order = 0, bool synced = true}) {
+  LocalPhoto add(String id, {String? remote, String section = 'roof', String? caption, int order = 0, bool synced = true, List<dynamic>? drawing}) {
     final f = File('${dir.path}/own_$id.jpg')..writeAsBytesSync([1, 2, 3]);
-    return rows[id] = LocalPhoto(id: id, surveyId: _survey, sectionId: section, localPath: f.path, remoteId: remote, caption: caption, sortOrder: order, synced: synced);
+    return rows[id] = LocalPhoto(id: id, surveyId: _survey, sectionId: section, localPath: f.path, remoteId: remote, caption: caption, sortOrder: order, synced: synced, annotations: drawing);
   }
 }
 
@@ -62,6 +62,14 @@ class _Cloud extends ReportEditingApi {
   Set<String> failDownloads = {};
   ReportEditingException? assignError;
   int version = 7;
+  final drawings = <String, List<dynamic>>{};
+  ReportEditingException? drawingError;
+
+  @override
+  Future<void> putAnnotations(String surveyId, String remoteId, List<dynamic> elements) async {
+    if (drawingError != null) throw drawingError!;
+    drawings[remoteId] = elements;
+  }
 
   @override
   Future<CloudPhotos> photos(String surveyId, {bool includeDeleted = false}) async => CloudPhotos(version: version, photos: includeDeleted ? list : list.where((p) => !p.deleted).toList());
@@ -240,6 +248,27 @@ void main() {
       local.add('a', remote: _r1, section: 'roof');
       expect(await sync.push(_survey, _doc(), 4), 5);
       expect(cloud.assigns.single['expected'], 4);
+    });
+
+    test('a drawing made on a synced photo is sent with it; photos without one, or not uploaded yet, send nothing', () async {
+      final drawing = [
+        {'type': 'arrow', 'x1': 0.1, 'y1': 0.2}
+      ];
+      local.add('a', remote: _r1, section: 'roof', drawing: drawing);
+      local.add('b', remote: _r2, section: 'roof');
+      local.add('c', synced: false, drawing: drawing);
+      await sync.push(_survey, _doc(), 4);
+      expect(cloud.drawings.keys, [_r1]);
+      expect(cloud.drawings[_r1], drawing);
+    });
+
+    test('a drawing that cannot be sent (finalised, newer on a computer, offline) never blocks the report', () async {
+      local.add('a', remote: _r1, section: 'roof', drawing: [
+        {'type': 'text', 'text': 'x'}
+      ]);
+      cloud.drawingError = const ReportEditingException(code: 'REPORT_FINALISED', message: 'x', status: 403);
+      expect(await sync.push(_survey, _doc(), 4), 5);
+      expect(cloud.drawings, isEmpty);
     });
 
     test('nothing to send means no request', () async {

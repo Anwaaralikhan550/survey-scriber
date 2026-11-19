@@ -7,13 +7,14 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { UserRole, MediaType } from '@prisma/client';
+import { ActorType, AuditEntityType, UserRole, MediaType } from '@prisma/client';
 import * as path from 'path';
 import { PrismaService } from '../prisma/prisma.service';
 import { StorageService, STORAGE_SERVICE } from './storage/storage.interface';
 import { MediaResponseDto, DeleteMediaResponseDto } from './dto';
 import { ApiUrlBuilder } from '../../common/utils/api-url.util';
 import { processPhoto } from './image-processor';
+import { AuditService } from '../audit/audit.service';
 
 interface AuthenticatedUser {
   id: string;
@@ -49,6 +50,7 @@ export class MediaService {
     private readonly prisma: PrismaService,
     private readonly configService: ConfigService,
     @Inject(STORAGE_SERVICE) private readonly storageService: StorageService,
+    private readonly auditService: AuditService,
   ) {
     // Convert MB to bytes
     this.maxSizePhoto = (this.configService.get<number>('MAX_UPLOAD_MB_PHOTO', 10)) * 1024 * 1024;
@@ -174,6 +176,23 @@ export class MediaService {
 
     if (media.survey.userId !== user.id && user.role !== UserRole.ADMIN) {
       throw new ForbiddenException('Access denied to this media');
+    }
+
+    // A survey with a report keeps its pictures and signatures: the original evidence is never destroyed (Remote Editor spec
+    // v1.4 section 9). The phone sees it as deleted, the file and the record stay until the retention purge of the whole report.
+    const hasReport = (await this.prisma.report.findUnique({ where: { id: media.surveyId }, select: { id: true } })) !== null;
+    if (hasReport) {
+      await this.prisma.media.update({ where: { id }, data: { deletedAt: new Date() } });
+      await this.auditService.log({
+        actorType: ActorType.STAFF,
+        actorId: user.id,
+        action: media.type === MediaType.SIGNATURE ? 'SIGNATURE_DELETED' : 'PHOTO_DELETED_ON_PHONE',
+        entityType: AuditEntityType.REPORT,
+        entityId: media.surveyId,
+        metadata: { mediaId: id, type: media.type, fileName: media.fileName },
+      });
+      this.logger.log('Media kept and marked deleted (the survey has a report): ' + id);
+      return { success: true, id };
     }
 
     // Hard delete: remove file from storage

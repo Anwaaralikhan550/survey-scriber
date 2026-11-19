@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:drift/drift.dart';
@@ -17,20 +18,29 @@ class MediaDaoPhotos implements LocalPhotos {
   @override
   Future<List<LocalPhoto>> forSurvey(String surveyId) async {
     final rows = await _dao.getMediaBySurvey(surveyId);
-    return [
-      for (final r in rows)
-        if (r.mediaType == 'photo')
-          LocalPhoto(
-            id: r.id,
-            surveyId: r.surveyId,
-            sectionId: r.sectionId,
-            localPath: r.localPath,
-            remoteId: PhotoSyncService.remoteIdOf(r.remotePath),
-            caption: r.caption,
-            sortOrder: r.sortOrder,
-            synced: r.status == 'synced',
-          ),
-    ];
+    final out = <LocalPhoto>[];
+    for (final r in rows) {
+      if (r.mediaType != 'photo') continue;
+      List<dynamic>? drawing;
+      if (r.hasAnnotations) {
+        final a = await _dao.getAnnotation(r.id);
+        if (a != null) drawing = jsonDecode(a.elementsJson) as List<dynamic>;
+      }
+      out.add(
+        LocalPhoto(
+          id: r.id,
+          surveyId: r.surveyId,
+          sectionId: r.sectionId,
+          localPath: r.localPath,
+          remoteId: PhotoSyncService.remoteIdOf(r.remotePath),
+          caption: r.caption,
+          sortOrder: r.sortOrder,
+          synced: r.status == 'synced',
+          annotations: drawing,
+        ),
+      );
+    }
+    return out;
   }
 
   @override

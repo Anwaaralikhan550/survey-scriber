@@ -35,6 +35,11 @@ export interface PhotoView {
   createdAt: Date;
   updatedAt: Date;
   deleted: boolean;
+  /** PHONE = an original of the inspection, EDITOR = added in the browser. */
+  source: string;
+  /** The picture that replaced this one (the old file and record are kept). */
+  replacedBy: string | null;
+  hasAnnotations: boolean;
 }
 
 /**
@@ -70,6 +75,9 @@ export class ReportPhotosService {
       createdAt: m.createdAt,
       updatedAt: m.updatedAt,
       deleted: m.deletedAt !== null,
+      source: m.source,
+      replacedBy: m.replacedById,
+      hasAnnotations: m.annotations !== null,
     };
   }
 
@@ -206,6 +214,7 @@ export class ReportPhotosService {
             caption,
             sectionKey,
             sortOrder: await this.nextOrder(tx, reportId, sectionKey),
+            source: 'EDITOR',
           },
         });
       });
@@ -284,7 +293,8 @@ export class ReportPhotosService {
       const { version, result } = await this.commit(reportId, opts.expectedVersion, actor, opts.guard ?? (async () => undefined), async (tx) => {
         const old = await tx.media.findFirst({ where: { id: photoId, surveyId: reportId, type: MediaType.PHOTO, deletedAt: null } });
         if (!old) throw Errors.notFound();
-        await tx.media.update({ where: { id: photoId }, data: { deletedAt: new Date() } });
+        // The old picture stays on the volume with its record: it points to the picture that replaced it.
+        await tx.media.update({ where: { id: photoId }, data: { deletedAt: new Date(), replacedById: id } });
         return tx.media.create({
           data: {
             id,
@@ -297,6 +307,7 @@ export class ReportPhotosService {
             caption: old.caption,
             sectionKey: old.sectionKey,
             sortOrder: old.sortOrder,
+            source: 'EDITOR',
           },
         });
       });

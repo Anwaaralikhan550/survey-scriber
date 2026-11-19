@@ -11,6 +11,7 @@ import { ReportPhotosService } from './report-photos.service';
 import { ReportFilesService } from './report-files.service';
 import { OriginalSnapshotService } from './original-snapshot.service';
 import { ReportAuditService } from './report-audit.service';
+import { ReportMediaService } from './report-media.service';
 import { EditorReviewController } from './editor-review.controller';
 import { ReviewService } from './review.service';
 import { FinalisationService } from './finalisation.service';
@@ -31,6 +32,7 @@ import { STORAGE_SERVICE } from '../media/storage/storage.interface';
     ReportFilesService,
     OriginalSnapshotService,
     ReportAuditService,
+    ReportMediaService,
     ReviewService,
     AiSuggestionService,
     FinalisationService,

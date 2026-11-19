@@ -3,7 +3,7 @@ import { Reflector } from '@nestjs/core';
 import { PrismaService } from '../prisma/prisma.service';
 import { CONFLICT_MESSAGE, FINALISED_MESSAGE, reportGate } from './report-gate';
 
-export type RemoteEditKind = 'survey' | 'section' | 'answer';
+export type RemoteEditKind = 'survey' | 'section' | 'answer' | 'media';
 const KIND = 'remote-edit-kind';
 
 /** Marks a route that changes survey data from the phone: which kind of id the route carries. */
@@ -49,6 +49,7 @@ export class RemoteEditGuard implements CanActivate {
   private async surveyOf(kind: RemoteEditKind, id: string): Promise<string | null> {
     if (kind === 'survey') return id;
     if (kind === 'section') return (await this.prisma.section.findUnique({ where: { id }, select: { surveyId: true } }))?.surveyId ?? null;
+    if (kind === 'media') return (await this.prisma.media.findUnique({ where: { id }, select: { surveyId: true } }))?.surveyId ?? null;
     return (await this.prisma.answer.findUnique({ where: { id }, select: { section: { select: { surveyId: true } } } }))?.section.surveyId ?? null;
   }
 }
