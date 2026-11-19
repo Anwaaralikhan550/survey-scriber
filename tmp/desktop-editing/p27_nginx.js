@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 const { prisma, seed, newLink } = require('./lib.js');
+const { enterEditor } = require('./lib.js');
 
 const BASE = 'http://localhost:8085';
 const OUT = path.join(__dirname, 'proof');
@@ -98,7 +99,7 @@ const SECURITY = ['content-security-policy', 'x-frame-options', 'x-content-type-
   });
   await page.addInitScript(() => document.addEventListener('securitypolicyviolation', (e) => (window.__v = (window.__v || []).concat(e.violatedDirective))));
   await page.goto(`${BASE}/open/${link.rawToken}`);
-  await page.getByRole('button', { name: 'Continue to the editor' }).click();
+  await enterEditor(page);
   await page.locator('.workspace').waitFor({ timeout: 15000 });
   check('the token is gone from the address bar (the page now shows /editor)', !page.url().includes(link.rawToken) && page.url() === `${BASE}/editor`, page.url());
   check('the session cookie is HttpOnly and cannot be read by the page', (await page.evaluate(() => document.cookie)) === '');

@@ -64,3 +64,9 @@ export class RestoreVersionDto {
   @Max(2147483647)
   baseVersion!: number;
 }
+
+export class ReviewerNameDto {
+  @IsString()
+  @MaxLength(200)
+  name!: string;
+}

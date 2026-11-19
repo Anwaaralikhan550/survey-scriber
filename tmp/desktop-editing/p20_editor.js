@@ -3,6 +3,7 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 const { prisma, seed, newLink, call, API, gate } = require('./lib.js');
+const { enterEditor } = require('./lib.js');
 
 const EDITOR = process.env.EDITOR_URL || 'http://localhost:5174';
 const OUT = path.join(__dirname, 'proof');
@@ -91,7 +92,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     await shot(page, '01_screenA_landing');
 
     // ---------- Screen B workspace ----------
-    await page.getByRole('button', { name: 'Continue to the editor' }).click();
+    await enterEditor(page);
     await page.locator('.workspace').waitFor();
     const head = await page.locator('.topbar').innerText();
     check('B: header shows reference, address, type, version, save state, link expiry and Editing', /VL1433/.test(head) && /54 Gas Lane/.test(head) && /Home Survey Level 2/.test(head) && /Version 1/.test(head) && /Saved/.test(head) && /Link:/.test(head) && /Editing/.test(head));
@@ -258,7 +259,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     s = await seed();
     link = await newLink(s.token, s.surveyId);
     ({ ctx, page, urls, errors } = await openEditor(browser, s, link));
-    await page.getByRole('button', { name: 'Continue to the editor' }).click();
+    await enterEditor(page);
     await page.locator('.workspace').waitFor();
     await page.locator('.sections li button', { hasText: 'F. Walls' }).click();
     const w = s.content[4].blocks[0];
@@ -286,7 +287,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     s = await seed();
     link = await newLink(s.token, s.surveyId);
     ({ ctx, page } = await openEditor(browser, s, link));
-    await page.getByRole('button', { name: 'Continue to the editor' }).click();
+    await enterEditor(page);
     await page.locator('.workspace').waitFor();
     await prisma.editLink.update({ where: { id: link.linkId }, data: { expiresAt: new Date(Date.now() - 1000) } });
     await page.reload();
@@ -301,7 +302,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     s = await seed();
     link = await newLink(s.token, s.surveyId);
     ({ ctx, page } = await openEditor(browser, s, link));
-    await page.getByRole('button', { name: 'Continue to the editor' }).click();
+    await enterEditor(page);
     await page.locator('.workspace').waitFor();
     await call(s.token, 'DELETE', `/reports/${s.surveyId}/edit-links/${link.linkId}`);
     await page.locator('.sections li button', { hasText: 'F. Walls' }).click();
@@ -350,7 +351,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
       s = await seed();
       link = await newLink(s.token, s.surveyId);
       const o = await openEditor(browser, s, link, vp);
-      await o.page.getByRole('button', { name: 'Continue to the editor' }).click();
+      await enterEditor(o.page);
       await o.page.locator('.workspace').waitFor();
       await o.page.locator('.pane .block').first().waitFor();
       const overflow = await o.page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);

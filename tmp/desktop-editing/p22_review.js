@@ -3,6 +3,7 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 const { prisma, seed, newLink, call, API } = require('./lib.js');
+const { enterEditor } = require('./lib.js');
 
 const EDITOR = process.env.EDITOR_URL || 'http://localhost:5174';
 const OUT = path.join(__dirname, 'proof');
@@ -40,7 +41,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errors.push(m.text());
   });
   await page.goto(`${EDITOR}/open/${link.rawToken}`);
-  await page.getByRole('button', { name: 'Continue to the editor' }).click();
+  await enterEditor(page);
   await page.locator('.workspace').waitFor({ timeout: 15000 });
   return { ctx, page, errors };
 }

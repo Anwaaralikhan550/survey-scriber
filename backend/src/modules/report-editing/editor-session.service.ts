@@ -5,6 +5,7 @@ import { Request } from 'express';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuditService } from '../audit/audit.service';
 import { ReportAuditService } from './report-audit.service';
+import { cleanReviewerName } from './reviewer-name';
 import { ContentValidationError, ReportContent, applyChanges } from './report-content';
 import { Errors } from './editing.errors';
 import { newToken, safeEqualHex, sha256 } from './token.util';
@@ -111,6 +112,18 @@ export class EditorSessionService {
     return { session, link, report, readOnly: readOnlyReason !== undefined, readOnlyReason };
   }
 
+  /**
+   * The display name of the person using this link session (spec v1.4 sections 7 and 18). Typed, never verified; it is written
+   * into the amendment history, the review entries and the version list from then on. A new session starts without a name.
+   */
+  async setReviewerName(ctx: EditorContext, raw: unknown, req?: Request) {
+    const name = cleanReviewerName(raw);
+    if (name === null) throw Errors.validation('Please enter your name (2 to 80 letters, no symbols)', 'name');
+    await this.prisma.editorSession.update({ where: { id: ctx.session.id }, data: { reviewerName: name } });
+    await this.log('REVIEWER_NAME_SET', ctx.report.id, req, { sessionId: ctx.session.id, linkId: ctx.link.id, name, verified: false });
+    return { name, verified: false };
+  }
+
   verifyCsrf(ctx: EditorContext, header: string | undefined): void {
     if (!header || !safeEqualHex(sha256(header), ctx.session.csrfHash)) throw Errors.csrf();
   }
@@ -128,6 +141,7 @@ export class EditorSessionService {
       linkExpiresAt: ctx.link.expiresAt,
       readOnly: ctx.readOnly,
       readOnlyReason: ctx.readOnlyReason ?? null,
+      reviewer: { name: ctx.session.reviewerName, verified: false },
       content: r.content,
     };
   }
@@ -171,7 +185,7 @@ export class EditorSessionService {
         if (dto.baseVersion !== cur.version) throw Errors.conflict(cur.version);
         const next = applyChanges(cur.content as ReportContent, dto.changes);
         const version = cur.version + 1;
-        await this.fieldAudit.recordChanges(tx, { reportId, version, actor: `session:${ctx.session.id}`, sessionId: ctx.session.id, source: 'BROWSER' }, cur.content as ReportContent, next);
+        await this.fieldAudit.recordChanges(tx, { reportId, version, actor: `session:${ctx.session.id}`, actorName: ctx.session.reviewerName, sessionId: ctx.session.id, source: 'BROWSER' }, cur.content as ReportContent, next);
         await tx.report.update({ where: { id: reportId }, data: { content: next as unknown as Prisma.InputJsonValue, version } });
         const row = await tx.reportVersion.create({
           data: {
@@ -179,6 +193,7 @@ export class EditorSessionService {
             version,
             content: next as unknown as Prisma.InputJsonValue,
             savedBy: `session:${ctx.session.id}`,
+            savedByName: ctx.session.reviewerName,
             reason: 'SAVE',
             idempotencyKey: dto.idempotencyKey,
           },

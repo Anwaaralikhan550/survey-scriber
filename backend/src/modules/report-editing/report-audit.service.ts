@@ -15,6 +15,8 @@ export interface AuditContext {
   version: number;
   actor: string; // 'owner:<userId>' | 'session:<sessionId>'
   sessionId?: string;
+  /** The unverified display name of a link session. */
+  actorName?: string | null;
   source: AuditSource;
 }
 
@@ -56,6 +58,7 @@ export class ReportAuditService {
         op: note.op,
         afterValue: (note.after ?? Prisma.JsonNull) as Prisma.InputJsonValue,
         actor: ctx.actor,
+        actorName: ctx.actorName ?? null,
         sessionId: ctx.sessionId ?? null,
         source: ctx.source,
       },
@@ -75,6 +78,7 @@ export class ReportAuditService {
       beforeValue: (c.before ?? Prisma.JsonNull) as Prisma.InputJsonValue,
       afterValue: (c.after ?? Prisma.JsonNull) as Prisma.InputJsonValue,
       actor: ctx.actor,
+      actorName: ctx.actorName ?? null,
       sessionId: ctx.sessionId ?? null,
       source: ctx.source,
     };
@@ -110,6 +114,8 @@ export class ReportAuditService {
         before: e.beforeValue,
         after: e.afterValue,
         actor: e.actor,
+        actorName: e.actorName,
+        actorNameVerified: false,
         source: e.source,
         at: e.createdAt,
       })),

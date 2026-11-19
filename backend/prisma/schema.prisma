@@ -1185,6 +1185,7 @@ model ReportVersion {
   version   Int
   content   Json     @db.JsonB
   savedBy   String?  @map("saved_by") @db.VarChar(80) // 'owner:<userId>' | 'session:<sessionId>' | 'system'
+  savedByName String? @map("saved_by_name") @db.VarChar(80) // unverified display name of a link session
   reason    String   @db.VarChar(20) // SNAPSHOT | SAVE | RESTORE | FINALISE
   // Client retry key: the same key on the same report returns the already committed save
   idempotencyKey String? @map("idempotency_key") @db.VarChar(80)
@@ -1291,6 +1292,7 @@ model ReportAuditEvent {
   beforeValue   Json?    @map("before_value") @db.JsonB
   afterValue    Json?    @map("after_value") @db.JsonB
   actor         String   @db.VarChar(80) // owner:<userId> | session:<sessionId>
+  actorName     String?  @map("actor_name") @db.VarChar(80) // the unverified display name of a link session
   sessionId     String?  @map("session_id") @db.Uuid
   source        String   @db.VarChar(20) // BROWSER | PHONE | RESTORE | AI
   createdAt     DateTime @default(now()) @map("created_at")
@@ -1328,6 +1330,8 @@ model EditorSession {
   linkId      String    @map("link_id") @db.Uuid
   sessionHash String    @unique @map("session_hash") @db.VarChar(64)
   csrfHash    String    @map("csrf_hash") @db.VarChar(64)
+  /// Typed by the link holder when the link is opened (spec v1.4): never verified
+  reviewerName String?  @map("reviewer_name") @db.VarChar(80)
   createdAt   DateTime  @default(now()) @map("created_at")
   expiresAt   DateTime  @map("expires_at")
   lastSeenAt  DateTime  @default(now()) @map("last_seen_at")
@@ -1347,6 +1351,7 @@ model Review {
   reportId       String         @map("report_id") @db.Uuid
   sessionId      String?        @map("session_id") @db.Uuid
   reviewerUserId String?        @map("reviewer_user_id") @db.Uuid
+  reviewerName   String?        @map("reviewer_name") @db.VarChar(80) // a link holder's typed name, not verified
   decision       ReviewDecision
   comment        String?        @db.Text
   version        Int

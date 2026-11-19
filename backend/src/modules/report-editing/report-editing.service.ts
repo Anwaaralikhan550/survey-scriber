@@ -221,7 +221,7 @@ export class ReportEditingService {
     const rows = await this.prisma.reportVersion.findMany({
       where: { reportId },
       orderBy: { version: 'desc' },
-      select: { version: true, savedBy: true, reason: true, createdAt: true },
+      select: { version: true, savedBy: true, savedByName: true, reason: true, createdAt: true },
     });
     return { reportId, versions: rows };
   }

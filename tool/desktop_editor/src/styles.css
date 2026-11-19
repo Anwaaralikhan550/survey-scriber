@@ -219,3 +219,12 @@ td input { width: 100%; border: 0; padding: 6px 8px; background: transparent; }
 .diff-text ins { background: #e3f4ea; color: var(--ok); text-decoration: none; font-weight: 600; }
 .ai-edit { width: 100%; font: inherit; border: 1px solid var(--line); border-radius: 8px; padding: 8px; resize: vertical; }
 @media (max-width: 760px) { .ai-compare { grid-template-columns: 1fr; } }
+
+.name-form { display: grid; gap: 6px; margin-top: 14px; }
+.name-form label { font-weight: 600; }
+.name-form input { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 16px; }
+.name-form input[aria-invalid='true'] { border-color: #b3261e; }
+.name-form .help { margin: 0; font-size: 13px; color: var(--muted, #5c6b75); }
+.name-form .help.bad { color: #b3261e; }
+.name-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
+.name-chip { max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

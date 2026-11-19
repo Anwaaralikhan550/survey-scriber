@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Workspace from './Workspace.jsx';
 import { api, hasSession } from './api.js';
+import { NameForm, rememberedName } from './Name.jsx';
 
 const TYPE_NAMES = { L2: 'Home Survey Level 2', L3: 'Home Survey Level 3', VALUATION: 'Valuation' };
 
@@ -113,9 +114,17 @@ export default function App() {
           <dt>Access</dt>
           <dd>{r.readOnly ? 'Read-only' : 'You can edit'}. The link works until {fmt(r.linkExpiresAt)}.</dd>
         </dl>
-        <button type="button" className="primary big" autoFocus onClick={() => setView({ name: 'workspace', report: r })}>
-          Continue to the editor
-        </button>
+        {r.readOnly || r.reviewer?.name ? (
+          <button type="button" className="primary big" autoFocus onClick={() => setView({ name: 'workspace', report: r })}>
+            Continue to the editor
+          </button>
+        ) : (
+          <NameForm
+            initial={rememberedName()}
+            submitLabel="Continue to the editor"
+            onDone={(name) => setView({ name: 'workspace', report: { ...r, reviewer: { name, verified: false } } })}
+          />
+        )}
       </Shell>
     );
   }

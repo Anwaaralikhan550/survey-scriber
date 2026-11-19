@@ -49,6 +49,8 @@ class _Cloud extends ReportEditingApi {
   int? reviewerApproved;
   int? ownerApproved;
   String? amendComment;
+  String? amendName;
+  String? approvedName;
   bool offline = false;
   bool reviewFails = false;
   int cycle = 1;
@@ -65,7 +67,8 @@ class _Cloud extends ReportEditingApi {
         submittedVersion: submitted,
         reviewerApprovalVersion: reviewerApproved,
         ownerApprovalVersion: ownerApproved,
-        lastAmendment: amendComment == null ? null : ReviewEntry(decision: 'AMENDMENTS_REQUIRED', version: version, by: 'reviewer', createdAt: DateTime(2026, 11, 16, 10), invalidated: false, comment: amendComment),
+        lastAmendment: amendComment == null ? null : ReviewEntry(decision: 'AMENDMENTS_REQUIRED', version: version, by: 'reviewer', createdAt: DateTime(2026, 11, 16, 10), invalidated: false, comment: amendComment, reviewerName: amendName),
+        reviewerApprovalName: approvedName,
         entries: const [],
         cycle: cycle,
         finalVersion: finalVersion,
@@ -461,6 +464,52 @@ void main() {
       expect(find.byKey(const Key('approve_needs_sync')), findsNothing);
       expect(tester.widget<FilledButton>(find.byKey(const Key('approve_final'))).onPressed, isNotNull);
       await _shot(tester, '10_phone_submitted');
+    });
+
+    testWidgets('a reviewer who gave a name is shown by that name, marked not verified', (tester) async {
+      cloud.status = 'REVIEWER_APPROVED';
+      cloud.reviewerApproved = 3;
+      cloud.approvedName = 'Omar Khan';
+      await open(tester);
+      expect(find.textContaining('Omar Khan (name not verified) approved version 3'), findsOneWidget);
+      await _shot(tester, '15_phone_reviewer_name');
+      cloud.approvedName = null;
+      cloud.reviewerApproved = null;
+    });
+
+    testWidgets('a change request from a named link holder says who asked, not verified', (tester) async {
+      cloud.amendComment = 'Check the chimney.';
+      cloud.amendName = 'Omar Khan';
+      cloud.status = 'AMENDMENTS_REQUIRED';
+      await open(tester);
+      expect(find.textContaining('Omar Khan (name not verified), version'), findsOneWidget);
+      cloud.amendName = null;
+      cloud.amendComment = null;
+    });
+
+    testWidgets('a change request from a link holder who gave no name says a reviewer', (tester) async {
+      cloud.amendComment = 'Check the chimney.';
+      cloud.amendName = null;
+      cloud.status = 'AMENDMENTS_REQUIRED';
+      await open(tester);
+      expect(find.textContaining('a reviewer, version'), findsOneWidget);
+      cloud.amendComment = null;
+    });
+
+    test('a review entry says who in plain words', () {
+      ReviewEntry e(String by, String? name) => ReviewEntry(decision: 'APPROVED', version: 1, by: by, createdAt: DateTime(2026), invalidated: false, reviewerName: name);
+      expect(e('owner', null).who(), 'you');
+      expect(e('reviewer', 'Jane Smith').who(), 'Jane Smith (name not verified)');
+      expect(e('reviewer', null).who(), 'a reviewer');
+      expect(ReviewInfo.fromJson({
+        'status': 'REVIEWER_APPROVED',
+        'version': 2,
+        'reviewerApproval': {'version': 2, 'reviewerName': 'Jane Smith'},
+        'reviews': [
+          {'decision': 'APPROVED', 'version': 2, 'by': 'reviewer', 'createdAt': '2026-11-19T10:00:00.000Z', 'invalidated': false, 'reviewerName': 'Jane Smith', 'nameVerified': false},
+        ],
+      }).entries.single.reviewerName, 'Jane Smith');
+      expect(ReviewInfo.fromJson({'status': 'DRAFT', 'version': 1}).reviewerApprovalName, isNull);
     });
 
     testWidgets('a draft offers only the final approval (no reviewer is needed)', (tester) async {

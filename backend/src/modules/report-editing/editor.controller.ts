@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post, Req, Res, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post, Put, Req, Res, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import { ConfigService } from '@nestjs/config';
@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 import { Public } from '../auth/decorators/public.decorator';
 import { EditorSessionService } from './editor-session.service';
 import { EDITOR_COOKIE, EditorRequest, EditorSecurityHeadersInterceptor, EditorSessionGuard } from './editor.guard';
-import { OpenLinkDto, SaveChangesDto } from './dto/editing.dto';
+import { OpenLinkDto, ReviewerNameDto, SaveChangesDto } from './dto/editing.dto';
 
 /** Token attempts per IP (spec 17). Production defaults; the browser tests start the server with higher values. */
 const OPEN_LIMITS = {
@@ -50,6 +50,15 @@ export class EditorController {
     const out = await this.sessions.close(req.editor, req);
     res.clearCookie(EDITOR_COOKIE, { path: '/api/v1/editor' });
     return out;
+  }
+
+  /** The display name of the person using this link (typed, not verified). */
+  @Public()
+  @UseGuards(EditorSessionGuard)
+  @Put('session/name')
+  @HttpCode(HttpStatus.OK)
+  setName(@Body() dto: ReviewerNameDto, @Req() req: EditorRequest) {
+    return this.sessions.setReviewerName(req.editor, dto.name, req);
   }
 
   @Public()

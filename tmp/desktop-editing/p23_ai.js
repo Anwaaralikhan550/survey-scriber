@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { randomUUID } = require('crypto');
 const { prisma, owner, newLink, call } = require('./lib.js');
+const { enterEditor } = require('./lib.js');
 
 const EDITOR = process.env.EDITOR_URL || 'http://localhost:5174';
 const FAKE = 'http://127.0.0.1:4799';
@@ -77,7 +78,7 @@ async function openEditor(browser, link, viewport = { width: 1440, height: 900 }
     if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errors.push(m.text());
   });
   await page.goto(`${EDITOR}/open/${link.rawToken}`);
-  await page.getByRole('button', { name: 'Continue to the editor' }).click();
+  await enterEditor(page);
   await page.locator('.workspace').waitFor({ timeout: 15000 });
   return { ctx, page, errors };
 }

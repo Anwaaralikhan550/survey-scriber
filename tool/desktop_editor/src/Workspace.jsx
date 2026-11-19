@@ -3,6 +3,7 @@ import TextEditor from './TextEditor.jsx';
 import { useEditor } from './useEditor.js';
 import { api } from './api.js';
 import { Dialog, Icon, ICONS } from './ui.jsx';
+import { NameForm, rememberedName } from './Name.jsx';
 import Photos from './Photos.jsx';
 import Review, { STATUS_LABEL } from './Review.jsx';
 import Suggest from './Suggest.jsx';
@@ -154,6 +155,7 @@ export default function Workspace({ initial, onExit }) {
   const [sectionId, setSectionId] = useState(cur[0]?.id);
   const [activeId, setActiveId] = useState(null);
   const [dialog, setDialog] = useState(null);
+  const [reviewerName, setReviewerName] = useState(initial.reviewer?.name || null);
   const [view, setView] = useState('report'); // 'report' | 'photos' | 'review'
   const photosState = usePhotos({ reportId: server.reportId, editor: ed, readOnly });
   const [now, setNow] = useState(Date.now());
@@ -281,6 +283,11 @@ export default function Workspace({ initial, onExit }) {
             {STATUS_LABEL[server.status] || server.status}
           </button>
           <span className="chip" title={`Link expires ${fmt(server.linkExpiresAt)}`}>Link: {linkLeft}</span>
+          {!server.readOnly ? (
+            <button type="button" className="chip chip-btn name-chip" title="The name you gave. It is recorded with your changes and is not verified. Click to change it." onClick={() => setDialog('name')}>
+              You: {reviewerName || 'add your name'}
+            </button>
+          ) : null}
         </div>
         <div className="actions">
           <button type="button" className="icon" aria-label="Undo" title="Undo (Ctrl+Z)" disabled={!ed.canUndo || readOnly} onClick={ed.undo}>
@@ -466,6 +473,20 @@ export default function Workspace({ initial, onExit }) {
         </Dialog>
       )}
 
+      {!readOnly && (!reviewerName || dialog === 'name') ? (
+        <Dialog title={reviewerName ? 'Change your name' : 'Please enter your name'} onClose={reviewerName ? () => setDialog(null) : undefined} actions={null}>
+          <p className="muted">The report owner sees this name next to your changes and review decisions. It is not verified.</p>
+          <NameForm
+            initial={reviewerName || rememberedName()}
+            submitLabel="Save name"
+            onDone={(n) => {
+              setReviewerName(n);
+              setDialog(null);
+            }}
+            secondary={reviewerName ? <button type="button" className="secondary" onClick={() => setDialog(null)}>Cancel</button> : null}
+          />
+        </Dialog>
+      ) : null}
       {dialog === 'exit' && (
         <Dialog
           title="You have unsaved changes"

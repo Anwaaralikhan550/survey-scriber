@@ -146,7 +146,7 @@ export default function Review({ reportId, editor, readOnly, onStatus }) {
         <dd>
           {view.reviewerApproval ? (
             <>
-              Approved, version {view.reviewerApproval.version} <span className="badge ok">current</span>
+              Approved{view.reviewerApproval.reviewerName ? ` by ${view.reviewerApproval.reviewerName} (name not verified)` : ''}, version {view.reviewerApproval.version} <span className="badge ok">current</span>
               {view.reviewerApproval.comment ? <div className="muted small">{view.reviewerApproval.comment}</div> : null}
             </>
           ) : (
@@ -213,7 +213,7 @@ export default function Review({ reportId, editor, readOnly, onStatus }) {
               <span className="what">{DECISION_LABEL[r.decision] || r.decision}</span>
               <span className="muted">
                 {' '}
-                · version {r.version} · {r.by === 'owner' ? 'owner' : 'reviewer'} · {fmt(r.createdAt)}
+                · version {r.version} · {r.by === 'owner' ? 'owner' : r.reviewerName ? `${r.reviewerName} (name not verified)` : 'reviewer'} · {fmt(r.createdAt)}
               </span>
               {r.invalidated ? <span className="badge warn">out of date</span> : null}
               {r.comment ? <div className="comment">{r.comment}</div> : null}

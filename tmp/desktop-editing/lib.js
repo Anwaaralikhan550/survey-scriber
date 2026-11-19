@@ -77,4 +77,12 @@ async function newLink(token, surveyId) {
   return { url: r.body.url, rawToken: r.body.url.split('/open/')[1], linkId: r.body.linkId };
 }
 
-module.exports = { prisma, owner, call, seed, newLink, API, gate };
+/** The landing page asks the link holder for a display name (spec v1.4): fill it in when asked, then continue. */
+async function enterEditor(page, name = 'Test Reviewer') {
+  const btn = page.getByRole('button', { name: 'Continue to the editor' });
+  await btn.waitFor({ timeout: 15000 });
+  const field = page.getByLabel('Your name');
+  if (await field.count()) await field.fill(name);
+  await btn.click();
+}
+module.exports = { enterEditor, prisma, owner, call, seed, newLink, API, gate };

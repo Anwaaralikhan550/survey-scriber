@@ -105,7 +105,7 @@ export class AiSuggestionService {
       const report = await this.prisma.report.findUniqueOrThrow({ where: { id: reportId }, select: { version: true } });
       await this.fieldAudit.recordNote(
         this.prisma,
-        { reportId, version: report.version, actor: `session:${ctx.session.id}`, sessionId: ctx.session.id, source: 'AI' },
+        { reportId, version: report.version, actor: `session:${ctx.session.id}`, actorName: ctx.session.reviewerName, sessionId: ctx.session.id, source: 'AI' },
         { entityType: 'BLOCK', entityId: dto.blockId, field: 'text', op: dto.outcome === 'REJECTED' ? 'AI_REJECTED' : 'AI_ACCEPTED', after: { suggestionId: dto.suggestionId, outcome: dto.outcome, action: dto.action ?? null } },
       );
     }

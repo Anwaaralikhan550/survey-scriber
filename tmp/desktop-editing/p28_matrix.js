@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const { randomUUID } = require('crypto');
 const { prisma, owner, call, newLink } = require('./lib.js');
+const { enterEditor } = require('./lib.js');
 
 const EDITOR = process.env.EDITOR_URL || 'http://localhost:5174';
 const OUT = 'E:/survey-scriber/tmp/client-edits-2026-11-17/proof';
@@ -50,7 +51,7 @@ const labels = ['Address', 'Date of Trans', 'Price', 'Size / Sqm', 'Bedrooms', '
   page.on('response', (r) => { if (r.url().includes('/api/') && r.status() >= 400) console.log('API', r.status(), r.url().slice(0, 90)); });
   await page.goto(`${EDITOR}/open/${link.rawToken}`);
   if (!(await page.getByRole('button', { name: 'Continue to the editor' }).waitFor({ timeout: 12000 }).then(() => true).catch(() => false))) console.log('LANDING TEXT:', (await page.locator('body').innerText()).slice(0, 300));
-  await page.getByRole('button', { name: 'Continue to the editor' }).click();
+  await enterEditor(page);
   await page.locator('.workspace').waitFor();
   check('left navigation lists the matrix as a section', (await page.locator('.sections li button', { hasText: 'FBS Valuation Matrix' }).count()) === 1);
   await page.locator('.sections li button', { hasText: 'FBS Valuation Matrix' }).click();
@@ -80,7 +81,7 @@ const labels = ['Address', 'Date of Trans', 'Price', 'Size / Sqm', 'Bedrooms', '
   await page.reload();
   await page.locator('.workspace').waitFor({ timeout: 15000 }).catch(() => {});
   if (!(await page.locator('.workspace').count())) {
-    await page.getByRole('button', { name: 'Continue to the editor' }).click().catch(() => {});
+    await enterEditor(page).catch(() => {});
     await page.locator('.workspace').waitFor({ timeout: 15000 });
   }
   await page.locator('.sections li button', { hasText: 'FBS Valuation Matrix' }).click();

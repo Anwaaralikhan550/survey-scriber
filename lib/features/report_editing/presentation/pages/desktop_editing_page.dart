@@ -478,7 +478,7 @@ String _statusText(ReviewInfo r) {
     case 'AMENDMENTS_REQUIRED':
       return 'Changes were requested. The editors need to make them and submit the report again.';
     case 'REVIEWER_APPROVED':
-      return 'A reviewer approved version ${r.reviewerApprovalVersion ?? r.version}. The final approval is yours.';
+      return '${r.reviewerApprovalName == null ? 'A reviewer' : '${r.reviewerApprovalName} (name not verified)'} approved version ${r.reviewerApprovalVersion ?? r.version}. The final approval is yours.';
     case 'OWNER_FINAL_APPROVAL':
       return 'You gave final approval to version ${r.ownerApprovalVersion ?? r.version}.';
     default:
@@ -515,7 +515,7 @@ class _ReviewSummary extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(color: scheme.errorContainer.withOpacity(0.5), borderRadius: BorderRadius.circular(8)),
-            child: Text('"${amend.comment ?? ''}" (${amend.by == 'owner' ? 'you' : 'a reviewer'}, version ${amend.version})'),
+            child: Text('"${amend.comment ?? ''}" (${amend.who()}, version ${amend.version})'),
           ),
         ],
         const SizedBox(height: 8),

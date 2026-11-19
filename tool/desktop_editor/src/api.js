@@ -128,6 +128,8 @@ export const api = {
     return data;
   },
   read: (reportId) => call('GET', `/editor/reports/${reportId}`),
+  /** The name of the person using this link (typed, not verified). */
+  setName: (name) => call('PUT', '/editor/session/name', { name }),
   save: (reportId, payload) => call('PATCH', `/editor/reports/${reportId}`, payload),
   async close() {
     try {

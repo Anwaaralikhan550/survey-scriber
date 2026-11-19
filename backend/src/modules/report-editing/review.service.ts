@@ -44,6 +44,9 @@ export class ReviewService {
       comment: r.comment,
       version: r.version,
       by: r.reviewerUserId ? 'owner' : 'reviewer',
+      // a link holder's typed name: never verified
+      reviewerName: r.reviewerUserId ? null : r.reviewerName,
+      nameVerified: false,
       createdAt: r.createdAt,
       invalidated: r.invalidatedAt !== null,
     }));
@@ -139,7 +142,7 @@ export class ReviewService {
         version: cur.version,
         decision: ReviewDecision.SUBMITTED,
         comment,
-        ...(actor.kind === 'session' ? { sessionId: actor.ctx.session.id } : { reviewerUserId: actor.userId }),
+        ...(actor.kind === 'session' ? { sessionId: actor.ctx.session.id, reviewerName: actor.ctx.session.reviewerName } : { reviewerUserId: actor.userId }),
       };
       const stale: ReviewDecision[] = [];
       switch (action) {

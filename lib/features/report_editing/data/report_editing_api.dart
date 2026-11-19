@@ -67,13 +67,19 @@ class CloudPhotos {
 
 /// One decision in the review history.
 class ReviewEntry {
-  const ReviewEntry({required this.decision, required this.version, required this.by, required this.createdAt, required this.invalidated, this.comment});
+  const ReviewEntry({required this.decision, required this.version, required this.by, required this.createdAt, required this.invalidated, this.comment, this.reviewerName});
   final String decision;
   final int version;
   final String by;
   final DateTime createdAt;
   final bool invalidated;
   final String? comment;
+
+  /// The name a link holder typed (never verified). Null for the owner and for a link holder who gave none.
+  final String? reviewerName;
+
+  /// "Omar Khan (name not verified)" for a link holder with a name, otherwise [fallback].
+  String who({String fallback = 'a reviewer'}) => by == 'owner' ? 'you' : (reviewerName == null ? fallback : '$reviewerName (name not verified)');
 }
 
 /// One edit round that reached a final version. Reopening keeps it, with who reopened and why.
@@ -100,6 +106,7 @@ class ReviewInfo {
     this.finalVersion,
     this.finalisedAt,
     this.rounds = const [],
+    this.reviewerApprovalName,
   });
 
   const ReviewInfo.draft(int version) : this(status: 'DRAFT', version: version);
@@ -108,6 +115,9 @@ class ReviewInfo {
   final int version;
   final int? submittedVersion;
   final int? reviewerApprovalVersion;
+
+  /// The name the approving link holder typed (not verified).
+  final String? reviewerApprovalName;
   final int? ownerApprovalVersion;
   final ReviewEntry? lastAmendment;
   final List<ReviewEntry> entries;
@@ -128,6 +138,7 @@ class ReviewInfo {
         createdAt: DateTime.parse(raw['createdAt'] as String),
         invalidated: raw['invalidated'] == true,
         comment: raw['comment'] as String?,
+        reviewerName: raw['reviewerName'] as String?,
       );
 
   static FinalRound _round(Map raw) => FinalRound(
@@ -143,6 +154,7 @@ class ReviewInfo {
         version: b['version'] as int,
         submittedVersion: b['submittedVersion'] as int?,
         reviewerApprovalVersion: (b['reviewerApproval'] as Map?)?['version'] as int?,
+        reviewerApprovalName: (b['reviewerApproval'] as Map?)?['reviewerName'] as String?,
         ownerApprovalVersion: (b['ownerApproval'] as Map?)?['version'] as int?,
         lastAmendment: b['lastAmendmentRequest'] == null ? null : _entry(b['lastAmendmentRequest'] as Map),
         entries: [for (final r in (b['reviews'] as List? ?? const [])) _entry(r as Map)],

@@ -6,6 +6,7 @@ const path = require('path');
 const { randomUUID } = require('crypto');
 const sharp = require('sharp');
 const { prisma, owner, newLink, call } = require('./lib.js');
+const { enterEditor } = require('./lib.js');
 
 const EDITOR = process.env.EDITOR_URL || 'http://localhost:5174';
 const OUT = path.join(__dirname, 'proof');
@@ -94,7 +95,7 @@ const HOSTILE = [
     await page.goto(`${EDITOR}/open/${link.rawToken}`);
     check('landing page shows the property text as text (address and reference)', await until(async () => /Gas Lane/.test(await page.locator('body').innerText())));
     check('the address that looked like markup is not parsed (no element made from it)', (await page.locator('.card img, .card svg, .card script').count()) === 0);
-    await page.getByRole('button', { name: 'Continue to the editor' }).click();
+    await enterEditor(page);
     await page.locator('.workspace').waitFor({ timeout: 15000 });
     const xss = () => page.evaluate(() => window.__xss);
     check('nothing ran on the landing page or while opening the editor', (await xss()) === undefined, `__xss=${await xss()}`);
