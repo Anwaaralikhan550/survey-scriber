@@ -1,0 +1,9 @@
+# The editor site. certbot adds the 443 block and the redirect.
+server {
+    listen 80;
+    listen [::]:80;
+    server_name editor.surveyscriber.com;
+    limit_req_status 429;
+    server_tokens off;
+    include /etc/nginx/snippets/editor-locations.conf;
+}
