@@ -9,6 +9,7 @@ import { EditorSessionGuard, EditorSecurityHeadersInterceptor } from './editor.g
 import { EditorPhotosController } from './editor-photos.controller';
 import { ReportPhotosService } from './report-photos.service';
 import { ReportFilesService } from './report-files.service';
+import { OriginalSnapshotService } from './original-snapshot.service';
 import { EditorReviewController } from './editor-review.controller';
 import { ReviewService } from './review.service';
 import { FinalisationService } from './finalisation.service';
@@ -27,6 +28,7 @@ import { STORAGE_SERVICE } from '../media/storage/storage.interface';
     EditorSecurityHeadersInterceptor,
     ReportPhotosService,
     ReportFilesService,
+    OriginalSnapshotService,
     ReviewService,
     AiSuggestionService,
     FinalisationService,

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -19,6 +20,7 @@ import '../../../property_valuation/domain/valuation_answer_validator.dart';
 import '../../../ai/domain/services/ai_client.dart';
 import '../../../../../../../shared/services/pdf_upload_service.dart';
 import '../../../report_editing/data/desktop_edit_store.dart';
+import '../../../report_editing/data/report_document_uploader.dart';
 import '../../../report_editing/domain/report_blocks_mapper.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
@@ -41,6 +43,7 @@ class ExportService {
     this.piiRedactor,
     this.recommendationsDao,
     this.desktopEdits,
+    this.documentUploader,
   });
 
   final ReportDataService dataService;
@@ -60,6 +63,9 @@ class ExportService {
 
   /// The browser's edits from desktop editing, applied to the report before it is rendered.
   final DesktopEditStore? desktopEdits;
+
+  /// Stores the generated PDF/Word in the cloud as the original or final document (best effort).
+  final ReportDocumentUploader? documentUploader;
 
   /// Export an Inspection survey.
   Future<ExportResult> exportInspection(
@@ -531,6 +537,18 @@ class ExportService {
           AppLogger.w('Export', 'Failed to update remoteUrl: $e');
         }
       }
+    }
+
+    // The original (or, after finalising, the final) PDF/Word also goes to the cloud. It never holds up the export.
+    final uploader = documentUploader;
+    if (uploader != null) {
+      unawaited(uploader.afterExport(
+        surveyId: surveyId,
+        document: document,
+        bytes: generated.bytes,
+        fileName: outputPath.split(Platform.pathSeparator).last,
+        format: config.format == ExportFormat.pdf ? 'pdf' : 'docx',
+      ));
     }
 
     onProgress?.call(const ExportProgress(

@@ -39,6 +39,14 @@ class CloudReportInfo {
   final DateTime updatedAt;
 }
 
+/// A report document the cloud now holds.
+class StoredReportFile {
+  const StoredReportFile({required this.id, required this.sha256, required this.duplicate});
+  final String id;
+  final String sha256;
+  final bool duplicate;
+}
+
 class CloudPhoto {
   const CloudPhoto({required this.id, required this.fileName, required this.mimeType, required this.size, required this.caption, required this.sectionKey, required this.sortOrder, required this.deleted});
   final String id;
@@ -198,6 +206,13 @@ class ReportEditingApi {
       'content': sections,
     });
     return CloudReportInfo(version: b['version'] as int, status: 'DRAFT', updatedAt: DateTime.parse(b['updatedAt'] as String));
+  }
+
+  /// The original or final PDF/Word document of a report (Remote Editor v1.4). [state] is `ORIGINAL` or `FINAL`.
+  Future<StoredReportFile> uploadReportFile(String surveyId, {required String state, required List<int> bytes, required String fileName}) async {
+    final form = FormData.fromMap({'state': state, 'file': MultipartFile.fromBytes(bytes, filename: fileName)});
+    final b = await _call('POST', 'reports/$surveyId/files', data: form);
+    return StoredReportFile(id: b['id'] as String, sha256: b['sha256'] as String, duplicate: b['duplicate'] == true);
   }
 
   Future<EditLinkInfo> createLink(String surveyId) async {

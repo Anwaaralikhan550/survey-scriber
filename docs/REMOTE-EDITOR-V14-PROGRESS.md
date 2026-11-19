@@ -9,7 +9,7 @@ State at lock: backend with D1-D8 + valuation 17 Nov deployed to the live server
 |---|---|---|---|
 | R0 | DONE 19 Nov | see git log | plan locked, spec + client note copied to `docs/remote-editor-v14/`, data-mapping note, this file, memory |
 | R1 | DONE 19 Nov | see git log | `report_files` table (+ enums, partial unique indexes: one ORIGINAL per kind, one FINAL per cycle+kind; migration `20261119090000_report_files`, prisma diff clean); `StorageService.storeVerified` (temp file, fsync, rename, read back size + SHA-256) and `checksum` on the existing `LocalStorageService`; `ReportFilesService` + owner routes `POST/GET /reports/:id/files`, `GET /reports/:id/files/:fileId` (type decided from bytes, PDF must end with %%EOF, DOCX recognised by entry names, 60 MB limit `REPORT_FILE_MAX_MB`, ownership/admin only, checksum verified before every download, safe headers); error codes FILE_INVALID 422 / FILE_TOO_LARGE 413 / FILE_EXISTS 409. Tests: unit `report-file-content.spec.ts` (7), e2e `report-files.e2e-spec.ts` (12, uses the real PDF/Word files made by the app), all 9 report e2e suites 181/181, report-editing + media unit 71. No UI in this step, so no screenshots; the real generated PDF/Word round-trip byte for byte in the test |
-| R2 | TODO | | |
+| R2 | DONE 19 Nov | see git log | table `report_original_snapshots` (migration `20261119100000`): schema v1 JSON (survey header, sections, media + signatures metadata, tree/phrase-bank ids, generatedAt, appVersion), checksum = SHA-256 of the stored jsonb text computed by PostgreSQL, DB trigger: no UPDATE ever, DELETE only together with the report, no TRUNCATE; existing reports backfilled from version 1 (6 of 6 on the dev DB). Captured in the same transaction as the first `PUT /reports/:id/snapshot` (optional `treeVersionId`, `phraseBankVersionId`, `generatedAt`, `appVersion`); `GET /reports/:id/original` returns snapshot, `intact` (checksum recomputed), original files. Phone: `ReportDocumentUploader` after every export (snapshot first when the cloud has no report, then ORIGINAL pdf/docx while cloud version is 1, FINAL per edit cycle after finalising; remembered in `DesktopEditStore.files`; never blocks export; offline retried at next export). Tests: e2e `report-original.e2e-spec.ts` (11: capture, valuation, bad input, unchanged after desktop edit + later phone upload + approve/finalise/reopen, history v1 equals original, trigger refuses UPDATE/DELETE/TRUNCATE, tamper detected, cascade with the report, access control, files listed), all 10 report e2e suites 192/192; Flutter `report_document_uploader_test.dart` (11) + report_editing + report_export suites green. LIMITS: phone does not send tree/phrase-bank version ids yet (no simple accessor), so they are null; generatedAt = upload time unless sent |
 | R3 | TODO | | |
 | R4 | TODO | | |
 | R5 | TODO | | |
@@ -20,7 +20,7 @@ State at lock: backend with D1-D8 + valuation 17 Nov deployed to the live server
 | R10 | TODO | | |
 
 ## NEXT ACTION
-R2 (immutable original snapshot, original/final files from the phone). Resume from the first TODO row. NOTE for R9: nginx `client_max_body_size 13m` must be raised to 64m for `/api/v1/reports/*/files`.
+R3 (field-level audit before/after). Resume from the first TODO row. NOTE for R9: nginx `client_max_body_size 13m` must be raised to 64m for `/api/v1/reports/*/files`.
 
 ## Gotchas (carried over, plus new)
 - Local stack for tests: docker `ss_e2e_pg` :15432, DB `ss_desk` for backend e2e (`DATABASE_URL=postgresql://ss:ss_pw@127.0.0.1:15432/ss_desk?schema=public`), `npx jest --config ./test/jest-e2e.json report-`; editor test backend on :3097 + `EDITOR_API_TARGET=http://localhost:3097 npx vite preview` (:5174), Chrome scripts in `tmp/desktop-editing/` (`NODE_PATH="E:\survey-scriber\backend\node_modules;$(npm root -g)\@playwright\mcp\node_modules"`, `API=http://localhost:3097/api/v1`).
@@ -29,5 +29,6 @@ R2 (immutable original snapshot, original/final files from the phone). Resume fr
 - Server: ssh `-p 2222 -i ~/.ssh/nijahomzs naija@158.69.1.183`; deploy = upload source tgz + dist tgz to `~/deploy-backups`, back up, `sudo -n -u ubuntu /usr/local/bin/surveyscriber-deploy` (npm ci + migrate + build; build fails on dist permissions, so swap the prebuilt local dist), `sudo -n systemctl restart surveyscriber-backend`. ASK THE USER before any server change.
 
 ## Log
+- 19 Nov 2026: R2 done. Open point for R10: send tree + phrase-bank version ids from the phone (or fill the current published ones on the server).
 - 19 Nov 2026: R1 done. Hung e2e runs were caused by stale jest processes from earlier days (kill them, run jest with `--forceExit`).
 - 19 Nov 2026: plan written and locked, spec read in full, mapping done.

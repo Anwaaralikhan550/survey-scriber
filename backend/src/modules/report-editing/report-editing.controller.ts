@@ -11,6 +11,7 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { ReportEditingService, Owner } from './report-editing.service';
 import { ReportPhotosService } from './report-photos.service';
 import { ReportFilesService } from './report-files.service';
+import { OriginalSnapshotService } from './original-snapshot.service';
 import { RestoreVersionDto, UploadSnapshotDto } from './dto/editing.dto';
 import { AssignPhotosDto, ReviewActionDto, ReviewDecisionDto } from './dto/photos.dto';
 import { ReviewService } from './review.service';
@@ -30,6 +31,7 @@ export class ReportEditingController {
     private readonly review: ReviewService,
     private readonly finalisation: FinalisationService,
     private readonly files: ReportFilesService,
+    private readonly originals: OriginalSnapshotService,
   ) {}
 
   @Put(':id/snapshot')
@@ -93,6 +95,12 @@ export class ReportEditingController {
       ETag: `"${f.sha256}"`,
     });
     return new StreamableFile(createReadStream(f.path));
+  }
+
+  /** The original report as generated: snapshot, checksum, whether it is intact, and the original documents. */
+  @Get(':id/original')
+  original(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string) {
+    return this.originals.read(user, id);
   }
 
   @Get(':id/latest')

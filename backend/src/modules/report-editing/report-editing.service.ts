@@ -4,6 +4,7 @@ import { ActorType, AuditEntityType, EditLinkStatus, Prisma, ReportStatus, UserR
 import { Request } from 'express';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuditService } from '../audit/audit.service';
+import { OriginalSnapshotService } from './original-snapshot.service';
 import { ContentValidationError, ReportContent, cleanContent } from './report-content';
 import { Errors } from './editing.errors';
 import { newToken } from './token.util';
@@ -28,6 +29,7 @@ export class ReportEditingService {
     private readonly prisma: PrismaService,
     private readonly config: ConfigService,
     private readonly audit: AuditService,
+    private readonly originals: OriginalSnapshotService,
   ) {}
 
   private get linkTtlHours(): number {
@@ -76,7 +78,12 @@ export class ReportEditingService {
    * The phone uploads the structured report. First upload creates the report (version 1).
    * Later uploads must name the cloud version they were based on, so stale phone data never overwrites newer cloud edits.
    */
-  async uploadSnapshot(user: Owner, surveyId: string, dto: { baseVersion?: number; reportType: string; content: unknown }, req?: Request) {
+  async uploadSnapshot(
+    user: Owner,
+    surveyId: string,
+    dto: { baseVersion?: number; reportType: string; content: unknown; treeVersionId?: string; phraseBankVersionId?: string; generatedAt?: string; appVersion?: string },
+    req?: Request,
+  ) {
     const survey = await this.assertSurveyOwner(surveyId, user);
     let content: ReportContent;
     try {
@@ -100,6 +107,14 @@ export class ReportEditingService {
         });
         await tx.reportVersion.create({
           data: { reportId: surveyId, version: 1, content: content as unknown as Prisma.InputJsonValue, savedBy: `owner:${user.id}`, reason: 'SNAPSHOT' },
+        });
+        // The first upload is the original report: kept apart and never changed (spec v1.4 section 5.1).
+        await this.originals.capture(tx, {
+          reportId: surveyId,
+          userId: user.id,
+          reportType: dto.reportType,
+          content,
+          meta: { treeVersionId: dto.treeVersionId, phraseBankVersionId: dto.phraseBankVersionId, generatedAt: dto.generatedAt, appVersion: dto.appVersion },
         });
         return { version: created.version, updatedAt: created.updatedAt, created: true, invalidated: false };
       }

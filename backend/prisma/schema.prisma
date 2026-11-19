@@ -1170,6 +1170,7 @@ model Report {
   sessions EditorSession[]
   finalisations ReportFinalisation[]
   files         ReportFile[]
+  originalSnapshot ReportOriginalSnapshot?
 
   @@index([ownerUserId])
   @@index([status])
@@ -1250,6 +1251,28 @@ model ReportFile {
 
   @@index([reportId, state])
   @@map("report_files")
+}
+
+/// ReportOriginalSnapshot - the report exactly as the phone generated it (Remote Editor spec v1.4 sections 5.1 and 6.1).
+/// Written once when the report is first uploaded. A database trigger refuses every UPDATE, and a DELETE is only possible
+/// together with the report itself (retention purge). checksum = SHA-256 of snapshot::text, computed by PostgreSQL.
+model ReportOriginalSnapshot {
+  id                  String   @id @default(uuid()) @db.Uuid
+  reportId            String   @unique @map("report_id") @db.Uuid
+  schemaVersion       Int      @default(1) @map("schema_version")
+  surveyType          String   @map("survey_type") @db.VarChar(20)
+  treeVersionId       String?  @map("tree_version_id") @db.VarChar(100)
+  phraseBankVersionId String?  @map("phrase_bank_version_id") @db.VarChar(100)
+  generatedAt         DateTime @map("generated_at")
+  appVersion          String?  @map("app_version") @db.VarChar(50)
+  snapshot            Json     @db.JsonB
+  checksum            String   @db.VarChar(64)
+  createdBy           String   @map("created_by") @db.Uuid
+  createdAt           DateTime @default(now()) @map("created_at")
+
+  report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@map("report_original_snapshots")
 }
 
 /// EditLink - a bearer link to edit one report in the browser. Only the SHA-256 hash of the token is stored.
