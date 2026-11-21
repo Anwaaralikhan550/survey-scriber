@@ -97,7 +97,11 @@ export function usePhotos({ reportId, editor, readOnly }) {
   const run = useCallback(
     (id, kind, fn) => {
       mark(id, kind);
-      return guard(fn).finally(() => alive.current && mark(id, null));
+      // One at a time, in the order asked: each change reads the report version when it starts, after the one before
+      // has stored its new version. Two quick changes on different photos must not collide with each other (409).
+      const done = queue.current.then(() => guard(fn));
+      queue.current = done.catch(() => undefined);
+      return done.finally(() => alive.current && mark(id, null));
     },
     [guard],
   );

@@ -31,17 +31,17 @@ Test names below are the `it(...)` titles; the first words are enough to find th
 | Retention holds | Admin and Manager place and release; reason 3-500; audited; owner told | `report-retention` legal hold group; Flutter `report_retention_test.dart` |
 | Backups | 30-day rolling off-server encrypted; code only provides the policy text, the retention report and the old-dump list | `DEPLOY-NOTES.md` sections 5 and 6 |
 
-## Last full run (19 Nov 2026)
+## Last full run (21 Nov 2026, final, on the code that is live)
+
+Local stack: PostgreSQL 16 in Docker, backend on Node, Chrome, real nginx in Docker earlier (19 Nov). The same code is live on the server (checked 21 Nov: health, security headers, editor site, wrong-link answer, no token in the nginx log, backup decrypts).
 
 | Suite | Result |
 |---|---|
 | Backend unit (`npx jest src`) | 38 suites, 606 tests pass |
-| Backend e2e (`report-*`, 16 suites) | 301 tests; all pass. `report-load` is timing-sensitive: it can miss its 3 s limit when run beside other heavy jobs, and passes alone 5/5 (read 60 ms, save p95 248 ms) |
+| Backend e2e (`report-*`, 16 suites) | 301 tests; 300 pass in the full run, the one other is `report-load` (3 s limit, timing under load) which passes alone 3/3 |
 | Flutter, whole project (`flutter test`) | 5482 pass, 0 fail (4 skipped) |
-| Phrase portal (`node --test tool/phrase_portal/test.js`) | 36/36 |
-| Editor (`npm test`, build) | 10/10, built |
-| Editor behind real nginx (`p27_nginx.js`) | 40/40 |
-| Live security (`p25_security_live.js`, production-style limits, CORS, no secrets in the log) | 19/19 |
-| Chrome editor scripts (last run before R6-R9, editor code unchanged since R4) | p20 65/65, p21 49/49, p22 39/39, p23 46/46, p24 20/20, p26 17/17, p28 14/14, p29 19/19 |
+| Editor (`npm test`, build) | 0 fail, built |
+| Chrome editor scripts | p20 65/65, p21 49/49 (3 runs), p22 39/39, p23 46/46, p24 20/20, p26 17/17, p28 14/14, p29 19/19 |
 
-Backend e2e suites outside `report-*` (auth, audit-logs, invoices, config-categories, booking-change-requests, phrase-management, sync-e2e) do not compile on `import * as request from 'supertest'`. This is old and not caused by this work.
+Found and fixed in this run: two quick changes on different photos (for example two section moves) were sent at the same moment and the second got a false 409 "newer changes". The editor now sends photo changes one at a time (`usePhotos.js`). A failed run before the fix showed it; three clean runs after.
+Backend e2e suites outside `report-*` do not compile on `import * as request from 'supertest'`. This is old and not caused by this work.
