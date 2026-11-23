@@ -117,6 +117,55 @@ export function applyOps(content, ops) {
   return next;
 }
 
+/**
+ * After a conflict: the fields that I changed AND someone else changed to something different meanwhile.
+ * `base` is what I was editing from, `theirs` the newer server copy, `ops` my own pending operations.
+ * Putting my change on top of such a field would silently throw their text away, so the user must choose.
+ */
+export function findOverlaps(base, theirs, ops) {
+  const was = indexBlocks(base || []);
+  const now = indexBlocks(theirs || []);
+  const titleOf = new Map((theirs || []).map((s) => [s.id, s.title]));
+  const out = [];
+  for (const op of ops) {
+    if (op.op !== 'updateBlock') continue;
+    const a = was.get(op.blockId);
+    const b = now.get(op.blockId);
+    if (!a || !b) continue;
+    for (const [field, mine] of Object.entries(op.fields)) {
+      if (!same(a.block[field], b.block[field]) && !same(b.block[field], mine)) {
+        out.push({ blockId: op.blockId, sectionId: b.sectionId, sectionTitle: titleOf.get(b.sectionId) || '', field, type: b.block.type, mine, theirs: b.block[field] });
+      }
+    }
+  }
+  return out;
+}
+
+/**
+ * Apply the user's choice for each overlap: 'mine' keeps my value on top, 'theirs' drops my change to that field,
+ * 'both' (paragraph text only) keeps theirs and adds my wording as a new paragraph right after it.
+ */
+export function resolveOps(ops, overlaps, choices, newId = () => crypto.randomUUID()) {
+  const pick = (o) => choices[`${o.blockId}:${o.field}`] || 'both';
+  const extra = [];
+  const kept = [];
+  for (const op of ops) {
+    if (op.op !== 'updateBlock') {
+      kept.push(op);
+      continue;
+    }
+    const fields = { ...op.fields };
+    for (const o of overlaps.filter((x) => x.blockId === op.blockId)) {
+      const c = o.field === 'text' ? pick(o) : pick(o) === 'mine' ? 'mine' : 'theirs';
+      if (c === 'mine') continue;
+      delete fields[o.field];
+      if (c === 'both') extra.push({ op: 'addBlock', sectionId: o.sectionId, afterBlockId: o.blockId, block: { id: newId(), type: 'paragraph', text: o.mine } });
+    }
+    if (Object.keys(fields).length) kept.push({ ...op, fields });
+  }
+  return [...kept, ...extra];
+}
+
 /** Split a long change list into saves of at most `size` operations. */
 export function chunkOps(ops, size = MAX_OPS_PER_SAVE) {
   const out = [];

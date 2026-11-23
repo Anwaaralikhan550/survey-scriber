@@ -21,6 +21,14 @@ const REASONS = {
   'required block': 'a template field cannot be removed or moved',
 };
 const friendly = (r) => REASONS[r] || 'it no longer fits';
+/** Section navigation indicator (spec 8): complete, needs attention (nothing written / rating missing), or a rating 3. */
+export function sectionStatus(section) {
+  const written = (b) => (b.type === 'paragraph' || b.type === 'recommendation') && String(b.text ?? b.recommendation ?? '').trim() !== '';
+  if (!section.blocks.some(written)) return { kind: 'attention', mark: '!', label: 'Nothing written in this section yet' };
+  if (section.blocks.some((b) => b.type === 'rating' && !b.rating)) return { kind: 'attention', mark: '!', label: 'Condition rating not chosen yet' };
+  if (section.blocks.some((b) => b.type === 'rating' && b.rating === '3')) return { kind: 'urgent', mark: '3', label: 'Contains a condition rating of 3' };
+  return { kind: 'complete', mark: '✓', label: 'Complete' };
+}
 const fmt = (d) => new Date(d).toLocaleString(undefined, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 function remaining(to, now) {
   const ms = new Date(to).getTime() - now;
@@ -337,6 +345,14 @@ export default function Workspace({ initial, onExit }) {
               <li key={s.id}>
                 <button type="button" className={s.id === section.id ? 'is-current' : ''} aria-current={s.id === section.id ? 'true' : undefined} onClick={() => goSection(s.id)}>
                   <span>{s.title}</span>
+                  {(() => {
+                    const st = sectionStatus(s);
+                    return (
+                      <span className={`status status-${st.kind}`} title={st.label} role="img" aria-label={st.label}>
+                        {st.mark}
+                      </span>
+                    );
+                  })()}
                   <span className="count">{s.blocks.length}</span>
                   {touched.has(s.id) ? <span className="dot" title="Unsaved changes in this section" /> : null}
                 </button>
@@ -364,6 +380,7 @@ export default function Workspace({ initial, onExit }) {
           ) : (
             <>
           <h1>{section.title}</h1>
+          <p className="muted scope-note">You are editing the report's content, not a Word or PDF file. The final PDF and Word are made in the SurveyScriber app after approval.</p>
           {section.blocks.length === 0 ? <p className="muted">No content in this section yet.</p> : null}
           {section.blocks.map((b, i) => (
             <React.Fragment key={b.id}>
@@ -545,7 +562,7 @@ export default function Workspace({ initial, onExit }) {
         </Dialog>
       )}
 
-      {ed.conflict && !(dialog && dialog.type === 'noreapply') && (
+      {ed.conflict && !(dialog && (dialog.type === 'noreapply' || dialog.type === 'overlap')) && (
         <Dialog
           title="Someone saved a newer version"
           actions={
@@ -565,7 +582,7 @@ export default function Workspace({ initial, onExit }) {
                 autoFocus
                 onClick={async () => {
                   const r = await ed.reapplyMine();
-                  if (!r.ok) setDialog({ type: 'noreapply', reason: r.reason });
+                  if (!r.ok) setDialog(r.reason === 'overlap' ? { type: 'overlap', overlaps: r.overlaps, choices: {} } : { type: 'noreapply', reason: r.reason });
                 }}
               >
                 Reload and re-apply my changes
@@ -577,6 +594,67 @@ export default function Workspace({ initial, onExit }) {
             The report on the server is now at version {ed.conflict.serverVersion}. Nothing was overwritten, and your {ed.conflict.mine.length} unsaved change{ed.conflict.mine.length === 1 ? '' : 's'} {ed.conflict.mine.length === 1 ? 'is' : 'are'} still here.
           </p>
           <p className="muted">Re-apply puts your changes on top of the newer version. If a paragraph you edited was removed meanwhile, it will tell you.</p>
+        </Dialog>
+      )}
+
+      {dialog && dialog.type === 'overlap' && (
+        <Dialog
+          title="You both changed the same text"
+          onClose={() => setDialog(null)}
+          actions={
+            <>
+              <button type="button" className="secondary" onClick={() => setDialog(null)}>
+                Back
+              </button>
+              <button
+                type="button"
+                className="primary"
+                autoFocus
+                onClick={async () => {
+                  const r = await ed.reapplyMine(dialog.choices);
+                  if (r.ok) setDialog(null);
+                  else setDialog({ type: 'noreapply', reason: r.reason });
+                }}
+              >
+                Apply my choices
+              </button>
+            </>
+          }
+        >
+          <p>Someone saved a different wording for {dialog.overlaps.length === 1 ? 'a part' : 'parts'} you also changed. Nothing is overwritten until you choose.</p>
+          {dialog.overlaps.map((o) => {
+            const key = `${o.blockId}:${o.field}`;
+            const isText = o.field === 'text';
+            const choice = dialog.choices[key] || (isText ? 'both' : 'theirs');
+            const show = (v) => (typeof v === 'string' ? v : JSON.stringify(v));
+            const set = (v) => setDialog((d) => ({ ...d, choices: { ...d.choices, [key]: v } }));
+            return (
+              <fieldset className="overlap" key={key}>
+                <legend>{o.sectionTitle || 'Report'}</legend>
+                <div className="ai-compare">
+                  <section>
+                    <h3>Their version</h3>
+                    <p>{show(o.theirs)}</p>
+                  </section>
+                  <section>
+                    <h3>My version</h3>
+                    <p>{show(o.mine)}</p>
+                  </section>
+                </div>
+                <label>
+                  <input type="radio" name={key} checked={choice === 'theirs'} onChange={() => set('theirs')} /> Keep their version
+                </label>
+                <label>
+                  <input type="radio" name={key} checked={choice === 'mine'} onChange={() => set('mine')} /> Keep my version
+                </label>
+                {isText && (
+                  <label>
+                    <input type="radio" name={key} checked={choice === 'both'} onChange={() => set('both')} /> Keep both (mine is added as a new paragraph below theirs)
+                  </label>
+                )}
+              </fieldset>
+            );
+          })}
         </Dialog>
       )}
 

@@ -45,3 +45,19 @@ Local stack: PostgreSQL 16 in Docker, backend on Node, Chrome, real nginx in Doc
 
 Found and fixed in this run: two quick changes on different photos (for example two section moves) were sent at the same moment and the second got a false 409 "newer changes". The editor now sends photo changes one at a time (`usePhotos.js`). A failed run before the fix showed it; three clean runs after.
 Backend e2e suites outside `report-*` do not compile on `import * as request from 'supertest'`. This is old and not caused by this work.
+
+## Live editor walk-through, 23 Nov 2026 (real link on editor.surveyscriber.com, desktop, iPad, phone width)
+
+Found by hand on the live site and fixed, each with a check in `tmp/desktop-editing/p30_live_fixes.js` (32 checks) and `tool/desktop_editor/test/diff.test.js` (16 tests):
+
+| Finding | Fix |
+|---|---|
+| Redo did nothing (the text to come back to was read after Undo had already put the old text back) | Undo and Redo read their stacks from refs |
+| Two people changed the same paragraph: the second person's "re-apply" silently replaced the first person's text (spec 11: never silently overwrite) | A choice dialog shows both versions: keep theirs, keep mine, or keep both (mine added as a new paragraph). Nothing is applied until chosen |
+| After "keep theirs" the save chip stayed on "Unsaved changes" with nothing to save | State is Saved when no change is left to send |
+| On a phone the block toolbar pushed the page wider than the screen; the tall header covered a third of the screen | Toolbar wraps; header scrolls away on phones |
+| Spec 8 "completion and attention indicators" in section navigation, and "show that the browser edits structured content, not a Word file" were missing | Per-section indicator (complete / needs attention / rating 3) with text alternative; a note above every section |
+| Two quick photo changes could give a false 409 | Photo changes are sent one at a time (21 Nov) |
+
+Not testable on the live site without the owner login: finalise, reopen, owner approval, archive, retention (covered by the backend and app suites above). AI suggestions answer "not available right now" on live until a `GEMINI_API_KEY` is set on the server.
+

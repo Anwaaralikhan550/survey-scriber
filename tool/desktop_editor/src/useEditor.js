@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { api, ApiError } from './api.js';
-import { applyOps, chunkOps, clone, diffContent, normalise, same } from './diff.js';
+import { applyOps, chunkOps, clone, diffContent, findOverlaps, normalise, resolveOps, same } from './diff.js';
 
 const AUTOSAVE_MS = 2000;
 const RETRY_MS = 5000;
@@ -15,8 +15,14 @@ const HISTORY_LIMIT = 100;
 export function useEditor(initial) {
   const [server, setServer] = useState(() => ({ ...initial, content: normalise(initial.content) }));
   const [cur, setCurRaw] = useState(() => normalise(initial.content));
-  const [past, setPast] = useState([]);
-  const [future, setFuture] = useState([]);
+  // The undo and redo stacks are read from refs: an update function that read the current text lazily would see the
+  // text already put back by the undo itself, and redo would then go nowhere.
+  const [past, setPastState] = useState([]);
+  const [future, setFutureState] = useState([]);
+  const pastRef = useRef([]);
+  const futureRef = useRef([]);
+  const setPast = useCallback((v) => { pastRef.current = v; setPastState(v); }, []);
+  const setFuture = useCallback((v) => { futureRef.current = v; setFutureState(v); }, []);
   const [saveState, setSaveStateRaw] = useState(initial.readOnly ? 'readonly' : 'saved');
   const stateRef = useRef(initial.readOnly ? 'readonly' : 'saved');
   // The ref is updated at once, so a second save() fired in the same moment already sees e.g. 'conflict'.
@@ -62,7 +68,7 @@ export function useEditor(initial) {
       const now = Date.now();
       const merge = key && lastKey.current.key === key && now - lastKey.current.at < COALESCE_MS;
       lastKey.current = { key, at: now };
-      if (!merge) setPast((p) => [...p.slice(-(HISTORY_LIMIT - 1)), before]);
+      if (!merge) setPast([...pastRef.current.slice(-(HISTORY_LIMIT - 1)), before]);
       setFuture([]);
       setCurState(next);
     },
@@ -70,23 +76,23 @@ export function useEditor(initial) {
   );
 
   const undo = useCallback(() => {
-    setPast((p) => {
-      if (!p.length) return p;
-      setFuture((f) => [curRef.current, ...f]);
-      setCurState(p[p.length - 1]);
-      lastKey.current = { key: null, at: 0 };
-      return p.slice(0, -1);
-    });
+    const p = pastRef.current;
+    if (!p.length) return;
+    const present = curRef.current;
+    setPast(p.slice(0, -1));
+    setFuture([present, ...futureRef.current]);
+    setCurState(p[p.length - 1]);
+    lastKey.current = { key: null, at: 0 };
   }, []);
 
   const redo = useCallback(() => {
-    setFuture((f) => {
-      if (!f.length) return f;
-      setPast((p) => [...p, curRef.current]);
-      setCurState(f[0]);
-      lastKey.current = { key: null, at: 0 };
-      return f.slice(1);
-    });
+    const f = futureRef.current;
+    if (!f.length) return;
+    const present = curRef.current;
+    setFuture(f.slice(1));
+    setPast([...pastRef.current, present]);
+    setCurState(f[0]);
+    lastKey.current = { key: null, at: 0 };
   }, []);
 
   const fail = useCallback((e) => {
@@ -144,9 +150,9 @@ export function useEditor(initial) {
         const serverVersion = e.details?.serverVersion;
         try {
           const theirs = await loadLatest();
-          setConflict({ serverVersion: serverVersion ?? theirs.version, mine: ops, theirs });
+          setConflict({ serverVersion: serverVersion ?? theirs.version, mine: ops, theirs, base: base.content });
         } catch {
-          setConflict({ serverVersion, mine: ops, theirs: null });
+          setConflict({ serverVersion, mine: ops, theirs: null, base: base.content });
         }
       }
       if (next === 'readonly') {
@@ -208,21 +214,31 @@ export function useEditor(initial) {
     setSaveState(fresh.readOnly ? 'readonly' : 'saved');
   }, [loadLatest, setSaveState]);
 
-  /** After a conflict: put my own pending changes on top of the newer server content, if they still fit. */
-  const reapplyMine = useCallback(async () => {
-    if (!conflict) return { ok: false };
-    const theirs = conflict.theirs || (await loadLatest());
-    try {
-      const merged = normalise(applyOps(theirs.content, conflict.mine));
-      setServerNow({ ...theirs, content: normalise(theirs.content) });
-      setCurState(merged);
-      setConflict(null);
-      setSaveState('unsaved');
-      return { ok: true };
-    } catch (e) {
-      return { ok: false, reason: e.message };
-    }
-  }, [conflict, loadLatest, setSaveState]);
+  /**
+   * After a conflict: put my own pending changes on top of the newer server content, if they still fit.
+   * Where someone else changed the very same text meanwhile, nothing is overwritten silently: the first call answers
+   * { reason: 'overlap', overlaps } and the user's choices come back in `choices` (see resolveOps).
+   */
+  const reapplyMine = useCallback(
+    async (choices) => {
+      if (!conflict) return { ok: false };
+      const theirs = conflict.theirs || (await loadLatest());
+      try {
+        const overlaps = findOverlaps(conflict.base, theirs.content, conflict.mine);
+        if (overlaps.length && !choices) return { ok: false, reason: 'overlap', overlaps };
+        const ops = overlaps.length ? resolveOps(conflict.mine, overlaps, choices) : conflict.mine;
+        const merged = normalise(applyOps(theirs.content, ops));
+        setServerNow({ ...theirs, content: normalise(theirs.content) });
+        setCurState(merged);
+        setConflict(null);
+        setSaveState(diffContent(theirs.content, merged).length ? 'unsaved' : 'saved'); // nothing left to send when all my changes were set aside
+        return { ok: true };
+      } catch (e) {
+        return { ok: false, reason: e.message };
+      }
+    },
+    [conflict, loadLatest, setSaveState],
+  );
 
   /** A photo change moved the report to a new version; the text editor must save against that one. */
   const syncVersion = useCallback((version) => {

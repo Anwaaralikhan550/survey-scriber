@@ -70,7 +70,7 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .sections { position: sticky; top: 112px; max-height: calc(100vh - 128px); overflow: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
 .sections ul { list-style: none; margin: 0; padding: 0; }
 .sections li button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 10px; border: 0; border-radius: 8px; background: none; text-align: left; }
-.sections li button span:first-child { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.sections li button span:first-child { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sections li button:hover { background: var(--brand-soft); }
 .sections li button.is-current { background: var(--brand); color: var(--brand-ink); }
 .count { font-size: 12px; opacity: 0.75; }
@@ -129,7 +129,15 @@ td input { width: 100%; border: 0; padding: 6px 8px; background: transparent; }
   .sections { position: static; max-height: none; padding: 0; border: 0; background: none; }
   .sections ul { display: none; }
   .section-select { display: block; }
-  .pane { padding: 14px; }
+  .pane { padding: 14px; min-width: 0; }
+}
+/* Phones: the block toolbar wraps under its label instead of pushing the page wider than the screen */
+@media (max-width: 560px) {
+  .block > header { flex-wrap: wrap; row-gap: 6px; }
+  .block-tools { flex-wrap: wrap; margin-left: 0; width: 100%; }
+  .block-tools select { flex: 1 1 120px; max-width: none; min-width: 0; }
+  .tabs button { padding: 8px 9px; }
+  .topbar { position: static; } /* the header is tall on a phone: it scrolls away instead of covering a third of the screen */
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
@@ -228,3 +236,18 @@ td input { width: 100%; border: 0; padding: 6px 8px; background: transparent; }
 .name-form .help.bad { color: #b3261e; }
 .name-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
 .name-chip { max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Conflict: both people changed the same text */
+.overlap { border: 1px solid var(--line); border-radius: 8px; margin: 12px 0; padding: 8px 12px 10px; }
+.overlap legend { font-weight: 700; color: var(--brand); padding: 0 6px; }
+.overlap label { display: flex; gap: 8px; align-items: flex-start; margin-top: 6px; }
+.overlap .ai-compare p { white-space: pre-wrap; overflow-wrap: anywhere; margin: 4px 0 0; }
+.overlap .ai-compare h3 { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+
+/* Section navigation indicators and the scope note */
+.scope-note { margin: -4px 0 12px; font-size: 13px; }
+.sections li button .status { flex: none; width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 11px; font-weight: 700; line-height: 1; }
+.status-complete { background: #e3f3e6; color: #1e6b2c; }
+.status-attention { background: #fff0d6; color: #8a5200; }
+.status-urgent { background: #fde3e3; color: #a12020; }
+.sections li button.is-current .status { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85); }

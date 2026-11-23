@@ -85,4 +85,4 @@ async function enterEditor(page, name = 'Test Reviewer') {
   if (await field.count()) await field.fill(name);
   await btn.click();
 }
-module.exports = { enterEditor, prisma, owner, call, seed, newLink, API, gate };
+module.exports = { sampleReport, enterEditor, prisma, owner, call, seed, newLink, API, gate };

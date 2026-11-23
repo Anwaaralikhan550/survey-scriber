@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
-import { diffContent, applyOps, chunkOps, normalise, clone } from '../src/diff.js';
+import { diffContent, applyOps, chunkOps, normalise, clone, findOverlaps, resolveOps } from '../src/diff.js';
 
 const id = () => randomUUID();
 const mk = (n, extra = {}) => ({ id: id(), type: 'paragraph', text: `p${n}`, order: 0, ...extra });
@@ -126,4 +126,76 @@ test('re-applying my own changes on newer server content (conflict rebase)', () 
   const gone = clone(base);
   gone[0].blocks.splice(0, 1); // colleague deleted the paragraph I edited
   assert.throws(() => applyOps(gone, ops));
+});
+
+// ---- two people changed the same paragraph (conflict re-apply must never throw their text away silently)
+function conflictCase() {
+  const base = report();
+  const mine = clone(base);
+  mine[0].blocks[0].text = 'my wording';
+  mine[0].blocks[1].text = 'my other change';
+  const theirs = clone(base);
+  theirs[0].blocks[0].text = 'their wording';
+  return { base, mine, theirs, ops: diffContent(base, mine) };
+}
+
+test('overlap: the same paragraph changed by both is found, a paragraph only I changed is not', () => {
+  const { base, theirs, ops } = conflictCase();
+  const found = findOverlaps(base, theirs, ops);
+  assert.equal(found.length, 1);
+  assert.equal(found[0].blockId, base[0].blocks[0].id);
+  assert.equal(found[0].mine, 'my wording');
+  assert.equal(found[0].theirs, 'their wording');
+  assert.equal(found[0].sectionTitle, 'Roof');
+});
+
+test('overlap: both changed it to the same text is not a conflict; a different paragraph is not a conflict', () => {
+  const { base, ops } = conflictCase();
+  const same1 = clone(base);
+  same1[0].blocks[0].text = 'my wording';
+  assert.equal(findOverlaps(base, same1, ops).length, 0);
+  const other = clone(base);
+  other[0].blocks[2].text = 'a different paragraph changed';
+  assert.equal(findOverlaps(base, other, ops).length, 0);
+});
+
+test('overlap: keep theirs drops my change to that paragraph only', () => {
+  const { base, theirs, ops } = conflictCase();
+  const found = findOverlaps(base, theirs, ops);
+  const merged = normalise(applyOps(theirs, resolveOps(ops, found, { [`${found[0].blockId}:text`]: 'theirs' })));
+  assert.equal(merged[0].blocks[0].text, 'their wording');
+  assert.equal(merged[0].blocks[1].text, 'my other change');
+});
+
+test('overlap: keep mine puts my wording on top', () => {
+  const { base, theirs, ops } = conflictCase();
+  const found = findOverlaps(base, theirs, ops);
+  const merged = normalise(applyOps(theirs, resolveOps(ops, found, { [`${found[0].blockId}:text`]: 'mine' })));
+  assert.equal(merged[0].blocks[0].text, 'my wording');
+});
+
+test('overlap: keep both keeps their paragraph and adds mine right after it (the default, nothing is lost)', () => {
+  const { base, theirs, ops } = conflictCase();
+  const found = findOverlaps(base, theirs, ops);
+  const merged = normalise(applyOps(theirs, resolveOps(ops, found, {}, () => 'new-id')));
+  assert.equal(merged[0].blocks[0].text, 'their wording');
+  assert.equal(merged[0].blocks[1].id, 'new-id');
+  assert.equal(merged[0].blocks[1].text, 'my wording');
+  assert.equal(merged[0].blocks[2].text, 'my other change');
+});
+
+test('overlap: a rating changed by both offers mine or theirs only (no "both")', () => {
+  const base = report();
+  const ratingId = base[1].blocks[1].id;
+  const mine = clone(base);
+  mine[1].blocks[1].rating = '3';
+  const theirs = clone(base);
+  theirs[1].blocks[1].rating = '1';
+  const ops = diffContent(base, mine);
+  const found = findOverlaps(base, theirs, ops);
+  assert.equal(found[0].field, 'rating');
+  const kept = normalise(applyOps(theirs, resolveOps(ops, found, {})));
+  assert.equal(kept[1].blocks[1].rating, '1');
+  const mineWins = normalise(applyOps(theirs, resolveOps(ops, found, { [`${ratingId}:rating`]: 'mine' })));
+  assert.equal(mineWins[1].blocks[1].rating, '3');
 });
