@@ -64,10 +64,28 @@
     return out;
   }
 
+  /**
+   * What people type and what is printed rarely agree letter for letter ("ensuite bathrooms" / "Ensuite bathroom(s)",
+   * "1900-1929" / "1900 – 1929"), so both sides are put in one plain form before they are compared.
+   */
+  function plain(text) {
+    return String(text || '')
+      .toLowerCase()
+      .replace(/\(s\)/g, 's')
+      .replace(/[()[\]]/g, ' ')
+      .replace(/[‐-―-]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .split(' ')
+      .map((w) => (w.length > 3 && w.endsWith('s') ? w.slice(0, -1) : w))
+      .join(' ');
+  }
+  const hasText = (haystack, needle) => plain(haystack).includes(needle);
+
   function matchesTicks(entry, query) {
-    const q = String(query || '').trim().toLowerCase();
+    const q = plain(query);
     if (!q) return true;
-    return entry.path.toLowerCase().includes(q) || entry.ticks.some((f) => String(f.label || '').toLowerCase().includes(q));
+    return hasText(entry.path, q) || entry.ticks.some((f) => hasText(f.label, q));
   }
 
   const wordsOf = (field, value) => (
@@ -78,13 +96,19 @@
   const isHidden = (field, value) => (field.hiddenOptions || []).includes(value);
 
   function matches(entry, query) {
-    const q = String(query || '').trim().toLowerCase();
+    const q = plain(query);
     if (!q) return true;
-    if (entry.path.toLowerCase().includes(q)) return true;
-    if (String(entry.field.label || '').toLowerCase().includes(q)) return true;
-    return entry.field.options.some(
-      (o) => o.toLowerCase().includes(q) || wordsOf(entry.field, o).toLowerCase().includes(q),
-    );
+    if (hasText(entry.path, q)) return true;
+    if (hasText(entry.field.label, q)) return true;
+    return entry.field.options.some((o) => hasText(o, q) || hasText(wordsOf(entry.field, o), q));
+  }
+
+  /** How many dropdown lists and tick-box screens answer a search, so a search never looks empty because of the other tab. */
+  function countMatches(tree, query) {
+    return {
+      dropdowns: dropdowns(tree).filter((e) => matches(e, query)).length,
+      ticks: tickLists(tree).filter((e) => matchesTicks(e, query)).length,
+    };
   }
 
   /** Change an option's words. Going back to the original words removes the rename. */
@@ -430,7 +454,7 @@
     !!(rules && rules[screenId] && rules[screenId][fieldId]);
 
   return {
-    TREE_TYPE, FIELD_TYPES, clone, nodesOf, pathOf, dropdowns, tickLists, matchesTicks, wordsOf, isHidden, matches, rename, setHidden,
+    TREE_TYPE, FIELD_TYPES, clone, nodesOf, pathOf, dropdowns, tickLists, matchesTicks, wordsOf, isHidden, matches, countMatches, rename, setHidden,
     addOption, problemWith, problems, treeChanges, sameTree, pickedSentence, fieldPicksSentences,
     stats, rowsOf, addNode, descendantIds, removeNode, splitOptions, conditionKeys, placeholdersIn,
     dependentsOf, fieldProblem, treeProblems, applyField, newField, searchNodes,

@@ -4062,6 +4062,109 @@
       "allowedTokens": [
         "FREE_TEXT"
       ]
+    },
+    "VAL_N17_0001": {
+      "screenId": "*",
+      "text": "The property is served by an [free text] heating system.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0002": {
+      "screenId": "*",
+      "text": "The property is served by an [free text] heating system with [free text] fuel storage tank(s).",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0003": {
+      "screenId": "*",
+      "text": "The property is served by an [free text] heating system located at the [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0004": {
+      "screenId": "*",
+      "text": "The property is served by an [free text] heating system with [free text] fuel storage tank(s) located at the [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0005": {
+      "screenId": "*",
+      "text": "The meter unit is dated.",
+      "allowedTokens": []
+    },
+    "VAL_N17_0006": {
+      "screenId": "*",
+      "text": "The property has been extended in [number] to provide [free text] accommodation.",
+      "allowedTokens": [
+        "FREE_TEXT",
+        "NUMBER"
+      ]
+    },
+    "VAL_N17_0007": {
+      "screenId": "*",
+      "text": "The property has been extended in [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_N17_0008": {
+      "screenId": "*",
+      "text": "The flat roof covering is formed in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0009": {
+      "screenId": "*",
+      "text": "The other roof covering is formed in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0010": {
+      "screenId": "*",
+      "text": "[free text] covering is formed in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17_0011": {
+      "screenId": "*",
+      "text": "The rainwater goods comprise [free text], and associated fittings.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17b_0001": {
+      "screenId": "*",
+      "text": "The inspection of the grounds was visual only. Underground services, buried structures, and concealed defects could not be inspected or confirmed as part of this inspection.",
+      "allowedTokens": []
+    },
+    "VAL_N17b_0002": {
+      "screenId": "*",
+      "text": "No inspection restrictions: There were no unusual restrictions affecting my inspection of the grounds within the apparent ownership of the property.",
+      "allowedTokens": []
+    },
+    "VAL_N17b_0003": {
+      "screenId": "*",
+      "text": "Restricted access: Access to the rear or external elevations of the property was not available. Consequently, I was unable to inspect or comment on the condition or composition of the rear grounds. Comments are limited to those external areas that were visible and accessible at the time of the inspection.",
+      "allowedTokens": []
+    },
+    "VAL_N17b_0004": {
+      "screenId": "*",
+      "text": "The reinstatement cost of your home represents the estimated cost of completely rebuilding the property if it is destroyed, for example, by fire. This figure differs from the market value of the property, as it relates solely to the cost of materials and labour required to reconstruct the building to its current form. The estimated reinstatement cost for this property is [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N17b_0005": {
+      "screenId": "*",
+      "text": "The reinstatement cost exceeds the purchase price; this is not unusual and does not indicate an error.",
+      "allowedTokens": []
     }
   }
 }

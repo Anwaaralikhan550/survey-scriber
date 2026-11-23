@@ -43,7 +43,7 @@ echo "[3/3] upload -> $SSH_USER@$SSH_HOST:$WEB_ROOT"
 SSH=(ssh -p "$SSH_PORT" -i "$SSH_KEY" -o IdentitiesOnly=yes -o BatchMode=yes)
 "${SSH[@]}" "$SSH_USER@$SSH_HOST" "mkdir -p '$WEB_ROOT/assets/banks'"
 scp -r -P "$SSH_PORT" -i "$SSH_KEY" -o IdentitiesOnly=yes -o BatchMode=yes \
-  "$DIST"/*.html "$DIST"/*.js "$DIST"/*.css "$DIST"/BUILD \
+  "$DIST"/*.html "$DIST"/*.js "$DIST"/*.css "$DIST"/*.png "$DIST"/BUILD \
   "$SSH_USER@$SSH_HOST:$WEB_ROOT/"
 if compgen -G "$DIST/pages/*.js" >/dev/null; then
   "${SSH[@]}" "$SSH_USER@$SSH_HOST" "mkdir -p '$WEB_ROOT/pages'"

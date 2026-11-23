@@ -19,7 +19,7 @@ function Shell({ children }) {
     <div className="landing">
       <div className="card">
         <div className="brand">
-          <span className="logo" aria-hidden="true">S</span>
+          <img className="logo" src="/logo.png" width="32" height="32" alt="" />
           <span>SurveyScriber</span>
         </div>
         {children}

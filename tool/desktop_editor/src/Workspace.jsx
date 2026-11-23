@@ -270,7 +270,7 @@ export default function Workspace({ initial, onExit }) {
     <div className="workspace">
       <header className="topbar">
         <div className="brand-mini" aria-label="SurveyScriber">
-          <span className="logo" aria-hidden="true">S</span>
+          <img className="logo" src="/logo.png" width="32" height="32" alt="" />
         </div>
         <div className="title">
           <strong>{server.property?.jobRef || 'Report'}</strong>

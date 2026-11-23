@@ -23,6 +23,7 @@ code{font-family:var(--mono);font-size:.92em;background:var(--accent-soft);color
 .logo{display:flex;align-items:center;gap:10px}
 .logo-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:18px;
   background:linear-gradient(135deg,#4aa3e8,#1f6fb2);color:#fff;box-shadow:0 4px 12px rgba(31,111,178,.35)}
+.logo-img{width:36px;height:36px;border-radius:50%;background:#fff;object-fit:cover;flex:none}
 .logo-word{font-weight:700;font-size:17px;letter-spacing:-.01em}
 .logo-dark .logo-word{color:var(--navy)} .logo-light .logo-word{color:#fff}
 
