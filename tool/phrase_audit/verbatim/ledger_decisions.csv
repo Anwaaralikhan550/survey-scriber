@@ -646,3 +646,10 @@ e55e476387,ACCEPT,"Client 13 Nov 2026 (file 6 answers): Floor Vibration rewritte
 a0a51e88a6,ACCEPT,"Client 13 Nov 2026 (file 6 answers): Floor Vibration rewritten by the client with locations; his sentence ends at 'attack'"
 62d9d088de,ACCEPT,"Client 13 Nov 2026 (file 6 answers): Floor Vibration rewritten by the client with locations; his sentence ends at 'attack'"
 54b855ccdf,ACCEPT,"Client 13 Nov 2026 (file 6 answers): Cellar sentences say cellar only; the PDF cellar-or-basement wording is kept for Basement"
+8b5e5fc419,ACCEPT,superseded by the client's own later edit: "natural slates / artificial slates" (client file 6 N3, 12 Nov 2026; commit 1f4677b)
+d47153964b,ACCEPT,superseded by the client's own later edit: Sill Defect words "inadequate, poorly installed, poorly drained, cracked, defective" (client file 5, 11 Nov 2026; commit 1c18aa9)
+eaa726c31b,ACCEPT,superseded by the client's own later edit: "replacement" is its own option and is not in the Description list (client file 6 N15; commit 034fb7c)
+cffb83972a,ACCEPT,superseded by the client's own later edit: condensation room list prints without "area(s)" (client file 6 N9-N10; commit 094edb2)
+18c124f06d,ACCEPT,superseded by the client's own later edit: boiler location reads "the kitchen, the utility room, the bedroom, under the stairs, the garage" (client file 6 N7-N8; commit 7fca348)
+84f651e2b9,ACCEPT,removed at the client's request: Shared Access keeps only the Shared areas capture; shared garden and communal surface/fence fields are out (client file 6 N18; commit d557633)
+6dd65085eb,ACCEPT,removed at the client's request: Shared Access keeps only the Shared areas capture; shared garden and communal surface/fence fields are out (client file 6 N18; commit d557633)

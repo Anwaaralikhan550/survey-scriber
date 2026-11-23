@@ -10,7 +10,7 @@ Branch `feature/verbatim-completion` (not merged to `main`). Source of truth: `S
 | Ledger (every PDF sentence, one row each) | 1806 rows: 1346 EXACT, 3 TOKENISED, 13 ACCEPT (each with a written reason in `verbatim/ledger_decisions.csv`), 1 QUERY, 0 UNRESOLVED prose rows; 443 menu/directive rows all decided | `python3 tool/phrase_audit/verbatim/ledger.py --check` |
 | T1 forward (PDF → bank) | 1349 EXACT/TOKENISED rows, 0 missing from their bank key | `python3 tool/phrase_audit/verbatim/gates.py` |
 | T2 reverse (bank → PDF) | 0 sentences in referenced bank keys that are not PDF text (4 porch fixture keys listed in `verbatim/approved_extras.csv`) | same |
-| T3 option lists | 406 option-list rows verified by generated rule tests, 0 unverified | ledger.py |
+| T3 option lists | 399 option-list rows verified by generated rule tests; the other 7 were reviewed by hand and are the client's own later edits or removals (11-12 Nov 2026, each with its commit in `verbatim/ledger_decisions.csv`), 0 unverified | ledger.py |
 | T5 emission | one generated test group per rule (screen + bank sentence exist, every option emits the exact sentence, several choices join, nothing chosen emits nothing) | `flutter test test/features/property_inspection/domain/inspection_verbatim_spec_test.dart` |
 | T6 end to end | the real engine → ReportBuilder path is dumped with one positive option per field; remaining flagged sentences are token-filled versions of PDF option lists or test filler | `flutter test test/phrase_audit/verbatim/t6_report_dump_test.dart`, then `python3 tool/phrase_audit/verbatim/t6check.py` |
 | T7 coverage | 1361 ledger sentences with a bank key, 0 whose key is missing or never referenced by code | gates.py |

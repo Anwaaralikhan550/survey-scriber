@@ -405,3 +405,31 @@ test('an edited bank round-trips through JSON unchanged apart from the edit (pub
   delete back[key]; delete raw[key];
   assert.deepStrictEqual(back, raw);
 });
+
+test('search finds what people mean: (s), plurals, dashes, and says when the other tab has the answer', () => {
+  const TLs = require('./public/tree-logic.js');
+  const entry = { path: 'Inside > Bathroom', ticks: [{ label: 'Ensuite bathroom(s)' }, { label: 'Shower room(s)' }, { label: '1900 – 1929' }, { label: 'Natural slate' }] };
+  for (const q of ['ensuite bathrooms', 'ensuite bathroom', 'shower rooms', '1900-1929', '1900 - 1929', 'natural slates', 'NATURAL  SLATE']) {
+    assert.ok(TLs.matchesTicks(entry, q), q);
+  }
+  assert.ok(!TLs.matchesTicks(entry, 'hedges'));
+  const field = { id: 'f', label: 'Roof cover', type: 'dropdown', options: ['Natural slate', 'Clay tiles'] };
+  assert.ok(TLs.matches({ path: 'A > B', field }, 'natural slates'));
+  assert.ok(!TLs.matches({ path: 'A > B', field }, 'hedges'));
+});
+
+test('both real trees: every option word of the client lists is found in one tab or the other', () => {
+  const TLs = require('./public/tree-logic.js');
+  const val = load('assets/property_valuation/valuation_tree.json');
+  // Words from the client's 13 Nov valuation file, as typed.
+  const words = ['clay tiles', 'fibre cement slates', 'asbestos cement', 'cast iron', 'cavity brick', 'beam and block',
+    'precast concrete panels', 'ensuite bathrooms', 'shower rooms', 'other garages', 'blocked gullies', 'combination boiler',
+    'sealed boiler system', 'in a communal cupboard', 'under the stairs', 'summer house', 'lath and plaster', 'granite', 'corian'];
+  const missing = words.filter((w) => {
+    const n = TLs.countMatches(val, w);
+    return n.dropdowns + n.ticks === 0;
+  });
+  assert.deepStrictEqual(missing, []);
+  const n = TLs.countMatches(val, 'clay tiles');
+  assert.ok(n.ticks > 0 || n.dropdowns > 0);
+});

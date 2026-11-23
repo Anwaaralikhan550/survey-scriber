@@ -7,7 +7,7 @@
 (function () {
   const TL = window.TreeLogic;
   const PAGE_SIZE = 20;
-  const view = { box: null, list: null, bar: null, query: '', page: 1, changedOnly: false, kind: 'dropdowns' };
+  const view = { box: null, list: null, bar: null, query: '', page: 1, changedOnly: false, kind: 'dropdowns', showKind: null };
 
   const data = () => SS.treeData.store;
 
@@ -143,6 +143,28 @@
     ]);
   }
 
+  const put = (...nodes) => view.list.replaceChildren(...nodes.filter(Boolean));
+
+  /** A search only looks at the open tab; say so when the other tab has answers, and offer to go there. */
+  function otherTabHint() {
+    if (!view.query.trim()) return null;
+    const found = TL.countMatches(data().tree, view.query);
+    const here = view.kind === 'ticks';
+    const there = here ? found.dropdowns : found.ticks;
+    if (!there) return null;
+    const where = here ? 'Dropdown lists' : 'Tick boxes';
+    const what = here ? (there === 1 ? 'list' : 'lists') : (there === 1 ? 'tick-box screen' : 'tick-box screens');
+    const go = SS.button('Show in ' + where, () => {
+      view.kind = here ? 'dropdowns' : 'ticks';
+      view.page = 1;
+      view.showKind();
+      renderList();
+    });
+    const note = SS.el('div', 'alert warn option-hint', [SS.el('span', '', 'Also found in ' + where + ': ' + there + ' ' + what + '. '), go]);
+    note.setAttribute('role', 'status');
+    return note;
+  }
+
   function renderTicks() {
     const was = view.changedOnly ? originalLabels() : null;
     const all = TL.tickLists(data().tree).filter((e) => TL.matchesTicks(e, view.query)
@@ -151,13 +173,14 @@
     if (view.page > pages) view.page = pages;
     const shown = all.slice((view.page - 1) * PAGE_SIZE, view.page * PAGE_SIZE);
     if (all.length === 0) {
-      view.list.replaceChildren(SS.emptyBox(
+      put(SS.emptyBox(
         view.changedOnly ? 'No changes yet' : 'No tick boxes match',
         view.changedOnly ? 'Tick boxes you change will show here.' : 'Try another word.',
-      ));
+      ), otherTabHint());
       return;
     }
-    view.list.replaceChildren(
+    put(
+      otherTabHint(),
       ...shown.map(tickCard),
       SS.pager(view.page, PAGE_SIZE, all.length, (p) => { view.page = p; renderList(); document.getElementById('pageView').scrollTop = 0; }),
     );
@@ -174,13 +197,14 @@
     if (view.page > pages) view.page = pages;
     const shown = all.slice((view.page - 1) * PAGE_SIZE, view.page * PAGE_SIZE);
     if (all.length === 0) {
-      view.list.replaceChildren(SS.emptyBox(
+      put(SS.emptyBox(
         view.changedOnly ? 'No changes yet' : 'No list matches',
         view.changedOnly ? 'Lists you change will show here.' : 'Try another word.',
-      ));
+      ), otherTabHint());
       return;
     }
-    view.list.replaceChildren(
+    put(
+      otherTabHint(),
       ...shown.map(fieldCard),
       SS.pager(view.page, PAGE_SIZE, all.length, (p) => { view.page = p; renderList(); document.getElementById('pageView').scrollTop = 0; }),
     );
@@ -223,6 +247,7 @@
       );
     }
     showKind();
+    view.showKind = showKind;
     view.box.replaceChildren(
       view.bar,
       intro,
