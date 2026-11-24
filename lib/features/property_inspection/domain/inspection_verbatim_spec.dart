@@ -31,6 +31,7 @@ class VerbatimToken {
     this.prefixKeys = const {},
     this.fallback,
     this.joint,
+    this.article = false,
   });
 
   /// Placeholder in the bank sentence, e.g. `{CS_STACK_CONSTRUCTION}`.
@@ -84,6 +85,9 @@ class VerbatimToken {
   /// are printed in front of them instead of joined with "and":
   /// "replacement PVCu", not "replacement and PVCu".
   final Set<String> prefixKeys;
+
+  /// Put "a" or "an" in front of the typed words ("a games room", "an office annex").
+  final bool article;
 }
 
 /// One approved sentence and where its values come from.
@@ -10448,24 +10452,14 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenAny: [['actv_h2_shed_cond', 'Reasonable'], ['actv_h2_shed_cond', 'Fair'], ['actv_h2_shed_cond', 'Poor'], ['actv_h2_shed_cond', 'Very poor']],
   ),
   VerbatimRule(
-    'h2_ob',
-    'activity_grounds_other_large_outbuildings',
+    'h2_ob_large_shed',
+    'activity_grounds_other_large_outbuildings__large_shed',
     '{H_OTHER}',
     '{H2_OUTBUILDING}',
     [
       VerbatimToken(
         '{H2_OB_TYPE}',
-        options: {
-          'h2_ob_0_large_shed': 'large shed',
-          'h2_ob_0_workshop': 'workshop',
-          'h2_ob_0_annex': 'annex',
-          'h2_ob_0_summer_house': 'summer house',
-          'h2_ob_0_office': 'office',
-          'h2_ob_0_studio': 'studio',
-        },
-        otherCheckbox: 'h2_ob_0_other',
-        otherText: 'h2_ob_0_other_text',
-        pdfOptions: ['large shed', 'workshop', 'annex', 'summer house', 'office', 'studio'],
+        constant: 'a large shed',
       ),
     ],
     pdf:
@@ -10474,8 +10468,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
-    'h2_ob_cons',
-    'activity_grounds_other_large_outbuildings',
+    'h2_ob_cons_large_shed',
+    'activity_grounds_other_large_outbuildings__large_shed',
     '{H_OTHER}',
     '{H2_OB_CONSTRUCTION}',
     [
@@ -10501,8 +10495,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
-    'h2_ob_roof',
-    'activity_grounds_other_large_outbuildings',
+    'h2_ob_roof_large_shed',
+    'activity_grounds_other_large_outbuildings__large_shed',
     '{H_OTHER}',
     '{H2_OB_ROOF}',
     [
@@ -10538,8 +10532,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
-    'h2_ob_floor',
-    'activity_grounds_other_large_outbuildings',
+    'h2_ob_floor_large_shed',
+    'activity_grounds_other_large_outbuildings__large_shed',
     '{H_OTHER}',
     '{H2_OB_FLOOR}',
     [
@@ -10562,8 +10556,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
-    'h2_ob_doors',
-    'activity_grounds_other_large_outbuildings',
+    'h2_ob_doors_large_shed',
+    'activity_grounds_other_large_outbuildings__large_shed',
     '{H_OTHER}',
     '{H2_OB_DOORS}',
     [
@@ -10585,8 +10579,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
-    'h2_ob_cond',
-    'activity_grounds_other_large_outbuildings',
+    'h2_ob_cond_large_shed',
+    'activity_grounds_other_large_outbuildings__large_shed',
     '{H_OTHER}',
     '{H2_OB_CONDITION}',
     [
@@ -10605,8 +10599,951 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenAny: [['actv_h2_ob_cond', 'Reasonable'], ['actv_h2_ob_cond', 'Fair'], ['actv_h2_ob_cond', 'Poor'], ['actv_h2_ob_cond', 'Very poor']],
   ),
   VerbatimRule(
-    'h2_ob_no_defects',
-    'activity_grounds_other_large_outbuildings',
+    'h2_ob_no_defects_large_shed',
+    'activity_grounds_other_large_outbuildings__large_shed',
+    '{H_OTHER}',
+    '{H2_OB_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_ob_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_workshop',
+    'activity_grounds_other_large_outbuildings__workshop',
+    '{H_OTHER}',
+    '{H2_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_OB_TYPE}',
+        constant: 'a workshop',
+      ),
+    ],
+    pdf:
+        'Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).',
+    whenField: 'cb_h2_h2_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cons_workshop',
+    'activity_grounds_other_large_outbuildings__workshop',
+    '{H_OTHER}',
+    '{H2_OB_CONSTRUCTION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONSTRUCTION}',
+        options: {
+          'h2_ob_cons_0_bricks': 'bricks',
+          'h2_ob_cons_0_blocks': 'blocks',
+          'h2_ob_cons_0_timber': 'timber',
+          'h2_ob_cons_0_steel': 'steel',
+          'h2_ob_cons_0_prefabricated_concrete': 'prefabricated concrete',
+          'h2_ob_cons_0_aluminium': 'aluminium',
+          'h2_ob_cons_0_composite_boards': 'composite boards',
+        },
+        otherCheckbox: 'h2_ob_cons_0_other',
+        otherText: 'h2_ob_cons_0_other_text',
+        pdfOptions: ['bricks', 'blocks', 'timber', 'steel', 'prefabricated concrete', 'aluminium', 'composite boards'],
+      ),
+    ],
+    pdf:
+        'Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.',
+    whenField: 'cb_h2_h2_ob_cons',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_roof_workshop',
+    'activity_grounds_other_large_outbuildings__workshop',
+    '{H_OTHER}',
+    '{H2_OB_ROOF}',
+    [
+      VerbatimToken(
+        '{H2_OB_ROOF}',
+        options: {
+          'h2_ob_roof_0_pitched': 'pitched',
+          'h2_ob_roof_0_flat': 'flat',
+          'h2_ob_roof_0_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h2_ob_roof_0_other',
+        otherText: 'h2_ob_roof_0_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H2_OB_COVER}',
+        options: {
+          'h2_ob_roof_1_clay_tiles': 'clay tiles',
+          'h2_ob_roof_1_concrete_tiles': 'concrete tiles',
+          'h2_ob_roof_1_slates': 'slates',
+          'h2_ob_roof_1_felt': 'felt',
+          'h2_ob_roof_1_rubber_membrane': 'rubber membrane',
+          'h2_ob_roof_1_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_ob_roof_1_other',
+        otherText: 'h2_ob_roof_1_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt', 'rubber membrane', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.',
+    whenField: 'cb_h2_h2_ob_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_floor_workshop',
+    'activity_grounds_other_large_outbuildings__workshop',
+    '{H_OTHER}',
+    '{H2_OB_FLOOR}',
+    [
+      VerbatimToken(
+        '{H2_OB_FLOOR}',
+        options: {
+          'h2_ob_floor_0_concrete': 'concrete',
+          'h2_ob_floor_0_suspended_timber': 'suspended timber',
+          'h2_ob_floor_0_engineered_timber': 'engineered timber',
+          'h2_ob_floor_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'h2_ob_floor_0_other',
+        otherText: 'h2_ob_floor_0_other_text',
+        pdfOptions: ['concrete', 'suspended timber', 'engineered timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.',
+    whenField: 'cb_h2_h2_ob_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_doors_workshop',
+    'activity_grounds_other_large_outbuildings__workshop',
+    '{H_OTHER}',
+    '{H2_OB_DOORS}',
+    [
+      VerbatimToken(
+        '{H2_OB_DOORS}',
+        options: {
+          'h2_ob_doors_0_timber_upvc': 'timber uPVC',
+          'h2_ob_doors_0_aluminium': 'aluminium',
+          'h2_ob_doors_0_metal': 'metal',
+        },
+        otherCheckbox: 'h2_ob_doors_0_other',
+        otherText: 'h2_ob_doors_0_other_text',
+        pdfOptions: ['timber uPVC', 'aluminium', 'metal'],
+      ),
+    ],
+    pdf:
+        'Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.',
+    whenField: 'cb_h2_h2_ob_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cond_workshop',
+    'activity_grounds_other_large_outbuildings__workshop',
+    '{H_OTHER}',
+    '{H2_OB_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONDITION_COND}',
+        dropdown: 'actv_h2_ob_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_ob_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_ob_cond', 'Reasonable'], ['actv_h2_ob_cond', 'Fair'], ['actv_h2_ob_cond', 'Poor'], ['actv_h2_ob_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob_no_defects_workshop',
+    'activity_grounds_other_large_outbuildings__workshop',
+    '{H_OTHER}',
+    '{H2_OB_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_ob_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_annex',
+    'activity_grounds_other_large_outbuildings__annex',
+    '{H_OTHER}',
+    '{H2_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_OB_TYPE}',
+        constant: 'an annex',
+      ),
+    ],
+    pdf:
+        'Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).',
+    whenField: 'cb_h2_h2_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cons_annex',
+    'activity_grounds_other_large_outbuildings__annex',
+    '{H_OTHER}',
+    '{H2_OB_CONSTRUCTION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONSTRUCTION}',
+        options: {
+          'h2_ob_cons_0_bricks': 'bricks',
+          'h2_ob_cons_0_blocks': 'blocks',
+          'h2_ob_cons_0_timber': 'timber',
+          'h2_ob_cons_0_steel': 'steel',
+          'h2_ob_cons_0_prefabricated_concrete': 'prefabricated concrete',
+          'h2_ob_cons_0_aluminium': 'aluminium',
+          'h2_ob_cons_0_composite_boards': 'composite boards',
+        },
+        otherCheckbox: 'h2_ob_cons_0_other',
+        otherText: 'h2_ob_cons_0_other_text',
+        pdfOptions: ['bricks', 'blocks', 'timber', 'steel', 'prefabricated concrete', 'aluminium', 'composite boards'],
+      ),
+    ],
+    pdf:
+        'Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.',
+    whenField: 'cb_h2_h2_ob_cons',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_roof_annex',
+    'activity_grounds_other_large_outbuildings__annex',
+    '{H_OTHER}',
+    '{H2_OB_ROOF}',
+    [
+      VerbatimToken(
+        '{H2_OB_ROOF}',
+        options: {
+          'h2_ob_roof_0_pitched': 'pitched',
+          'h2_ob_roof_0_flat': 'flat',
+          'h2_ob_roof_0_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h2_ob_roof_0_other',
+        otherText: 'h2_ob_roof_0_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H2_OB_COVER}',
+        options: {
+          'h2_ob_roof_1_clay_tiles': 'clay tiles',
+          'h2_ob_roof_1_concrete_tiles': 'concrete tiles',
+          'h2_ob_roof_1_slates': 'slates',
+          'h2_ob_roof_1_felt': 'felt',
+          'h2_ob_roof_1_rubber_membrane': 'rubber membrane',
+          'h2_ob_roof_1_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_ob_roof_1_other',
+        otherText: 'h2_ob_roof_1_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt', 'rubber membrane', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.',
+    whenField: 'cb_h2_h2_ob_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_floor_annex',
+    'activity_grounds_other_large_outbuildings__annex',
+    '{H_OTHER}',
+    '{H2_OB_FLOOR}',
+    [
+      VerbatimToken(
+        '{H2_OB_FLOOR}',
+        options: {
+          'h2_ob_floor_0_concrete': 'concrete',
+          'h2_ob_floor_0_suspended_timber': 'suspended timber',
+          'h2_ob_floor_0_engineered_timber': 'engineered timber',
+          'h2_ob_floor_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'h2_ob_floor_0_other',
+        otherText: 'h2_ob_floor_0_other_text',
+        pdfOptions: ['concrete', 'suspended timber', 'engineered timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.',
+    whenField: 'cb_h2_h2_ob_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_doors_annex',
+    'activity_grounds_other_large_outbuildings__annex',
+    '{H_OTHER}',
+    '{H2_OB_DOORS}',
+    [
+      VerbatimToken(
+        '{H2_OB_DOORS}',
+        options: {
+          'h2_ob_doors_0_timber_upvc': 'timber uPVC',
+          'h2_ob_doors_0_aluminium': 'aluminium',
+          'h2_ob_doors_0_metal': 'metal',
+        },
+        otherCheckbox: 'h2_ob_doors_0_other',
+        otherText: 'h2_ob_doors_0_other_text',
+        pdfOptions: ['timber uPVC', 'aluminium', 'metal'],
+      ),
+    ],
+    pdf:
+        'Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.',
+    whenField: 'cb_h2_h2_ob_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cond_annex',
+    'activity_grounds_other_large_outbuildings__annex',
+    '{H_OTHER}',
+    '{H2_OB_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONDITION_COND}',
+        dropdown: 'actv_h2_ob_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_ob_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_ob_cond', 'Reasonable'], ['actv_h2_ob_cond', 'Fair'], ['actv_h2_ob_cond', 'Poor'], ['actv_h2_ob_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob_no_defects_annex',
+    'activity_grounds_other_large_outbuildings__annex',
+    '{H_OTHER}',
+    '{H2_OB_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_ob_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_summer_house',
+    'activity_grounds_other_large_outbuildings__summer_house',
+    '{H_OTHER}',
+    '{H2_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_OB_TYPE}',
+        constant: 'a summer house',
+      ),
+    ],
+    pdf:
+        'Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).',
+    whenField: 'cb_h2_h2_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cons_summer_house',
+    'activity_grounds_other_large_outbuildings__summer_house',
+    '{H_OTHER}',
+    '{H2_OB_CONSTRUCTION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONSTRUCTION}',
+        options: {
+          'h2_ob_cons_0_bricks': 'bricks',
+          'h2_ob_cons_0_blocks': 'blocks',
+          'h2_ob_cons_0_timber': 'timber',
+          'h2_ob_cons_0_steel': 'steel',
+          'h2_ob_cons_0_prefabricated_concrete': 'prefabricated concrete',
+          'h2_ob_cons_0_aluminium': 'aluminium',
+          'h2_ob_cons_0_composite_boards': 'composite boards',
+        },
+        otherCheckbox: 'h2_ob_cons_0_other',
+        otherText: 'h2_ob_cons_0_other_text',
+        pdfOptions: ['bricks', 'blocks', 'timber', 'steel', 'prefabricated concrete', 'aluminium', 'composite boards'],
+      ),
+    ],
+    pdf:
+        'Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.',
+    whenField: 'cb_h2_h2_ob_cons',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_roof_summer_house',
+    'activity_grounds_other_large_outbuildings__summer_house',
+    '{H_OTHER}',
+    '{H2_OB_ROOF}',
+    [
+      VerbatimToken(
+        '{H2_OB_ROOF}',
+        options: {
+          'h2_ob_roof_0_pitched': 'pitched',
+          'h2_ob_roof_0_flat': 'flat',
+          'h2_ob_roof_0_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h2_ob_roof_0_other',
+        otherText: 'h2_ob_roof_0_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H2_OB_COVER}',
+        options: {
+          'h2_ob_roof_1_clay_tiles': 'clay tiles',
+          'h2_ob_roof_1_concrete_tiles': 'concrete tiles',
+          'h2_ob_roof_1_slates': 'slates',
+          'h2_ob_roof_1_felt': 'felt',
+          'h2_ob_roof_1_rubber_membrane': 'rubber membrane',
+          'h2_ob_roof_1_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_ob_roof_1_other',
+        otherText: 'h2_ob_roof_1_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt', 'rubber membrane', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.',
+    whenField: 'cb_h2_h2_ob_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_floor_summer_house',
+    'activity_grounds_other_large_outbuildings__summer_house',
+    '{H_OTHER}',
+    '{H2_OB_FLOOR}',
+    [
+      VerbatimToken(
+        '{H2_OB_FLOOR}',
+        options: {
+          'h2_ob_floor_0_concrete': 'concrete',
+          'h2_ob_floor_0_suspended_timber': 'suspended timber',
+          'h2_ob_floor_0_engineered_timber': 'engineered timber',
+          'h2_ob_floor_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'h2_ob_floor_0_other',
+        otherText: 'h2_ob_floor_0_other_text',
+        pdfOptions: ['concrete', 'suspended timber', 'engineered timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.',
+    whenField: 'cb_h2_h2_ob_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_doors_summer_house',
+    'activity_grounds_other_large_outbuildings__summer_house',
+    '{H_OTHER}',
+    '{H2_OB_DOORS}',
+    [
+      VerbatimToken(
+        '{H2_OB_DOORS}',
+        options: {
+          'h2_ob_doors_0_timber_upvc': 'timber uPVC',
+          'h2_ob_doors_0_aluminium': 'aluminium',
+          'h2_ob_doors_0_metal': 'metal',
+        },
+        otherCheckbox: 'h2_ob_doors_0_other',
+        otherText: 'h2_ob_doors_0_other_text',
+        pdfOptions: ['timber uPVC', 'aluminium', 'metal'],
+      ),
+    ],
+    pdf:
+        'Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.',
+    whenField: 'cb_h2_h2_ob_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cond_summer_house',
+    'activity_grounds_other_large_outbuildings__summer_house',
+    '{H_OTHER}',
+    '{H2_OB_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONDITION_COND}',
+        dropdown: 'actv_h2_ob_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_ob_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_ob_cond', 'Reasonable'], ['actv_h2_ob_cond', 'Fair'], ['actv_h2_ob_cond', 'Poor'], ['actv_h2_ob_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob_no_defects_summer_house',
+    'activity_grounds_other_large_outbuildings__summer_house',
+    '{H_OTHER}',
+    '{H2_OB_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_ob_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_office',
+    'activity_grounds_other_large_outbuildings__office',
+    '{H_OTHER}',
+    '{H2_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_OB_TYPE}',
+        constant: 'an office',
+      ),
+    ],
+    pdf:
+        'Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).',
+    whenField: 'cb_h2_h2_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cons_office',
+    'activity_grounds_other_large_outbuildings__office',
+    '{H_OTHER}',
+    '{H2_OB_CONSTRUCTION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONSTRUCTION}',
+        options: {
+          'h2_ob_cons_0_bricks': 'bricks',
+          'h2_ob_cons_0_blocks': 'blocks',
+          'h2_ob_cons_0_timber': 'timber',
+          'h2_ob_cons_0_steel': 'steel',
+          'h2_ob_cons_0_prefabricated_concrete': 'prefabricated concrete',
+          'h2_ob_cons_0_aluminium': 'aluminium',
+          'h2_ob_cons_0_composite_boards': 'composite boards',
+        },
+        otherCheckbox: 'h2_ob_cons_0_other',
+        otherText: 'h2_ob_cons_0_other_text',
+        pdfOptions: ['bricks', 'blocks', 'timber', 'steel', 'prefabricated concrete', 'aluminium', 'composite boards'],
+      ),
+    ],
+    pdf:
+        'Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.',
+    whenField: 'cb_h2_h2_ob_cons',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_roof_office',
+    'activity_grounds_other_large_outbuildings__office',
+    '{H_OTHER}',
+    '{H2_OB_ROOF}',
+    [
+      VerbatimToken(
+        '{H2_OB_ROOF}',
+        options: {
+          'h2_ob_roof_0_pitched': 'pitched',
+          'h2_ob_roof_0_flat': 'flat',
+          'h2_ob_roof_0_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h2_ob_roof_0_other',
+        otherText: 'h2_ob_roof_0_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H2_OB_COVER}',
+        options: {
+          'h2_ob_roof_1_clay_tiles': 'clay tiles',
+          'h2_ob_roof_1_concrete_tiles': 'concrete tiles',
+          'h2_ob_roof_1_slates': 'slates',
+          'h2_ob_roof_1_felt': 'felt',
+          'h2_ob_roof_1_rubber_membrane': 'rubber membrane',
+          'h2_ob_roof_1_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_ob_roof_1_other',
+        otherText: 'h2_ob_roof_1_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt', 'rubber membrane', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.',
+    whenField: 'cb_h2_h2_ob_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_floor_office',
+    'activity_grounds_other_large_outbuildings__office',
+    '{H_OTHER}',
+    '{H2_OB_FLOOR}',
+    [
+      VerbatimToken(
+        '{H2_OB_FLOOR}',
+        options: {
+          'h2_ob_floor_0_concrete': 'concrete',
+          'h2_ob_floor_0_suspended_timber': 'suspended timber',
+          'h2_ob_floor_0_engineered_timber': 'engineered timber',
+          'h2_ob_floor_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'h2_ob_floor_0_other',
+        otherText: 'h2_ob_floor_0_other_text',
+        pdfOptions: ['concrete', 'suspended timber', 'engineered timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.',
+    whenField: 'cb_h2_h2_ob_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_doors_office',
+    'activity_grounds_other_large_outbuildings__office',
+    '{H_OTHER}',
+    '{H2_OB_DOORS}',
+    [
+      VerbatimToken(
+        '{H2_OB_DOORS}',
+        options: {
+          'h2_ob_doors_0_timber_upvc': 'timber uPVC',
+          'h2_ob_doors_0_aluminium': 'aluminium',
+          'h2_ob_doors_0_metal': 'metal',
+        },
+        otherCheckbox: 'h2_ob_doors_0_other',
+        otherText: 'h2_ob_doors_0_other_text',
+        pdfOptions: ['timber uPVC', 'aluminium', 'metal'],
+      ),
+    ],
+    pdf:
+        'Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.',
+    whenField: 'cb_h2_h2_ob_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cond_office',
+    'activity_grounds_other_large_outbuildings__office',
+    '{H_OTHER}',
+    '{H2_OB_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONDITION_COND}',
+        dropdown: 'actv_h2_ob_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_ob_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_ob_cond', 'Reasonable'], ['actv_h2_ob_cond', 'Fair'], ['actv_h2_ob_cond', 'Poor'], ['actv_h2_ob_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob_no_defects_office',
+    'activity_grounds_other_large_outbuildings__office',
+    '{H_OTHER}',
+    '{H2_OB_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_ob_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_studio',
+    'activity_grounds_other_large_outbuildings__studio',
+    '{H_OTHER}',
+    '{H2_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_OB_TYPE}',
+        constant: 'a studio',
+      ),
+    ],
+    pdf:
+        'Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).',
+    whenField: 'cb_h2_h2_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cons_studio',
+    'activity_grounds_other_large_outbuildings__studio',
+    '{H_OTHER}',
+    '{H2_OB_CONSTRUCTION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONSTRUCTION}',
+        options: {
+          'h2_ob_cons_0_bricks': 'bricks',
+          'h2_ob_cons_0_blocks': 'blocks',
+          'h2_ob_cons_0_timber': 'timber',
+          'h2_ob_cons_0_steel': 'steel',
+          'h2_ob_cons_0_prefabricated_concrete': 'prefabricated concrete',
+          'h2_ob_cons_0_aluminium': 'aluminium',
+          'h2_ob_cons_0_composite_boards': 'composite boards',
+        },
+        otherCheckbox: 'h2_ob_cons_0_other',
+        otherText: 'h2_ob_cons_0_other_text',
+        pdfOptions: ['bricks', 'blocks', 'timber', 'steel', 'prefabricated concrete', 'aluminium', 'composite boards'],
+      ),
+    ],
+    pdf:
+        'Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.',
+    whenField: 'cb_h2_h2_ob_cons',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_roof_studio',
+    'activity_grounds_other_large_outbuildings__studio',
+    '{H_OTHER}',
+    '{H2_OB_ROOF}',
+    [
+      VerbatimToken(
+        '{H2_OB_ROOF}',
+        options: {
+          'h2_ob_roof_0_pitched': 'pitched',
+          'h2_ob_roof_0_flat': 'flat',
+          'h2_ob_roof_0_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h2_ob_roof_0_other',
+        otherText: 'h2_ob_roof_0_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H2_OB_COVER}',
+        options: {
+          'h2_ob_roof_1_clay_tiles': 'clay tiles',
+          'h2_ob_roof_1_concrete_tiles': 'concrete tiles',
+          'h2_ob_roof_1_slates': 'slates',
+          'h2_ob_roof_1_felt': 'felt',
+          'h2_ob_roof_1_rubber_membrane': 'rubber membrane',
+          'h2_ob_roof_1_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_ob_roof_1_other',
+        otherText: 'h2_ob_roof_1_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt', 'rubber membrane', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.',
+    whenField: 'cb_h2_h2_ob_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_floor_studio',
+    'activity_grounds_other_large_outbuildings__studio',
+    '{H_OTHER}',
+    '{H2_OB_FLOOR}',
+    [
+      VerbatimToken(
+        '{H2_OB_FLOOR}',
+        options: {
+          'h2_ob_floor_0_concrete': 'concrete',
+          'h2_ob_floor_0_suspended_timber': 'suspended timber',
+          'h2_ob_floor_0_engineered_timber': 'engineered timber',
+          'h2_ob_floor_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'h2_ob_floor_0_other',
+        otherText: 'h2_ob_floor_0_other_text',
+        pdfOptions: ['concrete', 'suspended timber', 'engineered timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.',
+    whenField: 'cb_h2_h2_ob_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_doors_studio',
+    'activity_grounds_other_large_outbuildings__studio',
+    '{H_OTHER}',
+    '{H2_OB_DOORS}',
+    [
+      VerbatimToken(
+        '{H2_OB_DOORS}',
+        options: {
+          'h2_ob_doors_0_timber_upvc': 'timber uPVC',
+          'h2_ob_doors_0_aluminium': 'aluminium',
+          'h2_ob_doors_0_metal': 'metal',
+        },
+        otherCheckbox: 'h2_ob_doors_0_other',
+        otherText: 'h2_ob_doors_0_other_text',
+        pdfOptions: ['timber uPVC', 'aluminium', 'metal'],
+      ),
+    ],
+    pdf:
+        'Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.',
+    whenField: 'cb_h2_h2_ob_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cond_studio',
+    'activity_grounds_other_large_outbuildings__studio',
+    '{H_OTHER}',
+    '{H2_OB_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONDITION_COND}',
+        dropdown: 'actv_h2_ob_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_ob_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_ob_cond', 'Reasonable'], ['actv_h2_ob_cond', 'Fair'], ['actv_h2_ob_cond', 'Poor'], ['actv_h2_ob_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob_no_defects_studio',
+    'activity_grounds_other_large_outbuildings__studio',
+    '{H_OTHER}',
+    '{H2_OB_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_ob_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_other',
+    'activity_grounds_other_large_outbuildings__other',
+    '{H_OTHER}',
+    '{H2_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_OB_TYPE}',
+        text: 'h2_ob_0_other_text',
+        article: true,
+      ),
+    ],
+    pdf:
+        'Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).',
+    whenField: 'cb_h2_h2_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cons_other',
+    'activity_grounds_other_large_outbuildings__other',
+    '{H_OTHER}',
+    '{H2_OB_CONSTRUCTION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONSTRUCTION}',
+        options: {
+          'h2_ob_cons_0_bricks': 'bricks',
+          'h2_ob_cons_0_blocks': 'blocks',
+          'h2_ob_cons_0_timber': 'timber',
+          'h2_ob_cons_0_steel': 'steel',
+          'h2_ob_cons_0_prefabricated_concrete': 'prefabricated concrete',
+          'h2_ob_cons_0_aluminium': 'aluminium',
+          'h2_ob_cons_0_composite_boards': 'composite boards',
+        },
+        otherCheckbox: 'h2_ob_cons_0_other',
+        otherText: 'h2_ob_cons_0_other_text',
+        pdfOptions: ['bricks', 'blocks', 'timber', 'steel', 'prefabricated concrete', 'aluminium', 'composite boards'],
+      ),
+    ],
+    pdf:
+        'Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.',
+    whenField: 'cb_h2_h2_ob_cons',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_roof_other',
+    'activity_grounds_other_large_outbuildings__other',
+    '{H_OTHER}',
+    '{H2_OB_ROOF}',
+    [
+      VerbatimToken(
+        '{H2_OB_ROOF}',
+        options: {
+          'h2_ob_roof_0_pitched': 'pitched',
+          'h2_ob_roof_0_flat': 'flat',
+          'h2_ob_roof_0_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h2_ob_roof_0_other',
+        otherText: 'h2_ob_roof_0_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H2_OB_COVER}',
+        options: {
+          'h2_ob_roof_1_clay_tiles': 'clay tiles',
+          'h2_ob_roof_1_concrete_tiles': 'concrete tiles',
+          'h2_ob_roof_1_slates': 'slates',
+          'h2_ob_roof_1_felt': 'felt',
+          'h2_ob_roof_1_rubber_membrane': 'rubber membrane',
+          'h2_ob_roof_1_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_ob_roof_1_other',
+        otherText: 'h2_ob_roof_1_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt', 'rubber membrane', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.',
+    whenField: 'cb_h2_h2_ob_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_floor_other',
+    'activity_grounds_other_large_outbuildings__other',
+    '{H_OTHER}',
+    '{H2_OB_FLOOR}',
+    [
+      VerbatimToken(
+        '{H2_OB_FLOOR}',
+        options: {
+          'h2_ob_floor_0_concrete': 'concrete',
+          'h2_ob_floor_0_suspended_timber': 'suspended timber',
+          'h2_ob_floor_0_engineered_timber': 'engineered timber',
+          'h2_ob_floor_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'h2_ob_floor_0_other',
+        otherText: 'h2_ob_floor_0_other_text',
+        pdfOptions: ['concrete', 'suspended timber', 'engineered timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.',
+    whenField: 'cb_h2_h2_ob_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_doors_other',
+    'activity_grounds_other_large_outbuildings__other',
+    '{H_OTHER}',
+    '{H2_OB_DOORS}',
+    [
+      VerbatimToken(
+        '{H2_OB_DOORS}',
+        options: {
+          'h2_ob_doors_0_timber_upvc': 'timber uPVC',
+          'h2_ob_doors_0_aluminium': 'aluminium',
+          'h2_ob_doors_0_metal': 'metal',
+        },
+        otherCheckbox: 'h2_ob_doors_0_other',
+        otherText: 'h2_ob_doors_0_other_text',
+        pdfOptions: ['timber uPVC', 'aluminium', 'metal'],
+      ),
+    ],
+    pdf:
+        'Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.',
+    whenField: 'cb_h2_h2_ob_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cond_other',
+    'activity_grounds_other_large_outbuildings__other',
+    '{H_OTHER}',
+    '{H2_OB_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONDITION_COND}',
+        dropdown: 'actv_h2_ob_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_ob_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_ob_cond', 'Reasonable'], ['actv_h2_ob_cond', 'Fair'], ['actv_h2_ob_cond', 'Poor'], ['actv_h2_ob_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob_no_defects_other',
+    'activity_grounds_other_large_outbuildings__other',
     '{H_OTHER}',
     '{H2_OB_NO_DEFECTS}',
     [
@@ -13642,7 +14579,8 @@ extension _VerbatimSpec on InspectionPhraseEngine {
     if (token.text != null) {
       final v = (answers[token.text] ?? '').trim();
       if (v.isEmpty) return token.fallback == null ? const [] : [token.fallback!];
-      return [token.lower ? v.toLowerCase() : v];
+      final w = token.lower ? v.toLowerCase() : v;
+      return [token.article ? '${'aeiouAEIOU'.contains(w[0]) ? 'an' : 'a'} $w' : w];
     }
     final labels = <String, String>{...token.legacy, ...token.options};
     final items = InspectionPhraseEngine._labelsFor(

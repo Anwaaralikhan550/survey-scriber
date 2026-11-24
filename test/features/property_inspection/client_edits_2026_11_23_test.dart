@@ -140,4 +140,106 @@ void main() {
       expect(phraseTexts['{E_MAIN_WALLS}::{E4_LINTEL_DOOR}'], contains('above a door opening'));
     });
   });
+
+  group('4 Large Outbuilding: every type has the full set of options', () {
+    const base = 'activity_grounds_other_large_outbuildings';
+    const types = {
+      'large_shed': 'a large shed',
+      'workshop': 'a workshop',
+      'annex': 'an annex',
+      'summer_house': 'a summer house',
+      'office': 'an office',
+      'studio': 'a studio',
+    };
+    final screens = [for (final k in [...types.keys, 'other']) '${base}__$k'];
+    Map<String, String> full() => ticks(
+          ['cb_h2_h2_ob', 'cb_h2_h2_ob_cons', 'h2_ob_cons_0_timber', 'h2_ob_cons_0_steel', 'cb_h2_h2_ob_roof', 'h2_ob_roof_0_pitched', 'h2_ob_roof_1_slates', 'cb_h2_h2_ob_floor', 'h2_ob_floor_0_concrete', 'cb_h2_h2_ob_doors', 'h2_ob_doors_0_aluminium', 'cb_h2_h2_ob_no_defects'],
+          {'actv_h2_ob_cond': 'Fair', 'h2_ob_0_other_text': 'games room'},
+        );
+
+    test('Large Outbuilding is a group with one screen for each type, in the client order', () {
+      expect(nodes.containsKey(base), isFalse);
+      final group = nodes['group_large_outbuilding_54']!;
+      expect(group.title, 'Large Outbuilding');
+      final kids = [for (final s in screens) nodes[s]!];
+      expect([for (final k in kids) k.title], ['Large shed', 'Workshop', 'Annex', 'Summer house', 'Office', 'Studio', 'Other outbuilding']);
+      for (final k in kids) {
+        expect(k.parentId, 'group_large_outbuilding_54');
+      }
+      final orders = [for (final k in kids) k.order];
+      expect(orders, [...orders]..sort());
+    });
+    test('each type screen has structure, roof, roof cover, floor and doors/windows options, each with Other', () {
+      List<String> labelsOf(Map<String, dynamic> f, List<String> ids) => [for (final id in ids) (f[id] as dynamic).label as String];
+      for (final s in screens) {
+        final f = <String, dynamic>{for (final x in nodes[s]!.fields) x.id: x};
+        expect(labelsOf(f, ['h2_ob_cons_0_bricks', 'h2_ob_cons_0_blocks', 'h2_ob_cons_0_timber', 'h2_ob_cons_0_steel', 'h2_ob_cons_0_prefabricated_concrete', 'h2_ob_cons_0_aluminium', 'h2_ob_cons_0_composite_boards']),
+            ['bricks', 'blocks', 'timber', 'steel', 'prefabricated concrete', 'aluminium', 'composite boards'], reason: s);
+        expect(labelsOf(f, ['h2_ob_roof_0_pitched', 'h2_ob_roof_0_flat', 'h2_ob_roof_0_lean_to']), ['pitched', 'flat', 'lean-to'], reason: s);
+        expect(labelsOf(f, ['h2_ob_roof_1_clay_tiles', 'h2_ob_roof_1_concrete_tiles', 'h2_ob_roof_1_slates', 'h2_ob_roof_1_felt', 'h2_ob_roof_1_rubber_membrane', 'h2_ob_roof_1_metal_sheets']),
+            ['clay tiles', 'concrete tiles', 'slates', 'felt', 'rubber membrane', 'metal sheets'], reason: s);
+        expect(labelsOf(f, ['h2_ob_floor_0_concrete', 'h2_ob_floor_0_suspended_timber', 'h2_ob_floor_0_engineered_timber', 'h2_ob_floor_0_beam_and_block']),
+            ['concrete', 'suspended timber', 'engineered timber', 'beam and block'], reason: s);
+        expect(labelsOf(f, ['h2_ob_doors_0_timber_upvc', 'h2_ob_doors_0_aluminium', 'h2_ob_doors_0_metal']), ['timber uPVC', 'aluminium', 'metal'], reason: s);
+        for (final other in ['h2_ob_cons_0_other', 'h2_ob_roof_0_other', 'h2_ob_roof_1_other', 'h2_ob_floor_0_other', 'h2_ob_doors_0_other']) {
+          expect((f[other] as dynamic).label, 'Other', reason: '$s $other');
+          expect((f['${other}_text'] as dynamic).conditionalOn, other, reason: '$s $other');
+        }
+        expect((f['actv_h2_ob_cond'] as dynamic).options, ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'], reason: s);
+        expect(f.containsKey('h2_ob_0_workshop'), isFalse, reason: '$s: the type list is gone, the screen is the type');
+      }
+    });
+    test('each type prints its own Outbuilding sentence and the same full set of sentences', () {
+      types.forEach((key, word) {
+        final out = say('${base}__$key', full());
+        expect(out, contains('Outbuilding: The property incorporates $word permanent structure (s).'), reason: key);
+        expect(out, contains('Construction: The structure(s) is formed of timber and steel materials.'), reason: key);
+        expect(out, contains('Roof: The roof is of pitched construction and is covered with slates material.'), reason: key);
+        expect(out, contains('Floor: The floor is constructed of concrete material.'), reason: key);
+        expect(out, contains('Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of aluminium framed units.'), reason: key);
+        expect(out, contains('Condition: Where visible, the building appears in fair condition.'), reason: key);
+        expect(out, contains('No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.'), reason: key);
+        for (final other in types.keys.where((k) => k != key)) {
+          expect(out, isNot(contains(types[other]!)), reason: '$key must not name $other');
+        }
+      });
+    });
+    test('Other prints the typed name of the outbuilding', () {
+      final out = say('${base}__other', full());
+      expect(out, contains('Outbuilding: The property incorporates a games room permanent structure (s).'));
+      expect(say('${base}__other', {...full(), 'h2_ob_0_other_text': 'office annex'}), contains('incorporates an office annex permanent structure (s).'));
+      expect(say('${base}__other', ticks(['cb_h2_h2_ob'])), isNot(contains('Outbuilding:')));
+    });
+    test('nothing ticked prints nothing on any type screen', () {
+      for (final s in screens) {
+        expect(say(s, {}), isEmpty, reason: s);
+      }
+    });
+    test('an older survey with several types on the one old screen gets each type its own screen', () {
+      final old = <String, String>{
+        ...full(),
+        'h2_ob_0_workshop': 'true',
+        'h2_ob_0_office': 'true',
+      };
+      String migrated(String key) {
+        final s = '${base}__$key';
+        return say(s, migrateLegacyAnswers(s, mergeMovedAnswers(s, {}, old)));
+      }
+      for (final key in ['workshop', 'office']) {
+        final out = migrated(key);
+        expect(out, contains('Outbuilding: The property incorporates ${key == 'office' ? 'an' : 'a'} $key permanent structure (s).'), reason: key);
+        expect(out, contains('Construction: The structure(s) is formed of timber and steel materials.'), reason: key);
+        expect(out, contains('Condition: Where visible, the building appears in fair condition.'), reason: key);
+      }
+      for (final key in ['large_shed', 'annex', 'summer_house', 'studio', 'other']) {
+        expect(migrated(key), isEmpty, reason: '$key was not chosen in the old survey');
+      }
+    });
+    test('an older survey that typed an Other outbuilding keeps its name', () {
+      final old = {...full(), 'h2_ob_0_other': 'true'};
+      final s = '${base}__other';
+      final out = say(s, migrateLegacyAnswers(s, mergeMovedAnswers(s, {}, old)));
+      expect(out, contains('Outbuilding: The property incorporates a games room permanent structure (s).'));
+    });
+  });
 }

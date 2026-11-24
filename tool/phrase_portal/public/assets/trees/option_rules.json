@@ -56,7 +56,61 @@
     "Undulating"
    ]
   },
-  "activity_grounds_other_large_outbuildings": {
+  "activity_grounds_other_large_outbuildings__annex": {
+   "actv_h2_ob_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_other_large_outbuildings__large_shed": {
+   "actv_h2_ob_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_other_large_outbuildings__office": {
+   "actv_h2_ob_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_other_large_outbuildings__other": {
+   "actv_h2_ob_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_other_large_outbuildings__studio": {
+   "actv_h2_ob_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_other_large_outbuildings__summer_house": {
+   "actv_h2_ob_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_other_large_outbuildings__workshop": {
    "actv_h2_ob_cond": [
     "Fair",
     "Good",

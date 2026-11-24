@@ -148,7 +148,13 @@ class InspectionPhraseEngine {
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_shared_access':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
-      case 'activity_grounds_other_large_outbuildings':
+      case 'activity_grounds_other_large_outbuildings__large_shed':
+      case 'activity_grounds_other_large_outbuildings__workshop':
+      case 'activity_grounds_other_large_outbuildings__annex':
+      case 'activity_grounds_other_large_outbuildings__summer_house':
+      case 'activity_grounds_other_large_outbuildings__office':
+      case 'activity_grounds_other_large_outbuildings__studio':
+      case 'activity_grounds_other_large_outbuildings__other':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_private_road':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)

@@ -98,13 +98,12 @@ Map<String, String> migrateLegacyAnswers(
   if (screenId == 'general_details') {
     return _migrateValuationPropertyType(_migrateValuationWeather(answers));
   }
-  if (screenId.startsWith(_aboutWallPrefix)) {
-    answers = _migrateRenderedWall(answers);
-  }
+  final current =
+      screenId.startsWith(_aboutWallPrefix) ? _migrateRenderedWall(answers) : answers;
   final fields = _dropdownToTicks[screenId];
-  if (fields == null) return answers;
+  if (fields == null) return current;
 
-  final out = Map<String, String>.from(answers);
+  final out = Map<String, String>.from(current);
   fields.forEach((dropdownId, ticks) {
     final old = out.remove(dropdownId)?.trim();
     // Once any tick is saved the surveyor has moved on from the old value.
@@ -119,18 +118,39 @@ const _aboutWallPrefix = 'activity_outside_property_main_walls_about_wall';
 const _renderedWallScreen = '${_aboutWallPrefix}__rendered_masonry';
 const _pebbleDashWallScreen = '${_aboutWallPrefix}__pebble_dash_masonry';
 
+const _outbuildingScreen = 'activity_grounds_other_large_outbuildings';
+
+/// Large Outbuilding screen of each type -> the type tick of the old single screen.
+const _outbuildingTypeTicks = <String, String>{
+  '${_outbuildingScreen}__large_shed': 'h2_ob_0_large_shed',
+  '${_outbuildingScreen}__workshop': 'h2_ob_0_workshop',
+  '${_outbuildingScreen}__annex': 'h2_ob_0_annex',
+  '${_outbuildingScreen}__summer_house': 'h2_ob_0_summer_house',
+  '${_outbuildingScreen}__office': 'h2_ob_0_office',
+  '${_outbuildingScreen}__studio': 'h2_ob_0_studio',
+  '${_outbuildingScreen}__other': 'h2_ob_0_other',
+};
+
 /// Main Walls: the "rendered wall" tick became the first choice of Wall Finished (client, 23 Nov 2026).
 Map<String, String> _migrateRenderedWall(Map<String, String> answers) {
   if (answers['cb_rendered_wall'] != 'true') return answers;
-  final out = Map<String, String>.from(answers)..remove('cb_rendered_wall');
-  out.putIfAbsent('wf_rendered', () => 'true');
-  return out;
+  return Map<String, String>.from(answers)
+    ..remove('cb_rendered_wall')
+    ..putIfAbsent('wf_rendered', () => 'true');
 }
 
 /// Fields that moved to a new screen: new screen -> old screen, field id prefix.
 const movedAnswers = <String, ({String fromScreen, String fieldPrefix})>{
   // Rendered masonry and Pebble dash masonry became one section (client, 23 Nov 2026).
   _renderedWallScreen: (fromScreen: _pebbleDashWallScreen, fieldPrefix: ''),
+  // Large Outbuilding: one screen per type, each with the full set of options (client, 23 Nov 2026).
+  '${_outbuildingScreen}__large_shed': (fromScreen: _outbuildingScreen, fieldPrefix: ''),
+  '${_outbuildingScreen}__workshop': (fromScreen: _outbuildingScreen, fieldPrefix: ''),
+  '${_outbuildingScreen}__annex': (fromScreen: _outbuildingScreen, fieldPrefix: ''),
+  '${_outbuildingScreen}__summer_house': (fromScreen: _outbuildingScreen, fieldPrefix: ''),
+  '${_outbuildingScreen}__office': (fromScreen: _outbuildingScreen, fieldPrefix: ''),
+  '${_outbuildingScreen}__studio': (fromScreen: _outbuildingScreen, fieldPrefix: ''),
+  '${_outbuildingScreen}__other': (fromScreen: _outbuildingScreen, fieldPrefix: ''),
   'activity_outside_property_windows_sill_defect': (
     fromScreen: 'activity_outside_property_windows_sill_projection',
     fieldPrefix: 'e5sd_',
@@ -157,6 +177,17 @@ Map<String, String> mergeMovedAnswers(
 ) {
   final moved = movedAnswers[screenId];
   if (moved == null) return answers;
+  final typeTick = _outbuildingTypeTicks[screenId];
+  if (typeTick != null) {
+    // The old single screen listed the types it covered; every type that was ticked there now has its own screen
+    // that starts with the same construction, roof, floor, doors and condition answers.
+    if (oldScreenAnswers[typeTick] != 'true') return answers;
+    return {
+      for (final entry in oldScreenAnswers.entries)
+        if (!entry.key.startsWith('h2_ob_0_') || entry.key == 'h2_ob_0_other_text') entry.key: entry.value,
+      ...answers,
+    };
+  }
   final merged = {
     for (final entry in oldScreenAnswers.entries)
       if (entry.key.startsWith(moved.fieldPrefix)) entry.key: entry.value,

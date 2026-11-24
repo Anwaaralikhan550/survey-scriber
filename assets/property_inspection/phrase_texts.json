@@ -754,7 +754,7 @@
   "{H_OTHER}::{H2_REPAIR_FENCE}": "Repair fence: Parts of the boundary fencing are {H2_FENCE_DEFECTS}. You should arrange to repair or replace the affected fencing soon. However. if the damage is significant, repair should be carried out promptly and may be expensive.",
   "{H_OTHER}::{H2_SHEDS}": "Sheds: There is {H2_SHED_MATERIAL} shed(s) located within the grounds of the property. The roof(s) are {H2_SHED_ROOF}, and covered with {H2_SHED_COVER} materials.",
   "{H_OTHER}::{H2_SHED_CONDITION}": "Condition: Where visible, the shed(s) appear in {H2_SHED_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction of the shed should be expected. However, where the shed is in poor condition, you should arrange to repair or replace the shed.",
-  "{H_OTHER}::{H2_OUTBUILDING}": "Outbuilding: The property incorporates a {H2_OB_TYPE} permanent structure (s).",
+  "{H_OTHER}::{H2_OUTBUILDING}": "Outbuilding: The property incorporates {H2_OB_TYPE} permanent structure (s).",
   "{H_OTHER}::{H2_OB_CONSTRUCTION}": "Construction: The structure(s) is formed of {H2_OB_CONSTRUCTION} materials.",
   "{H_OTHER}::{H2_OB_ROOF}": "Roof: The roof is of {H2_OB_ROOF} construction and is covered with {H2_OB_COVER} material.",
   "{H_OTHER}::{H2_OB_FLOOR}": "Floor: The floor is constructed of {H2_OB_FLOOR} material. Minor cracking, shrinkage, and surface wear to concrete floors are not uncommon and do not necessarily indicate structural movement. The floor was inspected visually only, and concealed areas beneath floor coverings or finishes could not be examined.",
