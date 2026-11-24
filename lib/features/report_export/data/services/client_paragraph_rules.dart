@@ -10,6 +10,8 @@ import 'pdf_shared_utils.dart';
 
 const _chimneyGroup = 'group_e1_chimney_5';
 
+const _otherJoineryGroup = 'group_e8_other_joinery_and_finishes_31';
+
 const clientParagraphGroups = <String>{
   _chimneyGroup,
   'group_e3_rain_water_goods_13',
@@ -33,7 +35,45 @@ List<String> applyClientParagraphRules(
     for (final p in phrases)
       for (final item in p.split(_labelStart)) ..._splitRating(item),
   ];
+  if (groupId == _otherJoineryGroup) return _otherJoineryParagraphs(items);
   return groupId == _chimneyGroup ? _chimneyParagraphs(items) : items;
+}
+
+// E8 Other Joinery and Finishes (client, 23 Nov 2026): Inspected and Not Inspected first, then Description,
+// Decorations and Condition; Timber Weathering, Timber Decay and Defective Joinery sit above Asbestos Cement
+// Components; Repair (and its Hazards line) is last.
+const _otherJoineryOrder = <String>[
+  'Inspected: ',
+  'Not Inspected: ',
+  'Description: ',
+  'Decorations: ',
+  'Condition: ',
+  'Timber Weathering: ',
+  'Timber Decay: ',
+  'Defective Joinery',
+  'Asbestos Cement Components: ',
+  'General Maintenance: ',
+];
+const _otherJoineryRepair = <String>['Repair: ', 'Hazards: '];
+
+List<String> _otherJoineryParagraphs(List<String> items) {
+  int rank(String p) {
+    final text = p.trimLeft();
+    final lead = _otherJoineryOrder.indexWhere(text.startsWith);
+    if (lead >= 0) return lead;
+    final tail = _otherJoineryRepair.indexWhere(text.startsWith);
+    // Everything else (the leasehold paragraph, notes) stays after General Maintenance and before Repair.
+    return tail >= 0
+        ? _otherJoineryOrder.length + 1 + tail
+        : _otherJoineryOrder.length;
+  }
+
+  final indexed = items.asMap().entries.toList()
+    ..sort((a, b) {
+      final byRank = rank(a.value).compareTo(rank(b.value));
+      return byRank != 0 ? byRank : a.key.compareTo(b.key);
+    });
+  return [for (final e in indexed) e.value];
 }
 
 /// An element's condition rating sits directly under its heading (client, 3 Nov
