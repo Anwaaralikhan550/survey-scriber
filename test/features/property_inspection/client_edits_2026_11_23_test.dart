@@ -108,4 +108,36 @@ void main() {
       expect(out, contains('appear in poor condition'));
     });
   });
+
+  group('2 Main Wall Lintel: Windows and Door say which opening', () {
+    const win = 'activity_outside_property_main_wall_repairs_lintel';
+    const door = 'activity_outside_property_main_wall_repairs_lintel__door';
+    final base = ticks(['e4l_w_front', 'e4l_w_rear', 'e4l_l_main_building', 'e4l_l_bay_window']);
+    test('the Windows screen says window opening', () {
+      expect(nodes[win]!.title, 'Windows');
+      final out = say(win, base);
+      expect(out, contains('Lintel defect: The lintel (the beam supporting the masonry above a window opening), including a brick arch where applicable, in the front and rear wall of the main building and bay window is damaged, cracked, or distorted.'));
+      expect(out, isNot(contains('door')));
+    });
+    test('the Door screen says door opening', () {
+      expect(nodes[door]!.title, 'Door');
+      final out = say(door, base);
+      expect(out, contains('Lintel defect: The lintel (the beam supporting the masonry above a door opening), including a brick arch where applicable, in the front and rear wall of the main building and bay window is damaged, cracked, or distorted.'));
+      expect(out, isNot(contains('window opening')));
+    });
+    test('Minor defects and Significant defect read the same on both screens', () {
+      for (final s in [win, door]) {
+        final minor = say(s, {...base, 'actv_condition': 'Minor defects'});
+        expect(minor, contains('Minor defects: The defects observed are limited and do not require significant repair.'), reason: s);
+        expect(minor, contains('integrity of the lintel or brick arch'), reason: s);
+        final big = say(s, {...base, 'actv_condition': 'Significant defect'});
+        expect(big, contains('Significant defect: The defects observed are significant and have caused, or are likely to cause, movement or damage to the adjoining masonry.'), reason: s);
+        expect(big, isNot(contains('Minor defects:')), reason: s);
+      }
+    });
+    test('the old one-sentence key for both openings is gone', () {
+      expect(phraseTexts['{E_MAIN_WALLS}::{E4_LINTEL}'], isNot(contains('door or window')));
+      expect(phraseTexts['{E_MAIN_WALLS}::{E4_LINTEL_DOOR}'], contains('above a door opening'));
+    });
+  });
 }

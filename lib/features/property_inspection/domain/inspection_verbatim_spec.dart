@@ -2839,7 +2839,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       ),
     ],
     pdf:
-        'Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted.',
+        'Lintel defect: The lintel (the beam supporting the masonry above a window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted.',
   ),
   VerbatimRule(
     'e4_lintel_minor_win',
@@ -2865,7 +2865,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     'e4_lintel_door',
     'activity_outside_property_main_wall_repairs_lintel__door',
     '{E_MAIN_WALLS}',
-    '{E4_LINTEL}',
+    '{E4_LINTEL_DOOR}',
     [
       VerbatimToken(
         '{LINTEL_WALLS}',
@@ -2892,7 +2892,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       ),
     ],
     pdf:
-        'Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted.',
+        'Lintel defect: The lintel (the beam supporting the masonry above a door opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted.',
   ),
   VerbatimRule(
     'e4_lintel_minor_door',

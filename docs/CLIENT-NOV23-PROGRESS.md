@@ -7,13 +7,13 @@ generate full reports to test, then check the new phrases live. Push / APK / liv
 | # | Item | Status | Commit | Proof |
 |---|------|--------|--------|-------|
 | 1 | Main Wall: rendered wall + pebble dash = one "Wall Finished" sentence, after Description, before Condition | DONE | (this commit) | tests client_edits_2026_11_23_test (7), gates, PDF+Word p18/p17 in tmp/client-edits-2026-11-23/report |
-| 2 | Lintel: window screen says "window opening", door screen says "door opening" | TODO | | |
+| 2 | Lintel: window screen says "window opening", door screen says "door opening" | DONE | (this commit) | tests (4) in client_edits_2026_11_23_test, gates, PDF p24 + Word p23 |
 | 3 | Valuation weather: same 8 options as Inspection | TODO | | |
 | 4 | Large Outbuilding: every type gets the full set of options | TODO | | |
 | 5 | Outside Doors: Description + material on one line; BS EN paragraph only once | TODO | | |
 | 6 | E8 Other Joinery: inspected/not inspected first, repair last, ordering per client | TODO | | |
 
-Next action: item 2.
+Next action: item 3.
 
 ## Method per item
 tree json + verbatim spec (`inspection_verbatim_spec.dart`) + bank (`phrase_texts.json`) + answer migration

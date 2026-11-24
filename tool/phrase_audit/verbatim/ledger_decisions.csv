@@ -653,3 +653,5 @@ cffb83972a,ACCEPT,superseded by the client's own later edit: condensation room l
 18c124f06d,ACCEPT,superseded by the client's own later edit: boiler location reads "the kitchen, the utility room, the bedroom, under the stairs, the garage" (client file 6 N7-N8; commit 7fca348)
 84f651e2b9,ACCEPT,removed at the client's request: Shared Access keeps only the Shared areas capture; shared garden and communal surface/fence fields are out (client file 6 N18; commit d557633)
 6dd65085eb,ACCEPT,removed at the client's request: Shared Access keeps only the Shared areas capture; shared garden and communal surface/fence fields are out (client file 6 N18; commit d557633)
+
+d66443899f,ACCEPT,superseded by the client own later edit: the Lintel Windows screen says "window opening" and the Door screen says "door opening" (client edit list 23 Nov 2026 item 2)
