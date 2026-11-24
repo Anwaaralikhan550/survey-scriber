@@ -51,6 +51,12 @@ const _dropdownToTicks = <String, Map<String, Map<String, String>>>{
   },
 };
 
+/// Valuation Weather now has the Inspection list (client, 23 Nov 2026); the old "Snow" is "Snowing" there.
+Map<String, String> _migrateValuationWeather(Map<String, String> answers) {
+  if ((answers['actv_weather'] ?? '').trim() != 'Snow') return answers;
+  return Map<String, String>.from(answers)..['actv_weather'] = 'Snowing';
+}
+
 /// Valuation General Details: Property Type, Sub Type, Flat Type and Build Type became one
 /// Property Type list (client, 13 Nov 2026). What maps cleanly moves to the new option;
 /// the rest (for example a plain "House") keeps its old answers and old wording.
@@ -90,7 +96,7 @@ Map<String, String> migrateLegacyAnswers(
   Map<String, String> answers,
 ) {
   if (screenId == 'general_details') {
-    return _migrateValuationPropertyType(answers);
+    return _migrateValuationPropertyType(_migrateValuationWeather(answers));
   }
   if (screenId.startsWith(_aboutWallPrefix)) {
     answers = _migrateRenderedWall(answers);

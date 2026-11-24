@@ -102,7 +102,7 @@ test('both real trees: every tick box is listed and a rename shows in the change
 test('both real trees: every dropdown is listed', () => {
   const inspection = load('assets/property_inspection/inspection_tree.json');
   const valuation = load('assets/property_valuation/valuation_tree.json');
-  assert.ok(TL.dropdowns(inspection).length >= 196);
+  assert.ok(TL.dropdowns(inspection).length >= 195); // 196 before the Pebble dash screen was merged into Rendered masonry (client, 23 Nov 2026)
   assert.strictEqual(TL.dropdowns(valuation).length, 50);
   assert.deepStrictEqual(TL.problems(inspection), []);
   assert.deepStrictEqual(TL.problems(valuation), []);
