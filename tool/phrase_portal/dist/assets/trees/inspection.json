@@ -3771,10 +3771,1553 @@
           ]
         },
         {
-          "id": "activity_grounds_other_large_outbuildings",
+          "id": "group_large_outbuilding_54",
           "title": "Large Outbuilding",
-          "type": "screen",
+          "type": "group",
           "parentId": "group_other_53",
+          "order": 14
+        },
+        {
+          "id": "activity_grounds_other_large_outbuildings__large_shed",
+          "title": "Large shed",
+          "type": "screen",
+          "parentId": "group_large_outbuilding_54",
+          "order": 2,
+          "fields": [
+            {
+              "id": "cb_h2_h2_ob",
+              "label": "Outbuilding",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_h2_h2_ob_cons",
+              "label": "Outbuilding construction",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_construction",
+              "label": "Structure formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_cons_0_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_blocks",
+              "label": "blocks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_steel",
+              "label": "steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_prefabricated_concrete",
+              "label": "prefabricated concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_composite_boards",
+              "label": "composite boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_cons_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_roof",
+              "label": "Outbuilding roof",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_roof",
+              "label": "Roof construction",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_0_pitched",
+              "label": "pitched",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_lean_to",
+              "label": "lean-to",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_ob_cover",
+              "label": "Roof covered with",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_1_clay_tiles",
+              "label": "clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_concrete_tiles",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_slates",
+              "label": "slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_rubber_membrane",
+              "label": "rubber membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_1_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_floor",
+              "label": "Outbuilding floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_floor_0_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_suspended_timber",
+              "label": "suspended timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_engineered_timber",
+              "label": "engineered timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_beam_and_block",
+              "label": "beam and block",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_floor_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_doors",
+              "label": "Outbuilding doors and windows",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_doors",
+              "label": "Doors / windows formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_doors_0_timber_upvc",
+              "label": "timber uPVC",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_metal",
+              "label": "metal",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_doors_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_ob_cond",
+              "label": "Outbuilding condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            },
+            {
+              "id": "cb_h2_h2_ob_no_defects",
+              "label": "Outbuilding: no defects noted",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_grounds_other_large_outbuildings__workshop",
+          "title": "Workshop",
+          "type": "screen",
+          "parentId": "group_large_outbuilding_54",
+          "order": 4,
+          "fields": [
+            {
+              "id": "cb_h2_h2_ob",
+              "label": "Outbuilding",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_h2_h2_ob_cons",
+              "label": "Outbuilding construction",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_construction",
+              "label": "Structure formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_cons_0_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_blocks",
+              "label": "blocks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_steel",
+              "label": "steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_prefabricated_concrete",
+              "label": "prefabricated concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_composite_boards",
+              "label": "composite boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_cons_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_roof",
+              "label": "Outbuilding roof",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_roof",
+              "label": "Roof construction",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_0_pitched",
+              "label": "pitched",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_lean_to",
+              "label": "lean-to",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_ob_cover",
+              "label": "Roof covered with",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_1_clay_tiles",
+              "label": "clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_concrete_tiles",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_slates",
+              "label": "slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_rubber_membrane",
+              "label": "rubber membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_1_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_floor",
+              "label": "Outbuilding floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_floor_0_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_suspended_timber",
+              "label": "suspended timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_engineered_timber",
+              "label": "engineered timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_beam_and_block",
+              "label": "beam and block",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_floor_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_doors",
+              "label": "Outbuilding doors and windows",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_doors",
+              "label": "Doors / windows formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_doors_0_timber_upvc",
+              "label": "timber uPVC",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_metal",
+              "label": "metal",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_doors_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_ob_cond",
+              "label": "Outbuilding condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            },
+            {
+              "id": "cb_h2_h2_ob_no_defects",
+              "label": "Outbuilding: no defects noted",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_grounds_other_large_outbuildings__annex",
+          "title": "Annex",
+          "type": "screen",
+          "parentId": "group_large_outbuilding_54",
+          "order": 6,
+          "fields": [
+            {
+              "id": "cb_h2_h2_ob",
+              "label": "Outbuilding",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_h2_h2_ob_cons",
+              "label": "Outbuilding construction",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_construction",
+              "label": "Structure formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_cons_0_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_blocks",
+              "label": "blocks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_steel",
+              "label": "steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_prefabricated_concrete",
+              "label": "prefabricated concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_composite_boards",
+              "label": "composite boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_cons_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_roof",
+              "label": "Outbuilding roof",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_roof",
+              "label": "Roof construction",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_0_pitched",
+              "label": "pitched",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_lean_to",
+              "label": "lean-to",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_ob_cover",
+              "label": "Roof covered with",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_1_clay_tiles",
+              "label": "clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_concrete_tiles",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_slates",
+              "label": "slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_rubber_membrane",
+              "label": "rubber membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_1_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_floor",
+              "label": "Outbuilding floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_floor_0_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_suspended_timber",
+              "label": "suspended timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_engineered_timber",
+              "label": "engineered timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_beam_and_block",
+              "label": "beam and block",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_floor_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_doors",
+              "label": "Outbuilding doors and windows",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_doors",
+              "label": "Doors / windows formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_doors_0_timber_upvc",
+              "label": "timber uPVC",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_metal",
+              "label": "metal",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_doors_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_ob_cond",
+              "label": "Outbuilding condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            },
+            {
+              "id": "cb_h2_h2_ob_no_defects",
+              "label": "Outbuilding: no defects noted",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_grounds_other_large_outbuildings__summer_house",
+          "title": "Summer house",
+          "type": "screen",
+          "parentId": "group_large_outbuilding_54",
+          "order": 8,
+          "fields": [
+            {
+              "id": "cb_h2_h2_ob",
+              "label": "Outbuilding",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_h2_h2_ob_cons",
+              "label": "Outbuilding construction",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_construction",
+              "label": "Structure formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_cons_0_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_blocks",
+              "label": "blocks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_steel",
+              "label": "steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_prefabricated_concrete",
+              "label": "prefabricated concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_composite_boards",
+              "label": "composite boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_cons_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_roof",
+              "label": "Outbuilding roof",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_roof",
+              "label": "Roof construction",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_0_pitched",
+              "label": "pitched",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_lean_to",
+              "label": "lean-to",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_ob_cover",
+              "label": "Roof covered with",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_1_clay_tiles",
+              "label": "clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_concrete_tiles",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_slates",
+              "label": "slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_rubber_membrane",
+              "label": "rubber membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_1_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_floor",
+              "label": "Outbuilding floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_floor_0_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_suspended_timber",
+              "label": "suspended timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_engineered_timber",
+              "label": "engineered timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_beam_and_block",
+              "label": "beam and block",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_floor_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_doors",
+              "label": "Outbuilding doors and windows",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_doors",
+              "label": "Doors / windows formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_doors_0_timber_upvc",
+              "label": "timber uPVC",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_metal",
+              "label": "metal",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_doors_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_ob_cond",
+              "label": "Outbuilding condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            },
+            {
+              "id": "cb_h2_h2_ob_no_defects",
+              "label": "Outbuilding: no defects noted",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_grounds_other_large_outbuildings__office",
+          "title": "Office",
+          "type": "screen",
+          "parentId": "group_large_outbuilding_54",
+          "order": 10,
+          "fields": [
+            {
+              "id": "cb_h2_h2_ob",
+              "label": "Outbuilding",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_h2_h2_ob_cons",
+              "label": "Outbuilding construction",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_construction",
+              "label": "Structure formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_cons_0_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_blocks",
+              "label": "blocks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_steel",
+              "label": "steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_prefabricated_concrete",
+              "label": "prefabricated concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_composite_boards",
+              "label": "composite boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_cons_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_roof",
+              "label": "Outbuilding roof",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_roof",
+              "label": "Roof construction",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_0_pitched",
+              "label": "pitched",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_lean_to",
+              "label": "lean-to",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_ob_cover",
+              "label": "Roof covered with",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_1_clay_tiles",
+              "label": "clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_concrete_tiles",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_slates",
+              "label": "slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_rubber_membrane",
+              "label": "rubber membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_1_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_floor",
+              "label": "Outbuilding floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_floor_0_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_suspended_timber",
+              "label": "suspended timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_engineered_timber",
+              "label": "engineered timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_beam_and_block",
+              "label": "beam and block",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_floor_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_doors",
+              "label": "Outbuilding doors and windows",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_doors",
+              "label": "Doors / windows formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_doors_0_timber_upvc",
+              "label": "timber uPVC",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_metal",
+              "label": "metal",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_doors_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_ob_cond",
+              "label": "Outbuilding condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            },
+            {
+              "id": "cb_h2_h2_ob_no_defects",
+              "label": "Outbuilding: no defects noted",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_grounds_other_large_outbuildings__studio",
+          "title": "Studio",
+          "type": "screen",
+          "parentId": "group_large_outbuilding_54",
+          "order": 12,
+          "fields": [
+            {
+              "id": "cb_h2_h2_ob",
+              "label": "Outbuilding",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_h2_h2_ob_cons",
+              "label": "Outbuilding construction",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_construction",
+              "label": "Structure formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_cons_0_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_blocks",
+              "label": "blocks",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_steel",
+              "label": "steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_prefabricated_concrete",
+              "label": "prefabricated concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_composite_boards",
+              "label": "composite boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_cons_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_roof",
+              "label": "Outbuilding roof",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_roof",
+              "label": "Roof construction",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_0_pitched",
+              "label": "pitched",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_lean_to",
+              "label": "lean-to",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_ob_cover",
+              "label": "Roof covered with",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_roof_1_clay_tiles",
+              "label": "clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_concrete_tiles",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_slates",
+              "label": "slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_rubber_membrane",
+              "label": "rubber membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_roof_1_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_floor",
+              "label": "Outbuilding floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_floor_0_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_suspended_timber",
+              "label": "suspended timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_engineered_timber",
+              "label": "engineered timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_beam_and_block",
+              "label": "beam and block",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_floor_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_ob_doors",
+              "label": "Outbuilding doors and windows",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_doors",
+              "label": "Doors / windows formed of",
+              "type": "label"
+            },
+            {
+              "id": "h2_ob_doors_0_timber_upvc",
+              "label": "timber uPVC",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_metal",
+              "label": "metal",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_doors_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_ob_doors_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_ob_cond",
+              "label": "Outbuilding condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            },
+            {
+              "id": "cb_h2_h2_ob_no_defects",
+              "label": "Outbuilding: no defects noted",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_grounds_other_large_outbuildings__other",
+          "title": "Other outbuilding",
+          "type": "screen",
+          "parentId": "group_large_outbuilding_54",
           "order": 14,
           "fields": [
             {
@@ -3783,52 +5326,9 @@
               "type": "checkbox"
             },
             {
-              "id": "label_h2_ob_type",
-              "label": "Property incorporates a",
-              "type": "label"
-            },
-            {
-              "id": "h2_ob_0_large_shed",
-              "label": "large shed",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_ob_0_workshop",
-              "label": "workshop",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_ob_0_annex",
-              "label": "annex",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_ob_0_summer_house",
-              "label": "summer house",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_ob_0_office",
-              "label": "office",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_ob_0_studio",
-              "label": "studio",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_ob_0_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
               "id": "h2_ob_0_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "h2_ob_0_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "label": "Type of outbuilding",
+              "type": "text"
             },
             {
               "id": "cb_h2_h2_ob_cons",
@@ -14415,6 +15915,44 @@
               "type": "text"
             },
             {
+              "id": "label_wall_finished",
+              "label": "Wall finished",
+              "type": "label"
+            },
+            {
+              "id": "wf_rendered",
+              "label": "rendered",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_rendered_painted",
+              "label": "rendered with painted",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_pebble_dash",
+              "label": "coated with pebble dash",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_mock_tudor",
+              "label": "installed with mock tudor",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "wf_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
@@ -14429,11 +15967,6 @@
             {
               "id": "cb_painted",
               "label": "Painted walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rendered_wall",
-              "label": "rendered wall",
               "type": "checkbox"
             }
           ]
@@ -16783,6 +18316,44 @@
               "type": "text"
             },
             {
+              "id": "label_wall_finished",
+              "label": "Wall finished",
+              "type": "label"
+            },
+            {
+              "id": "wf_rendered",
+              "label": "rendered",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_rendered_painted",
+              "label": "rendered with painted",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_pebble_dash",
+              "label": "coated with pebble dash",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_mock_tudor",
+              "label": "installed with mock tudor",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "wf_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
@@ -16797,11 +18368,6 @@
             {
               "id": "cb_painted",
               "label": "Painted walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rendered_wall",
-              "label": "rendered wall",
               "type": "checkbox"
             }
           ]
@@ -18521,6 +20087,44 @@
               "type": "text"
             },
             {
+              "id": "label_wall_finished",
+              "label": "Wall finished",
+              "type": "label"
+            },
+            {
+              "id": "wf_rendered",
+              "label": "rendered",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_rendered_painted",
+              "label": "rendered with painted",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_pebble_dash",
+              "label": "coated with pebble dash",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_mock_tudor",
+              "label": "installed with mock tudor",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "wf_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
@@ -18535,11 +20139,6 @@
             {
               "id": "cb_painted",
               "label": "Painted walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rendered_wall",
-              "label": "rendered wall",
               "type": "checkbox"
             }
           ]
@@ -19694,6 +21293,44 @@
               "type": "text"
             },
             {
+              "id": "label_wall_finished",
+              "label": "Wall finished",
+              "type": "label"
+            },
+            {
+              "id": "wf_rendered",
+              "label": "rendered",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_rendered_painted",
+              "label": "rendered with painted",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_pebble_dash",
+              "label": "coated with pebble dash",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_mock_tudor",
+              "label": "installed with mock tudor",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "wf_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
@@ -19708,11 +21345,6 @@
             {
               "id": "cb_painted",
               "label": "Painted walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rendered_wall",
-              "label": "rendered wall",
               "type": "checkbox"
             }
           ]
@@ -20266,6 +21898,44 @@
               "type": "text"
             },
             {
+              "id": "label_wall_finished",
+              "label": "Wall finished",
+              "type": "label"
+            },
+            {
+              "id": "wf_rendered",
+              "label": "rendered",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_rendered_painted",
+              "label": "rendered with painted",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_pebble_dash",
+              "label": "coated with pebble dash",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_mock_tudor",
+              "label": "installed with mock tudor",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "wf_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
@@ -20281,17 +21951,12 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
-            },
-            {
-              "id": "cb_rendered_wall",
-              "label": "rendered wall",
-              "type": "checkbox"
             }
           ]
         },
         {
           "id": "activity_outside_property_main_walls_about_wall__rendered_masonry",
-          "title": "Rendered masonry",
+          "title": "Rendered / pebble dash masonry",
           "type": "screen",
           "parentId": "group_about_the_wall_17",
           "order": 12,
@@ -20330,70 +21995,44 @@
               "type": "text"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Good",
-                "Reasonable",
-                "Fair",
-                "Poor",
-                "Very poor"
-              ]
-            },
-            {
-              "id": "cb_painted",
-              "label": "Painted walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rendered_wall",
-              "label": "rendered wall",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_main_walls_about_wall__pebble_dash_masonry",
-          "title": "Pebble dash masonry",
-          "type": "screen",
-          "parentId": "group_about_the_wall_17",
-          "order": 14,
-          "fields": [
-            {
-              "id": "label_wall_location",
-              "label": "Wall",
+              "id": "label_wall_finished",
+              "label": "Wall finished",
               "type": "label"
             },
             {
-              "id": "e4w_loc_main_building",
-              "label": "main building",
+              "id": "wf_rendered",
+              "label": "rendered",
               "type": "checkbox"
             },
             {
-              "id": "e4w_loc_extension_s",
-              "label": "extension(s)",
+              "id": "wf_rendered_painted",
+              "label": "rendered with painted",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_832",
+              "id": "wf_pebble_dash",
+              "label": "coated with pebble dash",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_mock_tudor",
+              "label": "installed with mock tudor",
+              "type": "checkbox"
+            },
+            {
+              "id": "wf_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_133",
+              "id": "wf_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_832",
+              "conditionalOn": "wf_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "et_thickness",
-              "label": "Thickness (mm)",
-              "type": "text"
-            },
-            {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
@@ -20408,11 +22047,6 @@
             {
               "id": "cb_painted",
               "label": "Painted walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rendered_wall",
-              "label": "rendered wall",
               "type": "checkbox"
             }
           ]

@@ -13,7 +13,15 @@ generate full reports to test, then check the new phrases live. Push / APK / liv
 | 5 | Outside Doors: Description + material on one line; BS EN paragraph only once | DONE | (this commit) | new rule flag joinAfter; E6_BS_EN_NOTED bank text was doubled (fixed); tests (7); PDF p27 + Word p25 |
 | 6 | E8 Other Joinery: inspected/not inspected first, repair last, ordering per client | DONE | (this commit) | order rule in client_paragraph_rules.dart; tests (7) client_edits_2026_11_23_report_test; PDF p31 + Word p29 |
 
-Next action: bundled version bump, full gate, live publish + live check.
+Next action: user runs `node tool/phrase_portal/publish_nov23.js` (admin password) to fix the doubled BS EN sentence on the live bank, then re-check; APK/push only on the user's word.
+
+## Closing checks (24 Nov 2026)
+- Full Flutter suite: 5707 pass; the only failures were (a) the valuation phrase audit, fixed by 6 approved weather templates (VAL_N23_0001-6), (b) one UI test (desktop_editing_review_test) that failed under load and passes alone.
+- Python gates: T1 0, T7 0, T2 0 foreign; ledger 0 open prose rows. Portal tests 38/38.
+- Versions: inspection bundledVersion 13, valuation 8. Lintel Windows has its own bank key (E4_LINTEL_WINDOW); the old E4_LINTEL stays for phones on an older app.
+- Live: portal static deployed (BUILD 003eaf0), trees/meta/option rules/report nodes byte-identical to the repo, live page loads with no script errors.
+- Live bank v193 has the client's own portal edits; phones use live + bundled keys the live bank lacks. Report built with the LIVE bank (tmp/client-edits-2026-11-23/live_report) shows items 1, 2, 4, 5 (join), 6 right; item 5 BS EN stays doubled until E6_BS_EN_NOTED is published (script above, dry run checked).
+- Not done: pushing to GitHub, APK.
 
 ## Method per item
 tree json + verbatim spec (`inspection_verbatim_spec.dart`) + bank (`phrase_texts.json`) + answer migration
