@@ -92,6 +92,9 @@ Map<String, String> migrateLegacyAnswers(
   if (screenId == 'general_details') {
     return _migrateValuationPropertyType(answers);
   }
+  if (screenId.startsWith(_aboutWallPrefix)) {
+    answers = _migrateRenderedWall(answers);
+  }
   final fields = _dropdownToTicks[screenId];
   if (fields == null) return answers;
 
@@ -106,8 +109,22 @@ Map<String, String> migrateLegacyAnswers(
   return out;
 }
 
+const _aboutWallPrefix = 'activity_outside_property_main_walls_about_wall';
+const _renderedWallScreen = '${_aboutWallPrefix}__rendered_masonry';
+const _pebbleDashWallScreen = '${_aboutWallPrefix}__pebble_dash_masonry';
+
+/// Main Walls: the "rendered wall" tick became the first choice of Wall Finished (client, 23 Nov 2026).
+Map<String, String> _migrateRenderedWall(Map<String, String> answers) {
+  if (answers['cb_rendered_wall'] != 'true') return answers;
+  final out = Map<String, String>.from(answers)..remove('cb_rendered_wall');
+  out.putIfAbsent('wf_rendered', () => 'true');
+  return out;
+}
+
 /// Fields that moved to a new screen: new screen -> old screen, field id prefix.
 const movedAnswers = <String, ({String fromScreen, String fieldPrefix})>{
+  // Rendered masonry and Pebble dash masonry became one section (client, 23 Nov 2026).
+  _renderedWallScreen: (fromScreen: _pebbleDashWallScreen, fieldPrefix: ''),
   'activity_outside_property_windows_sill_defect': (
     fromScreen: 'activity_outside_property_windows_sill_projection',
     fieldPrefix: 'e5sd_',
@@ -134,9 +151,15 @@ Map<String, String> mergeMovedAnswers(
 ) {
   final moved = movedAnswers[screenId];
   if (moved == null) return answers;
-  return {
+  final merged = {
     for (final entry in oldScreenAnswers.entries)
       if (entry.key.startsWith(moved.fieldPrefix)) entry.key: entry.value,
     ...answers,
   };
+  // A survey that used the Pebble dash screen keeps saying so, as the pebble dash finish.
+  if (screenId == _renderedWallScreen &&
+      oldScreenAnswers.values.any((v) => v.trim().isNotEmpty)) {
+    merged.putIfAbsent('wf_pebble_dash', () => 'true');
+  }
+  return merged;
 }

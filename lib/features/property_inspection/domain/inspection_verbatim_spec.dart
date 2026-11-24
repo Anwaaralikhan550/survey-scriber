@@ -1710,6 +1710,28 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
   ),
   VerbatimRule(
+    'e4_finish_solid',
+    'activity_outside_property_main_walls_about_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_FINISHED}',
+    [
+      VerbatimToken(
+        '{WALL_FINISHED}',
+        options: {
+          'wf_rendered': 'rendered',
+          'wf_rendered_painted': 'rendered with painted',
+          'wf_pebble_dash': 'coated with pebble dash',
+          'wf_mock_tudor': 'installed with mock tudor',
+        },
+        otherCheckbox: 'wf_other',
+        otherText: 'wf_other_text',
+        pdfOptions: ['rendered', 'rendered with painted', 'coated with pebble dash', 'installed with mock tudor'],
+      ),
+    ],
+    pdf:
+        'Wall Finished: The outer face of the external walls is rendered, rendered with painted, coated with pebble dash, and installed with mock tudor, other wall finishes.',
+  ),
+  VerbatimRule(
     'e4_cond_solid',
     'activity_outside_property_main_walls_about_wall',
     '{E_MAIN_WALLS}',
@@ -1734,90 +1756,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     [
     ],
     whenField: 'cb_painted',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'e4_rendered_solid',
-    'activity_outside_property_main_walls_about_wall',
-    '{E_MAIN_WALLS}',
-    '{E4_RENDERED_WALL}',
-    [
-    ],
-    pdf:
-        'Rendered Wall: The walls are partially or fully rendered.',
-    whenField: 'cb_rendered_wall',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'e4_rendered_cbrick',
-    'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
-    '{E_MAIN_WALLS}',
-    '{E4_RENDERED_WALL}',
-    [
-    ],
-    pdf:
-        'Rendered Wall: The walls are partially or fully rendered.',
-    whenField: 'cb_rendered_wall',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'e4_rendered_cblock',
-    'activity_outside_property_main_walls_about_wall__cavity_block_wall',
-    '{E_MAIN_WALLS}',
-    '{E4_RENDERED_WALL}',
-    [
-    ],
-    pdf:
-        'Rendered Wall: The walls are partially or fully rendered.',
-    whenField: 'cb_rendered_wall',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'e4_rendered_cstud',
-    'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
-    '{E_MAIN_WALLS}',
-    '{E4_RENDERED_WALL}',
-    [
-    ],
-    pdf:
-        'Rendered Wall: The walls are partially or fully rendered.',
-    whenField: 'cb_rendered_wall',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'e4_rendered_other',
-    'activity_outside_property_main_walls_about_wall__other',
-    '{E_MAIN_WALLS}',
-    '{E4_RENDERED_WALL}',
-    [
-    ],
-    pdf:
-        'Rendered Wall: The walls are partially or fully rendered.',
-    whenField: 'cb_rendered_wall',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'e4_rendered_rendered',
-    'activity_outside_property_main_walls_about_wall__rendered_masonry',
-    '{E_MAIN_WALLS}',
-    '{E4_RENDERED_WALL}',
-    [
-    ],
-    pdf:
-        'Rendered Wall: The walls are partially or fully rendered.',
-    whenField: 'cb_rendered_wall',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'e4_rendered_pebble',
-    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
-    '{E_MAIN_WALLS}',
-    '{E4_RENDERED_WALL}',
-    [
-    ],
-    pdf:
-        'Rendered Wall: The walls are partially or fully rendered.',
-    whenField: 'cb_rendered_wall',
     whenValue: 'true',
   ),
   VerbatimRule(
@@ -1847,6 +1785,28 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_finish_cbrick',
+    'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_FINISHED}',
+    [
+      VerbatimToken(
+        '{WALL_FINISHED}',
+        options: {
+          'wf_rendered': 'rendered',
+          'wf_rendered_painted': 'rendered with painted',
+          'wf_pebble_dash': 'coated with pebble dash',
+          'wf_mock_tudor': 'installed with mock tudor',
+        },
+        otherCheckbox: 'wf_other',
+        otherText: 'wf_other_text',
+        pdfOptions: ['rendered', 'rendered with painted', 'coated with pebble dash', 'installed with mock tudor'],
+      ),
+    ],
+    pdf:
+        'Wall Finished: The outer face of the external walls is rendered, rendered with painted, coated with pebble dash, and installed with mock tudor, other wall finishes.',
   ),
   VerbatimRule(
     'e4_cond_cbrick',
@@ -1904,6 +1864,28 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
   ),
   VerbatimRule(
+    'e4_finish_cblock',
+    'activity_outside_property_main_walls_about_wall__cavity_block_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_FINISHED}',
+    [
+      VerbatimToken(
+        '{WALL_FINISHED}',
+        options: {
+          'wf_rendered': 'rendered',
+          'wf_rendered_painted': 'rendered with painted',
+          'wf_pebble_dash': 'coated with pebble dash',
+          'wf_mock_tudor': 'installed with mock tudor',
+        },
+        otherCheckbox: 'wf_other',
+        otherText: 'wf_other_text',
+        pdfOptions: ['rendered', 'rendered with painted', 'coated with pebble dash', 'installed with mock tudor'],
+      ),
+    ],
+    pdf:
+        'Wall Finished: The outer face of the external walls is rendered, rendered with painted, coated with pebble dash, and installed with mock tudor, other wall finishes.',
+  ),
+  VerbatimRule(
     'e4_cond_cblock',
     'activity_outside_property_main_walls_about_wall__cavity_block_wall',
     '{E_MAIN_WALLS}',
@@ -1957,6 +1939,28 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_finish_stud',
+    'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_FINISHED}',
+    [
+      VerbatimToken(
+        '{WALL_FINISHED}',
+        options: {
+          'wf_rendered': 'rendered',
+          'wf_rendered_painted': 'rendered with painted',
+          'wf_pebble_dash': 'coated with pebble dash',
+          'wf_mock_tudor': 'installed with mock tudor',
+        },
+        otherCheckbox: 'wf_other',
+        otherText: 'wf_other_text',
+        pdfOptions: ['rendered', 'rendered with painted', 'coated with pebble dash', 'installed with mock tudor'],
+      ),
+    ],
+    pdf:
+        'Wall Finished: The outer face of the external walls is rendered, rendered with painted, coated with pebble dash, and installed with mock tudor, other wall finishes.',
   ),
   VerbatimRule(
     'e4_cond_stud',
@@ -2014,6 +2018,28 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
   ),
   VerbatimRule(
+    'e4_finish_other',
+    'activity_outside_property_main_walls_about_wall__other',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_FINISHED}',
+    [
+      VerbatimToken(
+        '{WALL_FINISHED}',
+        options: {
+          'wf_rendered': 'rendered',
+          'wf_rendered_painted': 'rendered with painted',
+          'wf_pebble_dash': 'coated with pebble dash',
+          'wf_mock_tudor': 'installed with mock tudor',
+        },
+        otherCheckbox: 'wf_other',
+        otherText: 'wf_other_text',
+        pdfOptions: ['rendered', 'rendered with painted', 'coated with pebble dash', 'installed with mock tudor'],
+      ),
+    ],
+    pdf:
+        'Wall Finished: The outer face of the external walls is rendered, rendered with painted, coated with pebble dash, and installed with mock tudor, other wall finishes.',
+  ),
+  VerbatimRule(
     'e4_cond_other',
     'activity_outside_property_main_walls_about_wall__other',
     '{E_MAIN_WALLS}',
@@ -2069,6 +2095,28 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
   ),
   VerbatimRule(
+    'e4_finish_rendered',
+    'activity_outside_property_main_walls_about_wall__rendered_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_FINISHED}',
+    [
+      VerbatimToken(
+        '{WALL_FINISHED}',
+        options: {
+          'wf_rendered': 'rendered',
+          'wf_rendered_painted': 'rendered with painted',
+          'wf_pebble_dash': 'coated with pebble dash',
+          'wf_mock_tudor': 'installed with mock tudor',
+        },
+        otherCheckbox: 'wf_other',
+        otherText: 'wf_other_text',
+        pdfOptions: ['rendered', 'rendered with painted', 'coated with pebble dash', 'installed with mock tudor'],
+      ),
+    ],
+    pdf:
+        'Wall Finished: The outer face of the external walls is rendered, rendered with painted, coated with pebble dash, and installed with mock tudor, other wall finishes.',
+  ),
+  VerbatimRule(
     'e4_cond_rendered',
     'activity_outside_property_main_walls_about_wall__rendered_masonry',
     '{E_MAIN_WALLS}',
@@ -2088,61 +2136,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
   VerbatimRule(
     'e4_painted_rendered',
     'activity_outside_property_main_walls_about_wall__rendered_masonry',
-    '{E_MAIN_WALLS}',
-    '{E4_PAINTED}',
-    [
-    ],
-    whenField: 'cb_painted',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'e4_desc_pebble',
-    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
-    '{E_MAIN_WALLS}',
-    '{E4_DESCRIPTION}',
-    [
-      VerbatimToken(
-        '{WALL_LOCATION}',
-        options: {
-          'e4w_loc_main_building': 'main building',
-          'e4w_loc_extension_s': 'extension(s)',
-        },
-        otherCheckbox: 'cb_other_832',
-        otherText: 'et_other_133',
-        pdfOptions: ['main building', 'extension(s)'],
-      ),
-      VerbatimToken(
-        '{WALL_THICKNESS}',
-        text: 'et_thickness',
-      ),
-      VerbatimToken(
-        '{WALL_TYPE}',
-        constant: 'pebble dash masonry',
-      ),
-    ],
-    pdf:
-        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
-  ),
-  VerbatimRule(
-    'e4_cond_pebble',
-    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
-    '{E_MAIN_WALLS}',
-    '{E4_CONDITION}',
-    [
-      VerbatimToken(
-        '{WALL_CONDITION_VALUE}',
-        dropdown: 'actv_condition',
-        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
-        lower: true,
-        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
-      ),
-    ],
-    pdf:
-        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
-  ),
-  VerbatimRule(
-    'e4_painted_pebble',
-    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
     '{E_MAIN_WALLS}',
     '{E4_PAINTED}',
     [
