@@ -25,3 +25,4 @@
 {G_GAS_AND_OIL}::{G2_METER_NO_LOCATION},Metre chosen with no location: the client portal version of the Metre sentence without the location clause
 
 {E_MAIN_WALLS}::{E4_LINTEL_DOOR},client 23 Nov 2026: Lintel Door screen says "door opening", Windows screen says "window opening"; sentence is the client own
+{E_MAIN_WALLS}::{E4_LINTEL_WINDOW},client 23 Nov 2026: Lintel Windows screen says "window opening" (own key so phones on an older app version keep the old key); sentence is the client own

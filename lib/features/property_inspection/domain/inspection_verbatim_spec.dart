@@ -2821,7 +2821,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     'e4_lintel_win',
     'activity_outside_property_main_wall_repairs_lintel',
     '{E_MAIN_WALLS}',
-    '{E4_LINTEL}',
+    '{E4_LINTEL_WINDOW}',
     [
       VerbatimToken(
         '{LINTEL_WALLS}',

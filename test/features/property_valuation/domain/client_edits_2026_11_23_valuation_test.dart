@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_scriber/features/property_inspection/domain/legacy_answer_migration.dart';
 import 'package:survey_scriber/features/property_valuation/data/valuation_repository.dart';
+import 'package:survey_scriber/features/property_valuation/domain/valuation_phrase_catalog.dart';
 import 'package:survey_scriber/features/property_valuation/domain/valuation_phrase_engine.dart';
 
 void main() {
@@ -50,6 +51,13 @@ void main() {
       expect(m['actv_weather'], 'Snowing');
       expect(engine.buildPhrases('general_details', m).join(' '), contains('weather conditions were snowing.'));
       expect(migrateLegacyAnswers('general_details', {'actv_weather': 'Dry'})['actv_weather'], 'Dry');
+    });
+    test('every weather sentence is an approved template in the valuation phrase bank', () {
+      final catalog = ValuationPhraseCatalog.fromRawJson(File('assets/property_valuation/phrase_texts.json').readAsStringSync());
+      for (final w in inspectionWeather) {
+        final sentence = engine.buildPhrases('general_details', {'actv_weather': w}).single;
+        expect(catalog.matchTemplateId(sentence), isNotNull, reason: w);
+      }
     });
     test('the bundled valuation tree version moved on so phones take the new list', () {
       expect(ValuationRepository.bundledVersion, 8);

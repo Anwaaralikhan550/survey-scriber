@@ -135,9 +135,10 @@ void main() {
         expect(big, isNot(contains('Minor defects:')), reason: s);
       }
     });
-    test('the old one-sentence key for both openings is gone', () {
-      expect(phraseTexts['{E_MAIN_WALLS}::{E4_LINTEL}'], isNot(contains('door or window')));
+    test('each screen has its own key; the old one-sentence key is kept only for phones on an older app version', () {
+      expect(phraseTexts['{E_MAIN_WALLS}::{E4_LINTEL_WINDOW}'], contains('above a window opening'));
       expect(phraseTexts['{E_MAIN_WALLS}::{E4_LINTEL_DOOR}'], contains('above a door opening'));
+      expect(phraseTexts['{E_MAIN_WALLS}::{E4_LINTEL}'], contains('above a door or window opening'));
     });
   });
 

@@ -4165,6 +4165,36 @@
       "screenId": "*",
       "text": "The reinstatement cost exceeds the purchase price; this is not unusual and does not indicate an error.",
       "allowedTokens": []
+    },
+    "VAL_N23_0001": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the weather conditions were overcast. It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.",
+      "allowedTokens": []
+    },
+    "VAL_N23_0002": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the weather conditions were sunny. It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.",
+      "allowedTokens": []
+    },
+    "VAL_N23_0003": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the weather conditions were cold. It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.",
+      "allowedTokens": []
+    },
+    "VAL_N23_0004": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the weather conditions were windy. It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.",
+      "allowedTokens": []
+    },
+    "VAL_N23_0005": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the weather conditions were rainy. It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.",
+      "allowedTokens": []
+    },
+    "VAL_N23_0006": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the weather conditions were snowing. It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.",
+      "allowedTokens": []
     }
   }
 }
