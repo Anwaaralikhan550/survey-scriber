@@ -105,6 +105,7 @@ class VerbatimRule {
     this.whenField,
     this.whenValue,
     this.whenAny = const [],
+    this.joinAfter,
   });
 
   /// Stable name used in test output.
@@ -139,6 +140,10 @@ class VerbatimRule {
   /// Further `[field, value]` pairs that also make the rule fire (OR with
   /// `whenField`/`whenValue`).
   final List<List<String>> whenAny;
+
+  /// Id of another rule of the same screen: when that rule printed the phrase just before this one, this rule's
+  /// sentence goes on the same line (paragraph) instead of starting a new one.
+  final String? joinAfter;
 }
 
 /// All PDF-verbatim rules. Grouped by PDF section; keep PDF order.
@@ -3546,6 +3551,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'The external doors are formed of timber, PVCu, composite, aluminium, steel, other material.',
+    joinAfter: 'e6_desc',
   ),
   VerbatimRule(
     'e6_glazing',
@@ -14470,6 +14476,7 @@ extension _VerbatimSpec on InspectionPhraseEngine {
     required bool first,
   }) {
     final out = <String>[];
+    String? lastRuleId;
     for (final rule in kVerbatimRules) {
       if (rule.screen != screenId || rule.first != first) continue;
       if (rule.whenField != null) {
@@ -14512,9 +14519,18 @@ extension _VerbatimSpec on InspectionPhraseEngine {
       if (rule.isAre) {
         text = text.replaceAll('{IS_ARE}', count > 1 ? 'are' : 'is');
       }
-      out.addAll(InspectionPhraseEngine._split(
+      final parts = InspectionPhraseEngine._split(
         InspectionPhraseEngine._normalize(text),
-      ));
+      );
+      if (parts.isEmpty) continue;
+      if (rule.joinAfter != null &&
+          rule.joinAfter == lastRuleId &&
+          out.isNotEmpty) {
+        out[out.length - 1] = '${out.last} ${parts.join(' ')}';
+      } else {
+        out.addAll(parts);
+      }
+      lastRuleId = rule.id;
     }
     return out;
   }

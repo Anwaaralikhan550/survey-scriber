@@ -242,4 +242,49 @@ void main() {
       expect(out, contains('Outbuilding: The property incorporates a games room permanent structure (s).'));
     });
   });
+
+  group('5 Outside Doors: Description and material on one line, BS EN once', () {
+    const doors = 'activity_outside_property_out_side_doors_about_doors';
+    test('Description and the material sentence are one paragraph', () {
+      final out = phrases(doors, ticks(['e6t_original', 'e6t_front', 'e6m_timber']));
+      expect(out.first, 'Description: The property incorporates original and front doors. The external doors are formed of timber material.');
+      expect(out.where((p) => p.contains('The external doors are formed of')), hasLength(1));
+    });
+    test('every list item still prints, joined in the same paragraph', () {
+      final out = phrases(doors, ticks(['e6t_rear', 'e6t_patio', 'e6m_pvcu', 'e6m_steel']));
+      expect(out.first, 'Description: The property incorporates rear and patio doors. The external doors are formed of PVCu and steel material.');
+    });
+    test('with no door types ticked the material sentence stands alone, with no door material the Description stands alone', () {
+      final materialOnly = phrases(doors, ticks(['e6m_timber']));
+      expect(materialOnly, ['The external doors are formed of timber material.']);
+      final typesOnly = phrases(doors, ticks(['e6t_old']));
+      expect(typesOnly, ['Description: The property incorporates old doors.']);
+    });
+    test('the material sentence does not move up when something else came between', () {
+      final out = phrases(doors, ticks(['e6m_aluminium'], {'actv_condition': 'Fair'}));
+      expect(out, contains('The external doors are formed of aluminium material.'));
+      expect(out.where((p) => p.contains('formed of aluminium')).single, 'The external doors are formed of aluminium material.');
+      expect(out.any((p) => p.startsWith('Condition:')), isTrue);
+    });
+    test('BS EN noted prints its own sentence once, with no second sentence', () {
+      final out = say(doors, {'actv_status': 'BS EN noted'});
+      expect(out, startsWith('BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.'));
+      expect('BS EN noted:'.allMatches(out), hasLength(1));
+      expect(out, isNot(contains('No visible')));
+      expect(out, isNot(contains('absence of visible markings')));
+      expect(out, endsWith('your legal adviser should verify any available certification relating to replacement windows.'));
+      expect(phraseTexts['{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED}'], isNot(contains('No visible')));
+    });
+    test('No BS EN noted prints its own sentence once', () {
+      final out = say(doors, {'actv_status': 'No BS EN noted'});
+      expect(out, startsWith('No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.'));
+      expect('BS EN noted:'.allMatches(out), hasLength(1));
+      expect(out, isNot(contains('Visible British Standard')));
+    });
+    test('the windows and conservatory BS EN sentences are unchanged', () {
+      expect(phraseTexts['{E_WINDOWS}::{E5_BS_EN_NOTED}'], startsWith('BS EN noted: Visible British Standard'));
+      expect('BS EN noted:'.allMatches(phraseTexts['{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED}']!), hasLength(1));
+      expect('BS EN noted:'.allMatches(phraseTexts['{E_CONSERVATORY_PORCHES}::{E7_P_BS_EN_NOTED}']!), hasLength(1));
+    });
+  });
 }

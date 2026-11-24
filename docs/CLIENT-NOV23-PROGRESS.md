@@ -10,10 +10,10 @@ generate full reports to test, then check the new phrases live. Push / APK / liv
 | 2 | Lintel: window screen says "window opening", door screen says "door opening" | DONE | (this commit) | tests (4) in client_edits_2026_11_23_test, gates, PDF p24 + Word p23 |
 | 3 | Valuation weather: same 8 options as Inspection | DONE | (this commit) | tests (4) client_edits_2026_11_23_valuation_test; valuation + report_export suites 358 green; valuation PDF p2 + Word p2 in tmp/client-edits-2026-11-23/valuation; valuation bundledVersion 8 |
 | 4 | Large Outbuilding: every type gets the full set of options | DONE | (this commit) | group of 7 type screens (Large shed..Studio, Other outbuilding) each with structure/roof/floor/doors/condition; old single-screen answers migrate per ticked type; a/an for the type; tests (8) + suites 4529 green; PDF p41 + Word p39 |
-| 5 | Outside Doors: Description + material on one line; BS EN paragraph only once | TODO | | |
+| 5 | Outside Doors: Description + material on one line; BS EN paragraph only once | DONE | (this commit) | new rule flag joinAfter; E6_BS_EN_NOTED bank text was doubled (fixed); tests (7); PDF p27 + Word p25 |
 | 6 | E8 Other Joinery: inspected/not inspected first, repair last, ordering per client | TODO | | |
 
-Next action: item 5.
+Next action: item 6.
 
 ## Method per item
 tree json + verbatim spec (`inspection_verbatim_spec.dart`) + bank (`phrase_texts.json`) + answer migration
